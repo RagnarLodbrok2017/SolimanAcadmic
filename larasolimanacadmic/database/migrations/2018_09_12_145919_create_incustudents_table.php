@@ -25,8 +25,18 @@ class CreateIncustudentsTable extends Migration
             $table->date('dob');
             $table->string('address',200)->nullable();
 
-            $table->integer('incustudentparents_id')->unsigned();
+            $table->unsignedInteger('incustudentparents_id');
             $table->foreign('incustudentparents_id')->references('id')->on('incustudentparents');
+
+            $table->unsignedInteger('classroom_id');
+            $table->foreign('classroom_id')->references('id')->on('classroom');
+
+            $table->unsignedInteger('level_id');
+            $table->foreign('level_id')->references('id')->on('level');
+
+            $table->unsignedInteger('incushifts_id');
+            $table->foreign('incushifts_id')->references('id')->on('incushifts');
+
             $table->timestamps();
         });
     }
