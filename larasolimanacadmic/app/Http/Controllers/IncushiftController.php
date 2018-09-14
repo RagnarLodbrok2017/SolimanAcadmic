@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Incustudentpayment extends Controller
+class IncushiftController extends Controller
 {
     /**
      * Display a listing of the resource.

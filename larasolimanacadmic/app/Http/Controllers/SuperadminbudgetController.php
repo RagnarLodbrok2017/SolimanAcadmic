@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Incuteacher extends Controller
+class SuperadminbudgetController extends Controller
 {
     /**
      * Display a listing of the resource.

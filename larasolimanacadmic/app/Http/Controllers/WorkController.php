@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Incusubject extends Controller
+class WorkController extends Controller
 {
     /**
      * Display a listing of the resource.

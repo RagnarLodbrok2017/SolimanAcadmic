@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-class Classroom extends Controller
+use App\Incustudent;
+class IncustudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class Classroom extends Controller
      */
     public function index()
     {
-        //
+        $incustudents = Incustudent::all();
     }
 
     /**
