@@ -23,6 +23,6 @@ class IncuHomeController extends Controller
      */
     public function index()
     {
-        return view('incu.home');
+        return view('incu.incubation');
     }
 }

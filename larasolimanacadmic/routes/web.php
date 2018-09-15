@@ -17,5 +17,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'IncuHomeController@index')->name('home');
-Route::resource('student', 'IncustudentController');
+Route::get('/incubation', 'IncuHomeController@index')->name('incubation');
+Route::resource('incustudent', 'IncustudentController');

@@ -13,7 +13,8 @@ class IncustudentController extends Controller
      */
     public function index()
     {
-        $incustudents = Incustudent::all();
+        $students = Incustudent::all();
+        return view('incu.incustudent.index', compact('students'));
     }
 
     /**
@@ -23,7 +24,7 @@ class IncustudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('incu.incustudent.create');
     }
 
     /**

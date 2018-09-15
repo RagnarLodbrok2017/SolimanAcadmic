@@ -14,16 +14,16 @@ jQuery(document).ready(function($){
 		e.preventDefault();
 		jQuery("#outer-wrapper").toggleClass("toggled");
 	});
-	
+
 	//datepicker
 	jQuery("#startDate").datepicker();
 	jQuery("#endDate").datepicker();
 	jQuery("#studentDOB").datepicker({changeYear: true});
-	
+
 	//Student attendence detailed table
 	jQuery('#attendenceDetailedTable').DataTable();
-	
-	
+
+
 	//Student attendence horizontal bar chart
 	var myChart = new Chart( $('#studentAttendenceChart'), {
 		type: 'horizontalBar',
@@ -110,7 +110,7 @@ jQuery(document).ready(function($){
 			}
 		}
 	});
-	
+
 	//Student attendence summary bar chart
 	var myChart = new Chart( $('#studentAttendenceBar'), {
 		type: 'bar',
@@ -160,8 +160,8 @@ jQuery(document).ready(function($){
 			}
 		}
 	});
-	
-	//student pie chart
+
+	//incustudent pie chart
 	var myChart = new Chart( $('#studentPie'), {
 		type: 'pie',
 		data: {
@@ -181,8 +181,8 @@ jQuery(document).ready(function($){
 			}
 		}
 	});
-	
-	//student attendence trend chart
+
+	//incustudent attendence trend chart
 	var myChart = new Chart( $('#studentAttendenceLine'), {
 		type: 'line',
 		data: {
@@ -231,5 +231,5 @@ jQuery(document).ready(function($){
 			}
 		}
 	});
-	
+
 });
