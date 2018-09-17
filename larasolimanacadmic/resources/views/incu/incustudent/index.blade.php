@@ -34,11 +34,11 @@
 									@foreach($students  as $student)
 									<tr>
 										<td class="action-link">
+                                            <a class="delete" href="#" title="حذف" data-toggle="modal" data-target="#deleteDetailModal"><i class="fa fa-remove"></i></a>
 											<a class="edit" href="#" title="تعديل" data-toggle="modal" data-target="#editDetailModal"><i class="fa fa-edit"></i></a>
-											<a class="delete" href="#" title="حذف" data-toggle="modal" data-target="#deleteDetailModal"><i class="fa fa-remove"></i></a>
 										</td>
 										<td></td>
-										<td>500</td>
+										<td>{{ $student->payment->price }}</td>
 										<td>{{ $student->phone }}</td>
 										<td>{{ $student->shift['time'] }}</td>
 										<td> {{ $student->classroom['name'] }} </td>

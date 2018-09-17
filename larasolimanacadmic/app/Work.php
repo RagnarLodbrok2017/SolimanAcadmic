@@ -12,6 +12,6 @@ class Work extends Model
 
     public function student()
     {
-        return $this->hasMany('App\Incustudent');
+        return $this->hasMany('App\Student');
     }
 }

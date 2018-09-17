@@ -13,7 +13,7 @@ class CreateTeachersTable extends Migration
      */
     public function up()
     {
-        Schema::create('teachers', function (Blueprint $table) {
+        Schema::create('teacher', function (Blueprint $table) {
           $table->increments('id');
           $table->string('name');
           $table->boolean('sex');
@@ -36,6 +36,6 @@ class CreateTeachersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teachers');
+        Schema::dropIfExists('teacher');
     }
 }

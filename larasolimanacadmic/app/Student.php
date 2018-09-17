@@ -4,19 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Incustudent extends Model
+class Student extends Model
 {
-    public $table = "incustudents";
+    public $table = "students";
     protected $fillable = ['first_name','middle_name','last_name','sex','region','phone','photo','dob','address','created_at','updated_at'];
 
     public $timestamps = true;
     public  function attendance()
     {
-        return $this->hasMany('App\Incuattendance', 'incustudent_id');
-    }
-    public  function method1()
-    {
-        return $this->hasMany('App\Incuattendance', 'incustudent_id');
+        return $this->hasMany('App\attendance', 'student_id');
     }
     public function classroom()
     {
@@ -28,9 +24,12 @@ class Incustudent extends Model
     }
     public function shift()
     {
-      return $this->belongsTo('App\Incushift' , 'incushifts_id');
+      return $this->belongsTo('App\shift' , 'shift_id');
     }
     public function getFullNameAttribute(){
       return "{$this->first_name} {$this->middle_name} {$this->last_name}";
+    }
+    public function payment() {
+        return $this->hasOne('App\Payment');
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Incustudent;
-class IncustudentController extends Controller
+
+class ShiftController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,13 +13,7 @@ class IncustudentController extends Controller
      */
     public function index()
     {
-        $students = Incustudent::all();
-        $incu = Incustudent::first();
-        foreach ($students as $student)
-        {
-            $phone = $student->phone;
-        }
-        return view('incu.incustudent.index', compact('students'));
+        //
     }
 
     /**
@@ -29,7 +23,7 @@ class IncustudentController extends Controller
      */
     public function create()
     {
-        return view('incu.incustudent.create');
+        //
     }
 
     /**

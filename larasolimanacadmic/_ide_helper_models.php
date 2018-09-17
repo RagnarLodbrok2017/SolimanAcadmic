@@ -56,7 +56,7 @@ namespace App{
 
 namespace App{
 /**
- * App\Incustudentpayment
+ * App\Payment
  *
  * @property-read \App\Incustudent $student
  */

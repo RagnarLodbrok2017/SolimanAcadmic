@@ -18,4 +18,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/incubation', 'IncuHomeController@index')->name('incubation');
-Route::resource('incustudent', 'IncustudentController');
+Route::resource('incustudent', 'StudentController');

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-class IncuteacherController extends Controller
+use App\Student;
+use App\Payment;
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,9 @@ class IncuteacherController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        //$payments = Payment::all();
+        return view('incu.incustudent.index', compact('students'));
     }
 
     /**
@@ -23,7 +26,7 @@ class IncuteacherController extends Controller
      */
     public function create()
     {
-        //
+        return view('incu.incustudent.create');
     }
 
     /**
