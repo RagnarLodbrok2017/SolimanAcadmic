@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Incushift extends Model
 {
-    protected $fillable = ['id', 'time', 'description', 'created_at', 'updated_at'];
+  public $table = "incushifts";
+
+    protected $fillable = ['time', 'description', 'created_at', 'updated_at'];
 
 
     public $timestamps = true;

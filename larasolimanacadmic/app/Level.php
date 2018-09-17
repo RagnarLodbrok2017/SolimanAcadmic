@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Level extends Model
 {
-    protected $fillable = ['id', 'name', 'type', 'created_at', 'updated_at'];
+  public $table = "level";
+    protected $fillable = ['name', 'type', 'created_at', 'updated_at'];
 
     public $timestamps = true;
 

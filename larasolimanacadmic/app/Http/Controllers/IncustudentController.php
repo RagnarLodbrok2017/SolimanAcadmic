@@ -14,6 +14,11 @@ class IncustudentController extends Controller
     public function index()
     {
         $students = Incustudent::all();
+        $incu = Incustudent::first();
+        foreach ($students as $student)
+        {
+            $phone = $student->phone;
+        }
         return view('incu.incustudent.index', compact('students'));
     }
 
