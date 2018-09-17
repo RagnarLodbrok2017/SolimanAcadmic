@@ -25,22 +25,25 @@ class CreateStudentsTable extends Migration
           $table->date('dob');
           $table->string('address',200)->nullable();
 
-          $table->unsignedInteger('incustudentparents_id');
-          $table->foreign('incustudentparents_id')->references('id')->on('incustudentparents');
+          $table->unsignedInteger('parents_id');
+          $table->foreign('parents_id')->references('id')->on('parents');
 
           $table->unsignedInteger('classroom_id');
           $table->foreign('classroom_id')->references('id')->on('classroom');
 
-          $table->unsignedInteger('level_id');
+          $table->integer('level_id')->nullable;
           $table->foreign('level_id')->references('id')->on('level');
 
-          $table->unsignedInteger('incushifts_id');
-          $table->foreign('incushifts_id')->references('id')->on('incushifts');
+          $table->integer('stage_id')->nullable;
+          $table->foreign('stage_id')->references('id')->on('stage');
+
+          $table->integer('shift_id')->nullable;
+          $table->foreign('shift_id')->references('id')->on('shift');
 
           $table->unsignedInteger('type_id');
           $table->foreign('type_id')->references('id')->on('type');
 
-          $table->unsignedInteger('status_id');
+          $table->integer('status_id')->nullable;
           $table->foreign('status_id')->references('id')->on('status');
           $table->timestamps();
         });
