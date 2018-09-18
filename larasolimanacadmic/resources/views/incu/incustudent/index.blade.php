@@ -20,8 +20,8 @@
 								<thead>
 									<tr>
 										<th><i class="fa fa-tasks"></i>ACTION</th>
+                                        <th><i class="fa fa-envelope-o"></i>المصاريف</th>
 										<th><i class="fa fa-puzzle-piece"></i>الحالة</th>
-										<th><i class="fa fa-envelope-o"></i>المصاريف</th>
 										<th><i class="fa fa-phone"></i>الموبيل</th>
 										<th><i class="fa fa-cogs"></i>الفترة</th>
 										<th><i class="fa fa-book"></i>الفصل</th>
@@ -37,8 +37,8 @@
                                             <a class="delete" href="#" title="حذف" data-toggle="modal" data-target="#deleteDetailModal"><i class="fa fa-remove"></i></a>
 											<a class="edit" href="#" title="تعديل" data-toggle="modal" data-target="#editDetailModal"><i class="fa fa-edit"></i></a>
 										</td>
-										<td></td>
-										<td>{{ $student->payment->price }}</td>
+                                        <td>{{ $student->payment->price }}</td>
+										<td> {{ $student->status['name'] }} </td>
 										<td>{{ $student->phone }}</td>
 										<td>{{ $student->shift['time'] }}</td>
 										<td> {{ $student->classroom['name'] }} </td>

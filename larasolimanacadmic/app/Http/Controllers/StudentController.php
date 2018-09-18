@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Classroom;
+use App\Level;
+use App\Shift;
 use Illuminate\Http\Request;
 use App\Student;
+use App\Status;
 use App\Payment;
 class StudentController extends Controller
 {
@@ -26,7 +30,12 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('incu.incustudent.create');
+        $statuss = Status::all();
+        $classes = Classroom::all();
+        $levels = Level::all();
+        $shifts = Shift::all();
+        //$payment = Payment::all();
+        return view('incu.incustudent.create', compact('statuss','classes','levels','shifts'));
     }
 
     /**

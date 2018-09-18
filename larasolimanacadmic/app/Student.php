@@ -12,7 +12,7 @@ class Student extends Model
     public $timestamps = true;
     public  function attendance()
     {
-        return $this->hasMany('App\attendance', 'student_id');
+        return $this->hasMany('App\Attendance', 'student_id');
     }
     public function classroom()
     {
@@ -24,7 +24,11 @@ class Student extends Model
     }
     public function shift()
     {
-      return $this->belongsTo('App\shift' , 'shift_id');
+      return $this->belongsTo('App\Shift' , 'shift_id');
+    }
+    public function status()
+    {
+        return $this->belongsTo('App\Status' , 'status_id');
     }
     public function getFullNameAttribute(){
       return "{$this->first_name} {$this->middle_name} {$this->last_name}";
