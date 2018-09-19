@@ -54,6 +54,22 @@ html, body {
 .dashboard-top-nav  .notification-area .user .caret {
 	margin-left: 10px;
 }
+input {
+    direction:ltr;
+    overflow:hidden;
+    transition: 1s ease all;
+}
+input:not(:focus),
+option:not(:focus),
+select:not(:focus){
+    direction:rtl;
+    text-align: right;
+}
+option,
+select{
+    direction:rtl;
+    text-align: right;
+}
 .dash-form input,
 .dash-form textarea,
 .dash-form select{
@@ -68,6 +84,7 @@ html, body {
 	font-weight: 600;
 	margin-top: 20px;
 	margin-bottom: 10px;
+    float: right;
 }
 .dash-form a {
 	color: #fff;
@@ -588,7 +605,7 @@ html, body {
 	width: 60px;
 	background: #27AE60;
 	height: 5px;
-	left: 0px;
+    right: 0;
 	top: -3px;
 }
 .page-title {
@@ -597,6 +614,7 @@ html, body {
 	line-height: 1;
 	margin: 0;
 	padding: 0 15px;
+    float: right;
 }
 .page-title i {
 	margin-right: 5px;
@@ -912,4 +930,30 @@ table.dataTable > tbody > tr.child span.dtr-title i {
 }
 .ui-datepicker-current-day {
 	border: 1px solid #eee;
+}
+/* coloumns */
+.dash-form .col-sm-3{
+    padding-top: 10px;
+}
+/* submit css*/
+
+.dash-form input[type=submit] {
+    color: #fff;
+    background: #27AE60;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 25px;
+    padding: 12px 36px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    width: 96px;
+}
+.dash-form input[type=submit]:hover {
+    color: #27AE60;
+    background: transparent;
+    border: 1px solid #27AE60;
+}
+.dash-form input[type=submit] i {
+    margin-right: 5px;
 }

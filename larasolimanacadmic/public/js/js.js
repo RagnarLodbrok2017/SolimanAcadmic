@@ -1,8 +1,5 @@
 /**
-* Author: LimpidThemes
-* Version: 1.0
-* Description: Javascript file for the Pathshala Dashboard Template
-* Date: 16-07-2017
+* Author: Ahmed R.Mohamed
 **/
 
 /**********************************************************

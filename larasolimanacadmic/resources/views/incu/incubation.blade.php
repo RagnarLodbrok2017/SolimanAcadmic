@@ -93,7 +93,7 @@
                                     <h6 class="item-title"><i class="fa fa-bar-chart"></i>الغيابات</h6>
                                     <div class="inner-item">
                                         <div class="summary-chart">
-                                            <canvas id="studentAttendenceLine" height="100px"></canvas>
+                                            <canvas id="studentAttendenceLine" height="100px" width="100"></canvas>
                                             <div class="chart-legends">
                                                 <span class="red">ABSENT</span>
                                                 <span class="orange">ON LEAVE</span>

@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -16,7 +15,6 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <link href="{{ asset('fonts/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" media="screen">
-
     <!-- Styles -->
     <link href="{{ asset('css/main/bootstrap.min.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/main/chartist.min.css') }}" rel="stylesheet" media="screen">
@@ -121,7 +119,7 @@
                             <li>
                                 <div class="list-msg">
                                     <div class="col-xs-2 image clear-padding">
-                                        <img src="assets/img/parent/parent1.jpg" alt="Admin" />
+                                        <img src="assets/img/soliman2.jpg" alt="Admin" />
                                     </div>
                                     <div class="col-sm-10 desc">
                                         <h5><a href="#">Mona Hesham</a></h5>
@@ -321,5 +319,6 @@
     <script src="{{asset('plugins/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('plugins/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('js/js.js')}}"></script>
+    <script src="{{asset('js/style.js')}}"></script>
 </body>
 </html>
