@@ -313,6 +313,8 @@
 
     <script src="{{asset('js/jQuery_v3_2_0.min.js')}}"></script>
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('plugins/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('plugins/jquery.form.min.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('plugins/owl.carousel.min.js')}}"></script>
     <script src="{{asset('plugins/Chart.min.js')}}"></script>
@@ -320,5 +322,6 @@
     <script src="{{asset('plugins/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('js/js.js')}}"></script>
     <script src="{{asset('js/style.js')}}"></script>
+    <script src="{{asset('js/validator.js')}}"></script>
 </body>
 </html>

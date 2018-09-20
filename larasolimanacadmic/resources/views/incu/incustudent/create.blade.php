@@ -75,12 +75,7 @@
 
                                     <div class="col-sm-3">
                                         <label class="clear-top-margin"><i class="fa fa-briefcase"></i>الوظيفة</label>
-                                        <select>
-                                            <option>-- أختار --</option>
-                                            <option>مدرس</option>
-                                            <option>دكتور</option>
-                                            <option>أخرى</option>
-                                        </select>
+                                        {!! Form::text('job','',['placeholder' =>'الوظيفة']) !!}
                                     </div>
                                     <div class="col-sm-3">
                                         <label class="clear-top-margin"><i class="fa fa-phone"></i>رقم الموبيل #</label>
@@ -115,7 +110,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <label><i class="fa fa-bell-o"></i>الديانة</label>
-                                        <select>
+                                        <select name="region">
                                             <option value="مسلم">مسلم</option>
                                             <option value="مسيحى">مسيحى</option>
                                         </select>
