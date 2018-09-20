@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Classroom;
 use App\Level;
+use App\Parents;
 use App\Shift;
 use Illuminate\Http\Request;
 use App\Student;
 use App\Status;
 use App\Payment;
+
 class StudentController extends Controller
 {
     /**
@@ -35,27 +37,86 @@ class StudentController extends Controller
         $levels = Level::all();
         $shifts = Shift::all();
         //$payment = Payment::all();
-        return view('incu.incustudent.create', compact('statuss','classes','levels','shifts'));
+        return view('incu.incustudent.create', compact('statuss', 'classes', 'levels', 'shifts'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            //required Student Information
+            'first_name' => 'required | max:15 | string',
+            'middle_name' => 'required | max:15 | string',
+            'last_name' => 'required | max:15 | string',
+            'address' => 'required | max:80 | string',
+            'phone' => 'required | digits:11',
+            'sex' => 'required | integer',
+            'dob' => 'required |date',
+            'status_id' => 'required | integer',
+            'classroom_id' => 'required | integer',
+            'level_id' => 'required | integer',
+            'shift_id' => 'required | integer',
+            'payment' => 'required | integer | digits_between:0,5',
+            //Parents Information
+            'FPhone' => 'nullable |integer | digits:11',
+            'LPhone' => 'nullable |integer | digits:11',
+            'father_name' => 'nullable | max:15 | string',
+            'mother_name' => 'nullable | max:15 | string',
+            'job' => 'nullable | max:25 | string',
+            'email' => 'nullable | email | max:255 | string',
+        ]);
+        // Parent Information
+        $parent = new Parents();
+        if (empty($request->father_name) || is_null($request->father_name)) {
+            $parent->father_name = $request->middle_name . ' ' . $request->last_name;
+        } else {
+            $parent->father_name = $request->father_name;
+        }
+        if (!empty($request->mother_name) || !is_null($request->mother_name)) {
+            $parent->mother_name = $request->mother_name;
+        }
+        if (!empty($request->job) || !is_null($request->job)) {
+            $parent->job = $request->job;
+        }
+        if (!empty($request->FPhone) || !is_null($request->FPhone)) {
+            $parent->FPhone = $request->FPhone;
+        }
+        if (!empty($request->email) || !is_null($request->email)) {
+            $parent->email = $request->email;
+        }
+        $parent->save();
+        $newParentId = Parents::where('father_name', $parent->father_name)->first()->id;
+        $student = new Student();
+        $student->first_name = $request->first_name;
+        $student->middle_name = $request->middle_name;
+        $student->last_name = $request->last_name;
+        $student->address = $request->address;
+        $student->sex = $request->sex;
+        $student->dob = $request->dob;
+        $student->phone = $request->phone;
+        $student->status_id = $request->status_id;
+        $student->classroom_id = $request->classroom_id;
+        $student->level_id = $request->level_id;
+        $student->shift_id = $request->shift_id;
+        $student->type_id = 1;
+        $student->stage_id = NULL;
+        $student->parents_id = $newParentId;
+        $student->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
         //
     }
@@ -63,10 +124,11 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         //
     }
@@ -74,11 +136,12 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         //
     }
@@ -86,10 +149,11 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         //
     }

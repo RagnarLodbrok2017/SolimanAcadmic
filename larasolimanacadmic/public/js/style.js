@@ -1,6 +1,6 @@
-$(document).ready(function($){
+$(document).ready(function(){
     "use strict";
-    function validator() {
+    // function validator() {
         $("#addIncustudentForm").validate({
             rules: {
                 first_name: {
@@ -19,7 +19,7 @@ $(document).ready(function($){
                 dob: "required",
                 status: "required",
                 payment: "required",
-                class_id: "required",
+                classroom_id: "required",
                 level_id: "required",
                 shift_id: "required",
                 phone: {
@@ -65,12 +65,12 @@ $(document).ready(function($){
                 FormV.resetForm();
             },
         });
-    }
-    $("#addIncustudent").click(function () {
-        validator();
-        $("#addIncustudentForm").submit(function(e){
-            e.preventDefault();
-        });
-
-    });
+    // }
+    // $("#addIncustudent").click(function () {
+    //     validator();
+    //     $("#addIncustudentForm").submit(function(e){
+    //         e.preventDefault();
+    //     });
+    //
+    // });
 });

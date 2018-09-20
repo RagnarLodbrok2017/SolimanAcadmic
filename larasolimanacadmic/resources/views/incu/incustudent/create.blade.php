@@ -22,7 +22,6 @@
                                     <div class="col-sm-3">
                                         <label class="clear-top-margin"><i class="fa fa-venus"></i>النوع</label>
                                         <select name="sex">
-                                            <option>-- أختار --</option>
                                             <option value="1">ذكر</option>
                                             <option value="0">أنثى</option>
                                         </select>
@@ -132,9 +131,9 @@
                                     @if(isset($classes))
                                         <div class="col-sm-3">
                                             <label class="clear-top-margin"><i class="fa fa-cogs"></i>الفصول</label>
-                                            <select name="class_id" id="class_id">
-                                                @foreach($classes as $key => $class)
-                                                    <option value="{{ $class->id }}">{{$class->name}}</option>
+                                            <select name="classroom_id" id="classroom_id">
+                                                @foreach($classes as $key => $classroom_id)
+                                                    <option value="{{ $classroom_id->id }}">{{$classroom_id->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -144,7 +143,7 @@
                                             <label class="clear-top-margin"><i class="fa fa-book"></i>السنة</label>
                                             <select name="level_id">
                                                 @foreach($levels as $level)
-                                                    <option name="{{$level->id}}">{{$level->name}}</option>
+                                                    <option value="{{$level->id}}">{{$level->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -154,7 +153,7 @@
                                             <label class="clear-top-margin"><i class="fa fa-book"></i>الوقت</label>
                                             <select name="shift_id">
                                                 @foreach($shifts as $shift)
-                                                    <option name="{{$shift->id}}">{{$shift->time}}</option>
+                                                    <option value="{{$shift->id}}">{{$shift->time}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
