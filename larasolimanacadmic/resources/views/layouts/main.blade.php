@@ -17,6 +17,7 @@
     <link href="{{ asset('fonts/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" media="screen">
     <!-- Styles -->
     <link href="{{ asset('css/main/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/main/animate.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/main/chartist.min.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/main/owl.carousel.min.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/main/owl.theme.default.min.css') }}" rel="stylesheet" media="screen">

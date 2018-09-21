@@ -59,11 +59,20 @@ $(document).ready(function(){
             },
             debug: true,
             submitHandler: function(form) {
-                $(form).ajaxSubmit();
+                $(form).ajaxSubmit({
+                    success:function () {
+                        $('#message_lara').css('display','block');
+                        setTimeout(function() {
+                            $('#message_lara').css('display','none');
+                        },2000);
+                    }
+                });
                 var formid = $("#addIncustudentForm");
                 var FormV = formid.validate();
                 FormV.resetForm();
             },
+            success:function () {
+            }
         });
     // }
     // $("#addIncustudent").click(function () {

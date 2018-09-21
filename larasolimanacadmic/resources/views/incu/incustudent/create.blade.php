@@ -4,6 +4,13 @@
     <!-- MAIN CONTENT -->
     <div class="main-content" id="content-wrapper">
         <div class="container-fluid">
+            {{--@if(session()->has('message'))--}}
+                <div class="message_lara text-center animated bounceInRight" id="message_lara">
+                    <div class="alert alert-success">
+                        تم اضافة الطالب !
+                    </div>
+                </div>
+            {{--@endif--}}
             <div class="row">
                 <div class="col-lg-12 clear-padding-xs">
                     <h5 class="page-title"><i class="fa fa-user"></i>اضافة طالب</h5>
@@ -49,7 +56,7 @@
                                         {!! Form::text('phone','',['placeholder' =>'01155798554']) !!}
                                     </div>
                                     <div class="col-sm-3">
-                                        <label><i class="fa fa-phone"></i>العنوان #</label>
+                                        <label><i class="fa fa-address-book"></i>العنوان #</label>
                                         {!! Form::text('address','',['placeholder'=>'شارع محمد على']) !!}
                                     </div>
                                     @if(isset($statuss))
@@ -125,7 +132,7 @@
                             <div class="inner-item">
                                 <div class="dash-form">
                                     <div class="col-sm-3">
-                                        <label class="clear-top-margin"><i class="fa fa-puzzle-piece"></i> المبلغ المقدم</label>
+                                        <label class="clear-top-margin"><i class="fa fa-credit-card"></i> المبلغ المقدم</label>
                                         {{ Form::number('payment','0',['placeholder' => '500']) }}
                                     </div>
                                     @if(isset($classes))
@@ -150,7 +157,7 @@
                                     @endif
                                     @if(isset($shifts))
                                         <div class="col-sm-3">
-                                            <label class="clear-top-margin"><i class="fa fa-book"></i>الوقت</label>
+                                            <label class="clear-top-margin"><i class="fa fa-calendar"></i>الوقت</label>
                                             <select name="shift_id">
                                                 @foreach($shifts as $shift)
                                                     <option value="{{$shift->id}}">{{$shift->time}}</option>

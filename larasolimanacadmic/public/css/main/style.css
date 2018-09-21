@@ -957,3 +957,17 @@ table.dataTable > tbody > tr.child span.dtr-title i {
 .dash-form input[type=submit] i {
     margin-right: 5px;
 }
+/* the message of Success */
+.message_lara{
+    position: absolute;
+    font-size: 16px;
+    z-index: 100;
+    top: 40%;
+    right: 0;
+    overflow: hidden;
+    display: none;
+}
+.message_lara div{
+    padding-left: 30px;
+    padding-right: 30px;
+}
