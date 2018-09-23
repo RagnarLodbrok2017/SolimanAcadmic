@@ -51,6 +51,8 @@
                                             <!--Edit details modal-->
                                             <div id="editDetailModal{{$index}}" class="modal fade" role="dialog">
                                                 <div class="modal-dialog">
+                                                    {{ Form::open(array('url' => "incustudent/$student->id" , 'method' => 'PUT', 'id'=> 'updateIncustudentForm'))}}
+                                                    <input type="hidden" value="{{ csrf_token() }}" id="token">
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -59,6 +61,7 @@
                                                         </div>
                                                         <div class="modal-body dash-form">
                                                             <div class="col-sm-3">
+                                                                <input type="hidden" value="{{$student->id}}" name="id">
                                                                 <label class="clear-top-margin"><i class="fa fa-user"></i>الأسم الأول</label>
                                                                 {!!Form::text('first_name',$student->first_name,['placeholder' => ''])!!}
                                                             </div>
@@ -106,7 +109,7 @@
                                                                 @if(isset($statuss))
                                                                     <select name="status_id">
                                                                         @foreach($statuss as $status)
-                                                                            <option value="{{$status->id}}"  @if( $status->name == $student->status_id) selected='selected' @endif >{{ $status->name }}</option>
+                                                                            <option value="{{$status->id}}"  @if( $status->id == $student->status_id) selected='selected' @endif >{{ $status->name }}</option>
                                                                             {{--<option value="{{$status->id}}">{{$status->name}}</option>--}}
                                                                         @endforeach
                                                                     </select>
@@ -116,8 +119,9 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <div class="table-action-box">
-                                                                <a href="#" class="save"><i class="fa fa-check"></i>SAVE</a>
-                                                                <a href="#" class="cancel" data-dismiss="modal"><i class="fa fa-ban"></i>CLOSE</a>
+                                                                {{Form::submit('حفظ',['id'=>'updateIncustudent','class'=>'button_submit'])}}
+                                                                {{--<a href="#" class="save" id="updateIncustudent"><i class="fa fa-check"></i>حفظ</a>--}}
+                                                                <a href="#" class="cancel" data-dismiss="modal"><i class="fa fa-ban"></i>أغلاق</a>
                                                             </div>
                                                         </div>
                                                     </div>

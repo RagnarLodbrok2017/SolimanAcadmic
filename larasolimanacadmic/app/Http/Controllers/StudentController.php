@@ -157,7 +157,25 @@ class StudentController extends Controller
     public
     function update(Request $request, $id)
     {
-        //
+        if($request-> ajax())
+        {
+            $nStudent = Student::find($id);
+            /**
+             * @var $nStudent App\Student
+             * @var $nPayment App\Payment
+             */
+            $nStudent->first_name = $request->first_name;
+            $nStudent->middle_name = $request->middle_name;
+            $nStudent->last_name = $request->last_name;
+            $nStudent->phone = $request->phone;
+            $nStudent->status_id = $request->status_id;
+            $nStudent->classroom_id = $request->classroom_id;
+            $nPayment = Payment::find($request->student_id);
+            $nPayment->price = $request->payment;
+            $nStudent->save();
+            $nPayment->save();
+            return Response($nStudent);
+        }
     }
 
 

@@ -1,9 +1,3 @@
-/**
-*
-* Last Modified: 16-07-2017
-* Description: Stylesheet used by Pathshala Dashboard
-*
-**/
 
 /*********************************************************
 	TABLE OF CONTENTS
@@ -970,4 +964,23 @@ table.dataTable > tbody > tr.child span.dtr-title i {
 .message_lara div{
     padding-left: 30px;
     padding-right: 30px;
+}
+.button_submit{
+
+}
+.button_submit{
+    color: #fff;
+    background: #27AE60;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 10px 44px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    text-align: center;
+}
+.button_submit:hover {
+    color: #27AE60;
+    background: transparent;
+    border: 1px solid #27AE60;
 }
