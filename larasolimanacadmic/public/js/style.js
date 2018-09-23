@@ -74,11 +74,17 @@ $(document).ready(function () {
         success: function () {
         }
     });
-    $("#updateIncustudent").click(function () {
-        $("#updateIncustudentForm").submit(function (e) {
+
+
+    // Update Form Of Incustudent
+    var Incustudentid ;
+    $('.updateIncustudent').click(function () {
+        Incustudentid = this.id;
+        var submitButtonUpdate = ".updateIncustudentForm"+Incustudentid;
+        $("'"+submitButtonUpdate+"'").submit(function (e) {
             e.preventDefault();
         });
-        var id = $("input[name=id]").val();
+        var id = Incustudentid;
         var first_name = $("input[name=first_name]").val();
         var middle_name = $("input[name=middle_name]").val();
         var last_name = $("input[name=last_name]").val();
@@ -92,11 +98,11 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    function abortAjax(xhr) {
-        if(xhr && xhr.readyState !== 4){
-            xhr.abort();
-        }
-    }
+    // function abortAjax(xhr) {
+    //     if(xhr && xhr.readyState !== 4){
+    //         xhr.abort();
+    //     }
+    // }
     $.ajax({
         type:"PUT",
         data: {

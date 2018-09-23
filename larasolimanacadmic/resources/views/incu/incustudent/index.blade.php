@@ -36,9 +36,9 @@
                                             <tr>
                                                 <td class="action-link">
                                                     <a class="delete" href="#" title="حذف" data-toggle="modal"
-                                                       data-target="#deleteDetailModal"><i class="fa fa-remove"></i></a>
-                                                    <a class="edit" href="#" title="تعديل" data-toggle="modal"
-                                                       data-target="#editDetailModal{{$index}}"><i class="fa fa-edit"></i></a>
+                                                       data-target="#deleteDetailModal"><i class="fa fa-remove" id="tested{{$student->id}}"></i></a>
+                                                    <a class="edit EditUpdate" href="#" title="تعديل" data-toggle="modal" id="{{$student->id}}"
+                                                       data-target="#editDetailModal{{$student->id}}"><i class="fa fa-edit"></i></a>
                                                 </td>
                                                 <td>{{ $student->payment['price'] }}</td>
                                                 <td> {{ $student->status['name'] }} </td>
@@ -49,10 +49,12 @@
                                                 <td>{{ $student->getFullNameAttribute() }}</td>
                                             </tr>
                                             <!--Edit details modal-->
-                                            <div id="editDetailModal{{$index}}" class="modal fade" role="dialog">
+                                            <div id="editDetailModal{{$student->id}}" class="modal fade" role="dialog">
                                                 <div class="modal-dialog">
-                                                    {{ Form::open(array('url' => "incustudent/$student->id" , 'method' => 'PUT', 'id'=> 'updateIncustudentForm'))}}
+                                                    {{ Form::open(array('url' => "incustudent/$student->id" , 'method' => 'PUT', 'class'=> "updateIncustudentForm$student->id"))}}
                                                     <input type="hidden" value="{{ csrf_token() }}" id="token">
+                                                    <input type="hidden" value="{{ $student->id }}" id="id" name="id">
+                                                    {{--<input type="hidden" value="{{ $index }}" id="index" name="index">--}}
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -61,7 +63,6 @@
                                                         </div>
                                                         <div class="modal-body dash-form">
                                                             <div class="col-sm-3">
-                                                                <input type="hidden" value="{{$student->id}}" name="id">
                                                                 <label class="clear-top-margin"><i class="fa fa-user"></i>الأسم الأول</label>
                                                                 {!!Form::text('first_name',$student->first_name,['placeholder' => ''])!!}
                                                             </div>
@@ -119,7 +120,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <div class="table-action-box">
-                                                                {{Form::submit('حفظ',['id'=>'updateIncustudent','class'=>'button_submit'])}}
+                                                                {{Form::submit('حفظ',['id'=>"$student->id",'class'=>'updateIncustudent button_submit'])}}
                                                                 {{--<a href="#" class="save" id="updateIncustudent"><i class="fa fa-check"></i>حفظ</a>--}}
                                                                 <a href="#" class="cancel" data-dismiss="modal"><i class="fa fa-ban"></i>أغلاق</a>
                                                             </div>
