@@ -23,16 +23,44 @@ class StudentController extends Controller
         echo $output;
     }
 
-
+    //show all Incustudents and there Information
     public function index()
     {
-        $students = Student::all();
+        $students = Student::all()->where('type_id', 1);
         $statuss = Status::all();
         $classes = Classroom::all();
         $levels = Level::all();
         $shifts = Shift::all();
-        //$payments = Payment::all();
-        return view('incu.incustudent.index', compact('students', 'statuss', 'classes', 'levels', 'shifts'));
+        //total payment
+        $Total_Payment = 0;
+        foreach ($students as $student){
+            $payment = $student->payment->price;
+            $Total_Payment = $Total_Payment + $payment;
+        }
+        //number of student that price = 0
+        $Total_Students_Payment_Zero = 0;
+        foreach ($students as $student){
+            if($student->payment->price == 0){
+                $Total_Students_Payment_Zero ++;
+            }
+        }
+        //number of student that price > 0
+        $Total_Students_Payment_Not_Zero = 0;
+        foreach ($students as $student){
+            if($student->payment->price !== 0){
+                $Total_Students_Payment_Not_Zero ++;
+            }
+        }
+        //number of student that the father or mother is dead > 0
+        $Total_Students_Parents_Dead = 0;
+        foreach ($students as $student){
+            if($student->status_id !== 1){
+                $Total_Students_Parents_Dead ++;
+            }
+        }
+
+        return view('incu.incustudent.index', compact('students', 'statuss', 'classes', 'levels', 'shifts',
+            'Total_Payment','Total_Students_Payment_Zero','Total_Students_Payment_Not_Zero','Total_Students_Parents_Dead'));
     }
 
 
@@ -199,8 +227,23 @@ class StudentController extends Controller
 
 
     public
-    function destroy($id)
+    function destroy($id, Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $Student = Student::find($id);
+            Student::destroy($id);
+            //remove incustudent parents
+            if($Student->parents_id !== 0 || $Student->parents_id != null)
+            {
+                Parents::destroy($Student->parents_id);
+            }
+            //remove incustudent payments
+            $payment = Parents::where('student_id', $Student->id)->first();
+            if($payment->id != null)
+            {
+                Payment::destroy($payment->id);
+            }
+            return Response($Student);
+        }
     }
 }

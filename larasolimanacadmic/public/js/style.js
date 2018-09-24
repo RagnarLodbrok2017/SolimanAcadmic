@@ -75,6 +75,7 @@ $(document).ready(function () {
         }
     });
 
+
     // ************ Update Form Of Incustudent new 23/9/2018
     $(".EditUpdate").on('click', function () {
         let id = $(this).data('id');
@@ -137,20 +138,68 @@ $(document).ready(function () {
                 shift_id: shift_id,
                 status_id: status_id,
             },
-            async:true,
+            async: true,
             //notification
             success: function (data) {
-                var message = ' '+ data.first_name + ' '+data.middle_name+' ' +data.last_name+"<br> تم تعديله بنجاح" ;
-                setTimeout(function() {
+                var message = ' ' + data.first_name + ' ' + data.middle_name + ' ' + data.last_name + "<br> تم تعديله بنجاح";
+                setTimeout(function () {
                     $.bootstrapGrowl(message, {
                         type: 'success',
                         align: 'right',
                         stackup_spacing: 30
                     });
                 }, 1000);
+                $('#CancelUpdateForm').click();
+                $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
             }
         });
-    })
+    });
+
+
+    // ************** Delete Form of Incustudent 24/9
+    //Button delete in all students table
+    $('.DeleteIncuStudent').on('click', function (e) {
+        e.preventDefault();
+        let Incustudent_id = $(this).data('id');
+        $('#deleteDetailModal #Delete_Id').val(Incustudent_id);
+    });
+
+    $('#deleteDetailModal .Delete_Incustudent').on('click', function (e) {
+        e.preventDefault();
+        let id = $('#deleteDetailModal #Delete_Id').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'DELETE',
+            dataType: 'json',
+            url:'incustudent/'+id,
+            data: {
+                'id': id,
+                // _method: 'DELETE',
+                // _token: "{{ csrf_token() }}"
+            },
+            async: true,
+            success: function (data) {
+                $('.Cancel_Delete_Form').click();
+                var message = ' ' + data.first_name + ' ' + data.middle_name + ' ' + data.last_name + "<br> تم حذفه بنجاح";
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+                $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+            },
+            fail:function (error) {
+                console.log(error);
+            }
+        });
+    });
+
 
     // Update Form Of Incustudent
     // var Incustudentid ;
