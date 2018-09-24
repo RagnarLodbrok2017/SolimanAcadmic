@@ -321,6 +321,7 @@
     <script src="{{asset('plugins/Chart.min.js')}}"></script>
     <script src="{{asset('plugins/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('plugins/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('plugins/jquery.bootstrap-growl.min.js')}}"></script>
     <script src="{{asset('js/js.js')}}"></script>
     <script src="{{asset('js/style.js')}}"></script>
     <script src="{{asset('js/validator.js')}}"></script>

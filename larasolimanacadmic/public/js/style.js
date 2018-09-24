@@ -138,10 +138,16 @@ $(document).ready(function () {
                 status_id: status_id,
             },
             async:true,
-
+            //notification
             success: function (data) {
-                var newDiv = $('div').css({position: 'absolute', left: '100px', top: '100px'}).text('تم تعديل بيانات الطالب !').appendTo($('body'));
-                newDiv.fadeOut(5000);
+                var message = ' '+ data.first_name + ' '+data.middle_name+' ' +data.last_name+"<br> تم تعديله بنجاح" ;
+                setTimeout(function() {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
             }
         });
     })
