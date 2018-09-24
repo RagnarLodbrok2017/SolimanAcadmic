@@ -6,6 +6,7 @@ use App\Classroom;
 use App\Level;
 use App\Parents;
 use App\Shift;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Student;
 use App\Status;
@@ -150,16 +151,30 @@ class StudentController extends Controller
     public
     function edit($id)
     {
-        //
+
+    }
+    // Send information to Edit Form of IncuStudent by ajax and make values of the inputs as the Incustudent Information
+    //in ajax File style.js
+    public function getUpdate(Request $request)
+    {
+        if ($request-> ajax()){
+            $Update_Student = Student::find($request->id);
+            $Update_Statuses = Status::all();
+            $Update_Classes = Classroom::all();
+            $Update_Shifts = Shift::all();
+            $Update_Payment = Payment::where('student_id', $request->id)->first();
+            //$payments = Payment::all();
+            $data = compact('Update_Student','Update_Statuses', 'Update_Classes', 'Update_Shifts','Update_Payment');
+            return Response($data);
+        }
     }
 
-
     public
-    function update(Request $request, $id)
+    function newUpdate(Request $request)
     {
         if($request-> ajax())
         {
-            $nStudent = Student::find($id);
+            $nStudent = Student::find($request->id);
             /**
              * @var $nStudent App\Student
              * @var $nPayment App\Payment
@@ -170,12 +185,17 @@ class StudentController extends Controller
             $nStudent->phone = $request->phone;
             $nStudent->status_id = $request->status_id;
             $nStudent->classroom_id = $request->classroom_id;
-            $nPayment = Payment::find($request->student_id);
+            $nPayment = Payment::find($request->payment_id);
             $nPayment->price = $request->payment;
             $nStudent->save();
             $nPayment->save();
             return Response($nStudent);
         }
+    }
+    public
+    function update(Request $request , $id)
+    {
+
     }
 
 

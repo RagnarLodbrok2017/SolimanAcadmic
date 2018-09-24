@@ -75,53 +75,122 @@ $(document).ready(function () {
         }
     });
 
+    // ************ Update Form Of Incustudent new 23/9/2018
+    $(".EditUpdate").on('click', function () {
+        let id = $(this).data('id');
+        // var url = '{{URL::to('getUpdate')}}',
+        // var url = "{{ route("getUpdate") }}";
+        $.ajax({
+            type: 'get',
+            url: 'getUpdate',
+            data: {
+                'id': id
+            },
+            success: function (data) {
+                $("#S_id").val(data.Update_Student.id);
+                $("#S_payment").val(data.Update_Payment.id);
+                $("#S_first_name").val(data.Update_Student.first_name);
+                $("#S_middle_name").val(data.Update_Student.middle_name);
+                $("#S_last_name").val(data.Update_Student.last_name);
+                $("#S_phone").val(data.Update_Student.phone);
+                $("#Update_Classes").val(data.Update_Student.classroom_id);
+                $("#Update_Statuses").val(data.Update_Student.status_id);
+                $("#Update_Shifts").val(data.Update_Student.shift_id);
+                $("#Update_Payment").val(data.Update_Payment.price);
+                // $.each(data.Update_Classes,function(index,val){
+                //     $('#Update_Classes').append($("<option></option>").attr("value",val.id).text(val.name));
+                // });
+            }
+
+        });
+    });
+    // Send Updated Information to controller
+    $('#updateIncustudentForm').on('submit', function (e) {
+        e.preventDefault();
+        var id = $("#S_id").val();
+        var payment_id = $("#S_payment").val();
+        var first_name = $("#S_first_name").val();
+        var middle_name = $("#S_middle_name").val();
+        var last_name = $("#S_last_name").val();
+        var status_id = $("#Update_Statuses").val();
+        var phone = $("#S_phone").val();
+        var payment = $("#Update_Payment").val();
+        var classroom_id = $("#Update_Classes").val();
+        var shift_id = $("#Update_Shifts").val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'PUT',
+            url: '/newUpdate',
+            data: {
+                data: {
+                    id: id,
+                    payment_id: payment_id,
+                    first_name: first_name,
+                    middle_name: middle_name,
+                    last_name: last_name,
+                    phone: phone,
+                    payment: payment,
+                    class_id: classroom_id,
+                    shift_id: shift_id,
+                    status_id: status_id,
+                },
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    })
 
     // Update Form Of Incustudent
-    var Incustudentid ;
-    $('.updateIncustudent').click(function () {
-        Incustudentid = this.id;
-        var submitButtonUpdate = ".updateIncustudentForm"+Incustudentid;
-        $("'"+submitButtonUpdate+"'").submit(function (e) {
-            e.preventDefault();
-        });
-        var id = Incustudentid;
-        var first_name = $("input[name=first_name]").val();
-        var middle_name = $("input[name=middle_name]").val();
-        var last_name = $("input[name=last_name]").val();
-        var status = $("select[name=status]").val();
-        var phone = $("input[name=phone]").val();
-        var payment = $("input[name=payment]").val();
-        var class_id = $("select[name=class_id]").val();
-        var shift_id = $("select[name=shift_id]").val();
-        $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    // function abortAjax(xhr) {
-    //     if(xhr && xhr.readyState !== 4){
-    //         xhr.abort();
+    // var Incustudentid ;
+    // $('.updateIncustudent').click(function () {
+    //     Incustudentid = this.id;
+    //     var submitButtonUpdate = ".updateIncustudentForm"+Incustudentid;
+    //     $("'"+submitButtonUpdate+"'").submit(function (e) {
+    //         e.preventDefault();
+    //     });
+    //     var id = Incustudentid;
+    //     var first_name = $("input[name=first_name]").val();
+    //     var middle_name = $("input[name=middle_name]").val();
+    //     var last_name = $("input[name=last_name]").val();
+    //     var status = $("select[name=status]").val();
+    //     var phone = $("input[name=phone]").val();
+    //     var payment = $("input[name=payment]").val();
+    //     var class_id = $("select[name=class_id]").val();
+    //     var shift_id = $("select[name=shift_id]").val();
+    //     $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     //     }
-    // }
-    $.ajax({
-        type:"PUT",
-        data: {
-            id:id,
-            first_name: first_name,
-            middle_name: middle_name,
-            last_name: last_name,
-            phone: phone,
-            payment: payment,
-            class_id: class_id,
-            shift_id: shift_id,
-            status: status,
-        },
-        url:"/incustudent/"+id,
-        success:function (data) {
-            console.log(data)
-        }
-        });
-    });
+    // });
+    // // function abortAjax(xhr) {
+    // //     if(xhr && xhr.readyState !== 4){
+    // //         xhr.abort();
+    // //     }
+    // // }
+    // $.ajax({
+    //     type:"PUT",
+    //     data: {
+    //         id:id,
+    //         first_name: first_name,
+    //         middle_name: middle_name,
+    //         last_name: last_name,
+    //         phone: phone,
+    //         payment: payment,
+    //         class_id: class_id,
+    //         shift_id: shift_id,
+    //         status: status,
+    //     },
+    //     url:"/incustudent/"+id,
+    //     success:function (data) {
+    //         console.log(data)
+    //     }
+    //     });
+    // });
     // }
     // $("#addIncustudent").click(function () {
     //     validator();

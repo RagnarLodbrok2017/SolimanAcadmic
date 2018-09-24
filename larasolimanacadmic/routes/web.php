@@ -19,3 +19,5 @@ Auth::routes();
 
 Route::get('/incubation', 'IncuHomeController@index')->name('incubation');
 Route::resource('incustudent', 'StudentController');
+Route::get('/getUpdate','StudentController@getUpdate')->name('getUpdate');
+Route::put('/newUpdate','StudentController@newUpdate')->name('newUpdate');

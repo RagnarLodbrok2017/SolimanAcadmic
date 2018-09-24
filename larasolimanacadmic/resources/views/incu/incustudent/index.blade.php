@@ -36,9 +36,10 @@
                                             <tr>
                                                 <td class="action-link">
                                                     <a class="delete" href="#" title="حذف" data-toggle="modal"
-                                                       data-target="#deleteDetailModal"><i class="fa fa-remove" id="tested{{$student->id}}"></i></a>
-                                                    <a class="edit EditUpdate" href="#" title="تعديل" data-toggle="modal" id="{{$student->id}}"
-                                                       data-target="#editDetailModal{{$student->id}}"><i class="fa fa-edit"></i></a>
+                                                       data-target="#deleteDetailModal"><i class="fa fa-remove"></i></a>
+                                                    <a class="edit EditUpdate" href="#" title="تعديل" data-toggle="modal" data-id="{{$student->id}}" data-target="#editDetailModal">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
                                                 </td>
                                                 <td>{{ $student->payment['price'] }}</td>
                                                 <td> {{ $student->status['name'] }} </td>
@@ -48,86 +49,6 @@
                                                 <td>{{ $student->level['name'] }}</td>
                                                 <td>{{ $student->getFullNameAttribute() }}</td>
                                             </tr>
-                                            <!--Edit details modal-->
-                                            <div id="editDetailModal{{$student->id}}" class="modal fade" role="dialog">
-                                                <div class="modal-dialog">
-                                                    {{ Form::open(array('url' => "incustudent/$student->id" , 'method' => 'PUT', 'class'=> "updateIncustudentForm$student->id"))}}
-                                                    <input type="hidden" value="{{ csrf_token() }}" id="token">
-                                                    <input type="hidden" value="{{ $student->id }}" id="id" name="id">
-                                                    {{--<input type="hidden" value="{{ $index }}" id="index" name="index">--}}
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            <h4 class="modal-title"><i class="fa fa-edit"></i>تعديل بيانات الطالب</h4>
-                                                        </div>
-                                                        <div class="modal-body dash-form">
-                                                            <div class="col-sm-3">
-                                                                <label class="clear-top-margin"><i class="fa fa-user"></i>الأسم الأول</label>
-                                                                {!!Form::text('first_name',$student->first_name,['placeholder' => ''])!!}
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label class="clear-top-margin"><i class="fa fa-user"></i>الأسم الثانى</label>
-                                                                {!!Form::text('middle_name',$student->middle_name,['placeholder' => ''])!!}
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label class="clear-top-margin"><i class="fa fa-user"></i>اللقب</label>
-                                                                {!!Form::text('last_name',$student->last_name,['placeholder' => ''])!!}
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label class="clear-top-margin"><i class="fa fa-phone"></i>التليفون</label>
-                                                                {!! Form::text('phone',$student->phone,['placeholder' =>'']) !!}
-                                                            </div>
-                                                            <div class="clearfix"></div>
-                                                            <div class="col-sm-3">
-                                                                <label><i class="fa fa-cogs"></i>الفصل</label>
-                                                                @if(isset($classes))
-                                                                    <select name="classroom_id" id="classroom_id">
-                                                                        @foreach($classes as $key => $classroom_id)
-                                                                            <option value="{{ $classroom_id->id }}"  @if($classroom_id->id == $student->classroom_id) selected='selected' @endif >{{ $classroom_id->name }}</option>
-                                                                            {{--<option value="{{ $classroom_id->id }}">{{$classroom_id->name}}</option>--}}
-                                                                        @endforeach
-                                                                    </select>
-                                                                @endif
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label><i class="fa fa-calendar"></i>الوقت</label>
-                                                                @if(isset($shifts))
-                                                                    <select name="shift_id">
-                                                                        @foreach($shifts as $shift)
-                                                                            <option value="{{ $shift->id }}"  @if($shift->id == $student->shift_id) selected='selected' @endif >{{ $shift->time }}</option>
-                                                                            {{--<option value="{{$shift->id}}">{{$shift->time}}</option>--}}
-                                                                        @endforeach
-                                                                    </select>
-                                                                @endif
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label><i class="fa fa-credit-card"></i>المبلغ المقدم</label>
-                                                                {{ Form::number('payment',$student->payment['price'],['placeholder' => '']) }}
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <label><i class="fa fa-envelope-o"></i>حالة الطالب</label>
-                                                                @if(isset($statuss))
-                                                                    <select name="status_id">
-                                                                        @foreach($statuss as $status)
-                                                                            <option value="{{$status->id}}"  @if( $status->id == $student->status_id) selected='selected' @endif >{{ $status->name }}</option>
-                                                                            {{--<option value="{{$status->id}}">{{$status->name}}</option>--}}
-                                                                        @endforeach
-                                                                    </select>
-                                                                @endif
-                                                            </div>
-                                                            <div class="clearfix"></div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <div class="table-action-box">
-                                                                {{Form::submit('حفظ',['id'=>"$student->id",'class'=>'updateIncustudent button_submit'])}}
-                                                                {{--<a href="#" class="save" id="updateIncustudent"><i class="fa fa-check"></i>حفظ</a>--}}
-                                                                <a href="#" class="cancel" data-dismiss="modal"><i class="fa fa-ban"></i>أغلاق</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         @endforeach
                                     @endif
                                     </tbody>
@@ -143,6 +64,106 @@
         </div>
         <div class="dash-footer col-lg-12">
             <p>Copyright Ahmed R.Mohamed</p>
+        </div>
+
+        <!-- **********************************************************Edit details modal ********************************************************-->
+        <div id="editDetailModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                {{ Form::open(array('url' => "incustudent/$student->id" , 'method' => 'PUT', 'class'=> "updateIncustudentForm", 'id' => 'updateIncustudentForm' ))}}
+                <input type="hidden" value="{{ csrf_token() }}" id="token">
+                <input type="hidden" value="{{ $student->id }}" id="id" name="id">
+            {{--<input type="hidden" value="{{ $index }}" id="index" name="index">--}}
+            <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa-edit"></i>تعديل بيانات الطالب</h4>
+                    </div>
+                    <div class="modal-body dash-form">
+                        {!!Form::hidden('id','',['placeholder' => '','id' => 'S_id'])!!}
+                        {!!Form::hidden('payment_id','',['placeholder' => '','id' => 'S_payment'])!!}
+                        <div class="col-sm-3">
+                            <label class="clear-top-margin"><i class="fa fa-user"></i>الأسم الأول</label>
+                            {!!Form::text('first_name','',['placeholder' => '','id' => 'S_first_name'])!!}
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="clear-top-margin"><i class="fa fa-user"></i>الأسم الثانى</label>
+                            {!!Form::text('middle_name','',['placeholder' => '','id' => 'S_middle_name'])!!}
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="clear-top-margin"><i class="fa fa-user"></i>اللقب</label>
+                            {!!Form::text('last_name','',['placeholder' => '','id' => 'S_last_name'])!!}
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="clear-top-margin"><i class="fa fa-phone"></i>التليفون</label>
+                            {!! Form::text('phone','',['placeholder' =>'','id' => 'S_phone']) !!}
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-3">
+                            <label><i class="fa fa-cogs"></i>الفصل</label>
+                            <select name="classroom_id" id="Update_Classes">
+                                <option value="1">الفصل 1</option>
+                                <option value="2">الفصل 2</option>
+                                <option value="3">الفصل 3</option>
+                                <option value="4">الفصل 4</option>
+                                <option value="5">الفصل 5</option>
+                            </select>
+                            {{--@if(isset($Update_Classes))--}}
+                                {{--<select name="classroom_id" id="classroom_id">--}}
+                                    {{--@foreach( $Update_Classes as $key => $classroom_id )--}}
+                                        {{--<option value="{{ $classroom_id->id }}"  @if($classroom_id->id == $student->classroom_id) selected='selected' @endif >{{ $classroom_id->name }}</option>--}}
+                                        {{--<option value="{{ $classroom_id->id }}">{{$classroom_id->name}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--@endif--}}
+                        </div>
+                        <div class="col-sm-3">
+                            <label><i class="fa fa-calendar"></i>الوقت</label>
+                            <select name="shift_id" id="Update_Shifts">
+                                <option value="1">من 8 ال 1</option>
+                                <option value="2">من 2 الى 5</option>
+                            </select>
+                            {{--@if(isset($shifts))--}}
+                                {{--<select name="shift_id">--}}
+                                    {{--@foreach($shifts as $shift)--}}
+                                        {{--<option value="{{ $shift->id }}"  @if($shift->id == $student->shift_id) selected='selected' @endif >{{ $shift->time }}</option>--}}
+                                        {{--<option value="{{$shift->id}}">{{$shift->time}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--@endif--}}
+                        </div>
+                        <div class="col-sm-3">
+                            <label><i class="fa fa-credit-card"></i>المبلغ المقدم</label>
+                            {{ Form::number('payment_id','',['placeholder' => '','id' => 'Update_Payment']) }}
+                        </div>
+                        <div class="col-sm-3">
+                            <label><i class="fa fa-envelope-o"></i>حالة الطالب</label>
+                            <select name="status_id" id="Update_Statuses">
+                                <option value="1">عادى</option>
+                                <option value="2">يتيم الأب</option>
+                                <option value="3">يتيم الأم</option>
+                                <option value="4">يتيم الأتنين</option>
+                            </select>
+                            {{--@if(isset($statuss))--}}
+                                {{--<select name="status_id">--}}
+                                    {{--@foreach($statuss as $status)--}}
+                                        {{--<option value="{{$status->id}}"  @if( $status->id == $student->status_id) selected='selected' @endif >{{ $status->name }}</option>--}}
+                                        {{--<option value="{{$status->id}}">{{$status->name}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--@endif--}}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="table-action-box">
+                            {{Form::submit('حفظ',['id'=>"$student->id",'class'=>'updateIncustudent button_submit'])}}
+                            {{--<a href="#" class="save" id="updateIncustudent"><i class="fa fa-check"></i>حفظ</a>--}}
+                            <a href="#" class="cancel" data-dismiss="modal"><i class="fa fa-ban"></i>أغلاق</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
