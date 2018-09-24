@@ -14,12 +14,16 @@ use App\Payment;
 
 class StudentController extends Controller
 {
+    public function debug_to_console($data)
+    {
+        if (is_array($data))
+            $output = "<script>console.log( 'Debug Objects: " . implode(',', $data) . "' );</script>";
+        else
+            $output = "<script>console.log( 'Debug Objects: " . $data . "' );</script>";
+        echo $output;
+    }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $students = Student::all();
@@ -28,14 +32,10 @@ class StudentController extends Controller
         $levels = Level::all();
         $shifts = Shift::all();
         //$payments = Payment::all();
-        return view('incu.incustudent.index', compact('students','statuss', 'classes', 'levels', 'shifts'));
+        return view('incu.incustudent.index', compact('students', 'statuss', 'classes', 'levels', 'shifts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $statuss = Status::all();
@@ -46,12 +46,7 @@ class StudentController extends Controller
         return view('incu.incustudent.create', compact('statuss', 'classes', 'levels', 'shifts'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -121,27 +116,22 @@ class StudentController extends Controller
 
         //add price in payment
         $newStudentId = Student::where([
-            ['first_name',$student->first_name],
+            ['first_name', $student->first_name],
             ['middle_name', $student->middle_name],
             ['last_name', $student->last_name],
             ['address', $student->address],
-            ])->first()->id;
+        ])->first()->id;
         $payment = new Payment();
         $payment->price = $request->payment;
         $payment->student_id = $newStudentId;
         $payment->save();
         session()->flash('message', 'تم اضافة الطالب !');
-        return response()->json(['message'=>'تم اضافة الطالب !', 'success'=>true]);
+        return response()->json(['message' => 'تم اضافة الطالب !', 'success' => true]);
 //        return redirect()->back()->with('message', 'تم اضافة الطالب');
 //        return back()->with('message', 'تم اضافة الطالب');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public
     function show($id)
     {
@@ -157,14 +147,14 @@ class StudentController extends Controller
     //in ajax File style.js
     public function getUpdate(Request $request)
     {
-        if ($request-> ajax()){
+        if ($request->ajax()) {
             $Update_Student = Student::find($request->id);
             $Update_Statuses = Status::all();
             $Update_Classes = Classroom::all();
             $Update_Shifts = Shift::all();
             $Update_Payment = Payment::where('student_id', $request->id)->first();
             //$payments = Payment::all();
-            $data = compact('Update_Student','Update_Statuses', 'Update_Classes', 'Update_Shifts','Update_Payment');
+            $data = compact('Update_Student', 'Update_Statuses', 'Update_Classes', 'Update_Shifts', 'Update_Payment');
             return Response($data);
         }
     }
@@ -172,8 +162,7 @@ class StudentController extends Controller
     public
     function newUpdate(Request $request)
     {
-        if($request-> ajax())
-        {
+        if ($request->ajax()) {
             $nStudent = Student::find($request->id);
             /**
              * @var $nStudent App\Student
@@ -184,16 +173,26 @@ class StudentController extends Controller
             $nStudent->last_name = $request->last_name;
             $nStudent->phone = $request->phone;
             $nStudent->status_id = $request->status_id;
+            $nStudent->shift_id = $request->shift_id;
             $nStudent->classroom_id = $request->classroom_id;
+
+            //update new price
             $nPayment = Payment::find($request->payment_id);
             $nPayment->price = $request->payment;
+
+            //update new Parent
+            $nParent = Parents::find($nStudent->parents_id);
+            $nParent->father_name = $request->middle_name . ' ' . $request->last_name;
+
             $nStudent->save();
             $nPayment->save();
+            $nParent->save();
             return Response($nStudent);
         }
     }
+
     public
-    function update(Request $request , $id)
+    function update(Request $request, $id)
     {
 
     }

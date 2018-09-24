@@ -123,24 +123,25 @@ $(document).ready(function () {
             }
         });
         $.ajax({
-            type: 'PUT',
+            type: 'POST',
             url: '/newUpdate',
             data: {
-                data: {
-                    id: id,
-                    payment_id: payment_id,
-                    first_name: first_name,
-                    middle_name: middle_name,
-                    last_name: last_name,
-                    phone: phone,
-                    payment: payment,
-                    class_id: classroom_id,
-                    shift_id: shift_id,
-                    status_id: status_id,
-                },
+                id: id,
+                payment_id: payment_id,
+                first_name: first_name,
+                middle_name: middle_name,
+                last_name: last_name,
+                phone: phone,
+                payment: payment,
+                classroom_id: classroom_id,
+                shift_id: shift_id,
+                status_id: status_id,
             },
+            async:true,
+
             success: function (data) {
-                console.log(data);
+                var newDiv = $('div').css({position: 'absolute', left: '100px', top: '100px'}).text('تم تعديل بيانات الطالب !').appendTo($('body'));
+                newDiv.fadeOut(5000);
             }
         });
     })

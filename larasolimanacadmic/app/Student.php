@@ -36,4 +36,7 @@ class Student extends Model
     public function payment() {
         return $this->hasOne('App\Payment');
     }
+    public function parent() {
+        return $this->hasOne('App\Parents');
+    }
 }
