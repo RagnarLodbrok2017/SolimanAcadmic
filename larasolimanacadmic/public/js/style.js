@@ -156,7 +156,7 @@ $(document).ready(function () {
     });
 
 
-    // ************** Delete Form of Incustudent 24/9
+    // ************** Delete Form of Incustudent 24/9 **************************
     //Button delete in all students table
     $('.DeleteIncuStudent').on('click', function (e) {
         e.preventDefault();
@@ -175,7 +175,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'DELETE',
             dataType: 'json',
-            url:'incustudent/'+id,
+            url: 'incustudent/' + id,
             data: {
                 'id': id,
                 // _method: 'DELETE',
@@ -194,65 +194,206 @@ $(document).ready(function () {
                 }, 1000);
                 $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
             },
-            fail:function (error) {
+            fail: function (error) {
                 console.log(error);
             }
         });
     });
 
+//*********************** Add The Incu Subject 25/9  ****************************
+    $('.submit_incusubject').on('click', function (e) {
+        e.preventDefault();
+        var name = $('.Subject_name').val();
+        var code = $('.Subject_code').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: 'incusubject',
+            data: {'name': name, 'code': code},
+            async: true,
+            success: function (data) {
+                var message = ' ' + data.name + ' ' + data.code + "<br> تم اضافتها بنجاح";
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+                $("#addIncusubjectForm")[0].reset();
+                $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+            },
+            error: function () {
+                setTimeout(function () {
+                    $.bootstrapGrowl('The Subject Cannot Added !', {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 500);
+            }
 
-    // Update Form Of Incustudent
-    // var Incustudentid ;
-    // $('.updateIncustudent').click(function () {
-    //     Incustudentid = this.id;
-    //     var submitButtonUpdate = ".updateIncustudentForm"+Incustudentid;
-    //     $("'"+submitButtonUpdate+"'").submit(function (e) {
-    //         e.preventDefault();
-    //     });
-    //     var id = Incustudentid;
-    //     var first_name = $("input[name=first_name]").val();
-    //     var middle_name = $("input[name=middle_name]").val();
-    //     var last_name = $("input[name=last_name]").val();
-    //     var status = $("select[name=status]").val();
-    //     var phone = $("input[name=phone]").val();
-    //     var payment = $("input[name=payment]").val();
-    //     var class_id = $("select[name=class_id]").val();
-    //     var shift_id = $("select[name=shift_id]").val();
-    //     $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     }
-    // });
-    // // function abortAjax(xhr) {
-    // //     if(xhr && xhr.readyState !== 4){
-    // //         xhr.abort();
-    // //     }
-    // // }
-    // $.ajax({
-    //     type:"PUT",
-    //     data: {
-    //         id:id,
-    //         first_name: first_name,
-    //         middle_name: middle_name,
-    //         last_name: last_name,
-    //         phone: phone,
-    //         payment: payment,
-    //         class_id: class_id,
-    //         shift_id: shift_id,
-    //         status: status,
-    //     },
-    //     url:"/incustudent/"+id,
-    //     success:function (data) {
-    //         console.log(data)
-    //     }
-    //     });
-    // });
-    // }
-    // $("#addIncustudent").click(function () {
-    //     validator();
-    //     $("#addIncustudentForm").submit(function(e){
-    //         e.preventDefault();
-    //     });
-    //
-    // });
+        });
+    });
+
+    //*********** Delete Incu Subject *******************
+    $(".DeleteIncuSubject").on('click', function () {
+        let Subject_id = $(this).data('id');
+        $('.DeleteIncu_SubjectConfirmation #id_of_subject').val(Subject_id);
+    });
+    $('#DeleteIncusubjectConfirmed').on('click', function (e) {
+        e.preventDefault();
+        let id = $('#id_of_subject').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'DELETE',
+            dataType: 'json',
+            url: 'incusubject/' + id,
+            data: {'id': id},
+            success: function (data) {
+                var message = ' ' + data.name + ' ' + data.code + "<br> تم مسح المادة بنجاح";
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+                $('.ExitDeleteIncusubjectForm').click();
+                $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+            },
+            error: function () {
+                setTimeout(function () {
+                    $.bootstrapGrowl('المادة لا يمكن مسحها !', {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 500);
+            }
+        });
+    });
+
+    $('.EditIncuSubjectButton').on('click',function () {
+        let id = $(this).data('id');
+        $.ajax({
+            type:'GET',
+            url:'incusubject/'+id+'/edit',
+            data:{'id':id},
+            success:function (data) {
+                $('.EditIncuSubjectForm .IncuSubject_id').val(id);
+                $('.EditIncuSubjectForm .IncuSubject_code').val(data.code);
+                $('.EditIncuSubjectForm .IncuSubject_name').val(data.name);
+            }
+        });
+    });
+    $('.ButtonSubmitEditedIncuSubject').on('click',function (e) {
+        e.preventDefault();
+        let id = $('.EditIncuSubjectForm .IncuSubject_id').val();
+        let name = $('.EditIncuSubjectForm .IncuSubject_name').val();
+        let code = $('.EditIncuSubjectForm .IncuSubject_code').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            method:'POST',
+            url:'/newUpdateSubject',
+            data:{
+                'id':id,
+                'name':name,
+                'code':code,
+            },
+            success: function (data) {
+                $('.ExitIncuSubject').click();
+                var message = ' ' + data.name + ' ' + data.code + "<br> تم تعديل المادة بنجاح لقبول اى تعديل قم باعادة تحميل الصفحة";
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+                $('.ExitDeleteIncusubjectForm').click();
+                $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+            },
+            error: function () {
+                setTimeout(function () {
+                    $.bootstrapGrowl('المادة لا يمكن تعديلها من فضلك قم باعادة تحميل الصفحة !', {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 500);
+            }
+        });
+    });
+
 });
+
+/*
+Comment Update Form Of Incustudent
+var Incustudentid ;
+$('.updateIncustudent').click(function () {
+    Incustudentid = this.id;
+    var submitButtonUpdate = ".updateIncustudentForm"+Incustudentid;
+    $("'"+submitButtonUpdate+"'").submit(function (e) {
+        e.preventDefault();
+    });
+    var id = Incustudentid;
+    var first_name = $("input[name=first_name]").val();
+    var middle_name = $("input[name=middle_name]").val();
+    var last_name = $("input[name=last_name]").val();
+    var status = $("select[name=status]").val();
+    var phone = $("input[name=phone]").val();
+    var payment = $("input[name=payment]").val();
+    var class_id = $("select[name=class_id]").val();
+    var shift_id = $("select[name=shift_id]").val();
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+// function abortAjax(xhr) {
+//     if(xhr && xhr.readyState !== 4){
+//         xhr.abort();
+//     }
+// }
+$.ajax({
+    type:"PUT",
+    data: {
+        id:id,
+        first_name: first_name,
+        middle_name: middle_name,
+        last_name: last_name,
+        phone: phone,
+        payment: payment,
+        class_id: class_id,
+        shift_id: shift_id,
+        status: status,
+    },
+    url:"/incustudent/"+id,
+    success:function (data) {
+        console.log(data)
+    }
+    });
+});
+}
+$("#addIncustudent").click(function () {
+    validator();
+    $("#addIncustudentForm").submit(function(e){
+        e.preventDefault();
+    });
+
+});
+});
+*/

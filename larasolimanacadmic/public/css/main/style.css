@@ -1052,3 +1052,21 @@ table.dataTable > tbody > tr.child span.dtr-title i {
 .btn-danger.btn-outline:hover {
     color: #fff;
 }
+/* Incusubject create form and edit Form */
+.submit_incusubject{
+    overflow: hidden;
+    padding: 0;
+    background: white;
+    margin-top: 30px;
+    float: right;
+}
+.UpdateIncuSubject{
+    overflow: hidden;
+    padding: 0;
+    background: white;
+    float: right;
+}
+.noMargin{
+    margin-top: 0!important;
+}
+

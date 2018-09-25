@@ -16,8 +16,13 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+//incubation routes
 
 Route::get('/incubation', 'IncuHomeController@index')->name('incubation');
+// Incustudent routes
 Route::resource('incustudent', 'StudentController');
 Route::get('/getUpdate','StudentController@getUpdate')->name('getUpdate');
 Route::post('/newUpdate','StudentController@newUpdate')->name('newUpdate');
+// Incusubject routes
+Route::resource('incusubject', 'IncusubjectController');
+Route::post('/newUpdateSubject','IncusubjectController@newUpdateSubject')->name('newUpdateSubject');

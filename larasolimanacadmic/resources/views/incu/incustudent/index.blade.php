@@ -16,14 +16,15 @@
                         <div class="dash-item first-dash-item">
                             <h6 class="item-title"><i class="fa fa-user"></i>الطلاب</h6>
                             <div class="inner-item">
-                                <table id="attendenceDetailedTable" class="display responsive nowrap table-hover table-bordered" cellspacing="0"
+                                <table id="attendenceDetailedTable"
+                                       class="display responsive nowrap table-hover table-bordered" cellspacing="0"
                                        width="100%">
                                     <thead>
                                     <tr>
                                         <th class="text-center"><i class="fa fa-tasks"></i>ACTION</th>
                                         <th class="text-center"><i class="fa fa-credit-card"></i>المصاريف</th>
                                         <th class="text-center"><i class="fa fa-puzzle-piece"></i>الحالة</th>
-                                        <th class="text-center"<i class="fa fa-phone"></i>الموبيل</th>
+                                        <th class="text-center"><i class="fa fa-phone"></i>الموبيل</th>
                                         <th class="text-center"><i class="fa fa-calendar"></i>الفترة</th>
                                         <th class="text-center"><i class="fa fa-book"></i>الفصل</th>
                                         <th class="text-center"><i class="fa fa-id-card"></i>المستوى</th>
@@ -46,13 +47,15 @@
                                                 </td>
                                                 <td class="text-center">
                                                     @if( $student->payment['price'] == 0)
-                                                        <button type="button" class="btn btn-danger btn-outline" style="width: 54px">{{$student->payment['price']}}</button>
+                                                        <button type="button" class="btn btn-danger btn-outline"
+                                                                style="width: 54px">{{$student->payment['price']}}</button>
                                                     @elseif($student->payment['price'] > 0 && $student->payment['price'] < 200)
-                                                        <button type="button" class="btn btn-outline btn-warning">{{$student->payment['price']}}</button>
-                                                        @else
-                                                        <button type="button" class="btn btn-success btn-outline">{{$student->payment['price']}}</button>
-                                                        @endif
-
+                                                        <button type="button"
+                                                                class="btn btn-outline btn-warning">{{$student->payment['price']}}</button>
+                                                    @else
+                                                        <button type="button"
+                                                                class="btn btn-success btn-outline">{{$student->payment['price']}}</button>
+                                                    @endif
 
 
                                                 </td>

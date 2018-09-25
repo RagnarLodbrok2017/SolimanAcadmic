@@ -2,83 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use App\Incusubject;
 use Illuminate\Http\Request;
 
 class IncusubjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $Incu_Subjects = Incusubject::all();
+        return view('incu.incusubject.index',compact('Incu_Subjects'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            //required incusubject Information
+            'name' => 'required | max:20 | string',
+            'code' => 'nullable |max:15']);
+        $incusubject = new Incusubject();
+        if ($request->ajax()) {
+            $incusubject->name = $request->name;
+            if ($request->code != null) {
+                $incusubject->code = $request->code;
+            }
+            $incusubject->save();
+        }
+        return Response($incusubject);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit($id, Request $request)
     {
-        //
+        $IncuSubject = new Incusubject();
+        if($request->ajax()) {
+            $IncuSubject = Incusubject::find($id);
+        }
+        return Response($IncuSubject);
+    }
+    public function update($id, Request $request){
+
+    }
+    public function newUpdateSubject(Request $request)
+    {
+        $NewIncuSubject = Incusubject::find($request->id);
+        if ($request->ajax()){
+            $NewIncuSubject->name = $request->name;
+            $NewIncuSubject->code = $request->code;
+            $NewIncuSubject->save();
+        }
+        return Response($NewIncuSubject);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy($id, Request $request)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if ($request->ajax()) {
+            $Incu_Subject = Incusubject::find($id);
+            Incusubject::destroy($id);
+            return Response($Incu_Subject);
+        }
     }
 }

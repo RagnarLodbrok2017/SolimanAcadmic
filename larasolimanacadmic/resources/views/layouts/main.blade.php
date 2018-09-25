@@ -246,7 +246,7 @@
                                 <a href="admin-add-subject.html"><i class="fa fa-caret-right"></i>اضافة مادة</a>
                             </li>
                             <li>
-                                <a href="admin-add-subject.html"><i class="fa fa-caret-right"></i>كل المواد</a>
+                                <a href="../incusubject/index"><i class="fa fa-caret-right"></i>كل المواد</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
