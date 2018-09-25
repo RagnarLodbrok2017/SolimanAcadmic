@@ -243,10 +243,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="admin-add-subject.html"><i class="fa fa-caret-right"></i>اضافة مادة</a>
-                            </li>
-                            <li>
-                                <a href="../incusubject/index"><i class="fa fa-caret-right"></i>كل المواد</a>
+                                <a href="../incusubject"><i class="fa fa-caret-right"></i>مواد حضانة</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
