@@ -593,6 +593,11 @@ select{
 	border-top: 1px solid #eee;
 	position: relative;
 }
+.section-divid {
+    margin: 25px 15px 30px;
+    border-top: 1px solid #eee;
+    position: relative;
+}
 .section-divider:after {
 	content: '';
 	position: absolute;
@@ -1070,3 +1075,21 @@ table.dataTable > tbody > tr.child span.dtr-title i {
     margin-top: 0!important;
 }
 
+/* Every button has href inside it */
+.OutsideHref{
+    overflow: hidden;
+    padding: 0;
+    background: white;
+    float: right;
+}
+/* ************** Details of any think like payments and budgets********************* */
+.details_of_any{
+    margin-top: 30px;
+}
+.details_of_any .page-title{
+    margin-bottom: 20px;
+    float: none;
+}
+.details_of_any .head_p{
+    font-size: 17px !important;
+}

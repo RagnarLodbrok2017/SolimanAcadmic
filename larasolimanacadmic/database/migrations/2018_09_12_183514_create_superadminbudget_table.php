@@ -15,10 +15,15 @@ class CreateSuperadminbudgetTable extends Migration
     {
         Schema::create('superadminbudget', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type'); //للحضانة مثلا او للسنتر وكده
             $table->bigInteger('salary');
-            $table->string('about');
+            $table->string('day');
             $table->string('description')->nullable();
+
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->unsignedInteger('type_id');
+            $table->foreign('type_id')->references('id')->on('type');
             $table->timestamps();
         });
     }

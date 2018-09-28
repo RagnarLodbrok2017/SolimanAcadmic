@@ -167,13 +167,6 @@
                 </div>
 
             </div>
-            {{--<div class="center-block text-center">--}}
-            {{--<h4> اجمالى مصاريف الطلاب </h4>--}}
-            {{--@if(isset($Total_Payment))--}}
-            {{--<h5>{{$Total_Payment}}</h5>--}}
-            {{--@endif--}}
-
-            {{--</div>--}}
         </div>
         <div class="menu-togggle-btn">
             <a href="#menu-toggle" id="menu-toggle"><i class="fa fa-bars"></i></a>

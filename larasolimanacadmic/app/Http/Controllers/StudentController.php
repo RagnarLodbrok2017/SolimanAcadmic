@@ -14,6 +14,11 @@ use App\Payment;
 
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function debug_to_console($data)
     {
         if (is_array($data))

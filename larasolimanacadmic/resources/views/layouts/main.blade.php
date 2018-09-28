@@ -266,7 +266,7 @@
                         <a href="message.html"><i class="fa fa-envelope menu-icon"></i> MY MESSAGES</a>
                     </li>
                     <li>
-                        <a href="admin-add-announcement.html"><i class="fa fa-bullhorn menu-icon"></i> ANNOUNCEMENTS</a>
+                        <a href="../budget"><i class="fa fa-bullhorn menu-icon"></i> الميزاينه والمصاريف</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

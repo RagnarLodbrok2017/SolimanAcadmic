@@ -200,7 +200,7 @@ $(document).ready(function () {
         });
     });
 
-//*********************** Add The Incu Subject 25/9  ****************************
+/* ******************************************* Add The Incu Subject 25/9  ************************************************************** */
     $('.submit_incusubject').on('click', function (e) {
         e.preventDefault();
         var name = $('.Subject_name').val();
@@ -282,6 +282,7 @@ $(document).ready(function () {
         });
     });
 
+    /* Edit Incu Subject */
     $('.EditIncuSubjectButton').on('click',function () {
         let id = $(this).data('id');
         $.ajax({
@@ -338,7 +339,155 @@ $(document).ready(function () {
         });
     });
 
+
+    /* *******************************************************  Add The Budget 27/9  **************************************************************** */
+    $('.SubmitPostBudget').on('click', function (e) {
+        e.preventDefault();
+        var salary = $('.budgetSalary').val();
+        var type_id = $('.budgetType').val();
+        var day = $('.budgetDay').val();
+        var description = $('.budgetDes').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: 'budget',
+            data: {'salary': salary, 'type_id': type_id, 'day': day,'description':description},
+            async: true,
+            success: function (data) {
+                var message = 'تم اضافة الفاتورة شكرا لك';
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+                $("#PostBudget")[0].reset();
+                $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+            },
+            error: function () {
+                setTimeout(function () {
+                    $.bootstrapGrowl('لا يمكن اضافة الفاتورة', {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 500);
+            }
+
+        });
+    });
+    //Delete Budget
+    $(".DeleteButtonOfBudget").on('click', function () {
+        let Budget_id = $(this).data('id');
+        $('.DeleteBudgetForm .Budget_id').val(Budget_id);
+    });
+    $('.DeleteBudgetConfirmation').on('click', function (e) {
+        e.preventDefault();
+        let id = $('.DeleteBudgetForm .Budget_id').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'DELETE',
+            dataType: 'json',
+            url: 'budget/' + id,
+            data: {'id': id},
+            success: function (data) {
+                var message = 'تم مسح الفاتورة بنجاح';
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+                $('.CancelDeleteOfBudget').click();
+                $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+            },
+            error: function () {
+                setTimeout(function () {
+                    $.bootstrapGrowl('المادة لا يمكن مسحها !', {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 500);
+            }
+        });
+    });
+    //Edit Budget
+    $('.EditBudgetButton').on('click',function () {
+        let id = $(this).data('id');
+        $.ajax({
+            type:'GET',
+            url:'budget/'+id+'/edit',
+            data:{'id':id},
+            success:function (data) {
+                $('.EditBudgetForm .Budget_Id').val(id);
+                $('.EditBudgetForm .Budget_Type').val(data.type_id);
+                $('.EditBudgetForm .Budget_Salary').val(data.salary);
+                $('.EditBudgetForm .Budget_Description').val(data.description);
+                $('.EditBudgetForm .Budget_Day').val(data.day);
+                console.log(data);
+            }
+        });
+    });
+    $('.ButtonSubmitEditedBudget').on('click',function (e) {
+        e.preventDefault();
+        let id = $('.EditBudgetForm .Budget_Id').val();
+        let type_id = $('.EditBudgetForm .Budget_Type').val();
+        let salary = $('.EditBudgetForm .Budget_Salary').val();
+        let description = $('.EditBudgetForm .Budget_Description').val();
+        let day = $('.EditBudgetForm .Budget_Day').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            method:'POST',
+            url:'/updatebudget',
+            data:{
+                'id':id,
+                'type_id':type_id,
+                'salary':salary,
+                'description':description,
+                'day':day,
+            },
+            success: function (data) {
+                var message = "<br> تم تعديل الفاتورة بنجاح لقبول اى تعديل قم باعادة تحميل الصفحة";
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+                $('.ExitEditBudgetButton').click();
+                $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+            },
+            error: function () {
+                setTimeout(function () {
+                    $.bootstrapGrowl('الفاتورة لا يمكن تعديلها من فضلك قم باعادة تحميل الصفحة !', {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 500);
+            }
+        });
+    });
+
 });
+
+
 
 /*
 Comment Update Form Of Incustudent

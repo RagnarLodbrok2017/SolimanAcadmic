@@ -23,6 +23,11 @@ Route::get('/incubation', 'IncuHomeController@index')->name('incubation');
 Route::resource('incustudent', 'StudentController');
 Route::get('/getUpdate','StudentController@getUpdate')->name('getUpdate');
 Route::post('/newUpdate','StudentController@newUpdate')->name('newUpdate');
-// Incusubject routes
+
+/* Incusubject routes  */
 Route::resource('incusubject', 'IncusubjectController');
 Route::post('/newUpdateSubject','IncusubjectController@newUpdateSubject')->name('newUpdateSubject');
+
+// SuperAdmin Budget  ميزانية السوبر ادمين
+Route::resource('budget', 'SuperadminbudgetController');
+Route::post('/updatebudget','SuperadminbudgetController@newUpdateBudget')->name('newUpdateBudget');
