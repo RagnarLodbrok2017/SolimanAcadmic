@@ -33,7 +33,7 @@ class TeacherController extends Controller
     public function create()
     {
         $incusubjects = Incusubject::all();
-        return view('incu.incustudent.create', compact('incusubjects'));
+        return view('incu.teacher.create', compact('incusubjects'));
     }
 
     /**
