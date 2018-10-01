@@ -243,7 +243,7 @@ class StudentController extends Controller
                 Parents::destroy($Student->parents_id);
             }
             //remove incustudent payments
-            $payment = Parents::where('student_id', $Student->id)->first();
+            $payment = Payment::where('student_id', $Student->id)->first();
             if($payment->id != null)
             {
                 Payment::destroy($payment->id);

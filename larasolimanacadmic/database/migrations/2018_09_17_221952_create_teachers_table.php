@@ -13,18 +13,20 @@ class CreateTeachersTable extends Migration
      */
     public function up()
     {
-        Schema::create('teacher', function (Blueprint $table) {
+        Schema::create('teachers', function (Blueprint $table) {
           $table->increments('id');
           $table->string('name');
-          $table->boolean('sex');
-          $table->bigInteger('salary')->default('0');
+          $table->boolean('sex')->default('1');
+          $table->bigInteger('salary')->default(0);
           $table->string('region', 50)->nullable()->default('مسلم');
           $table->string('phone', 50)->nullable();
           $table->string('address',200)->nullable();
 
-          $table->unsignedInteger('type_id');
+          $table->unsignedInteger('type_id')->nullable();
           $table->foreign('type_id')->references('id')->on('type');
 
+          $table->unsignedInteger('subject_id')->nullable();
+          $table->foreign('subject_id')->references('id')->on('subjects');
           $table->timestamps();
         });
     }

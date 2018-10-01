@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWorkTable extends Migration
+class CreateTeachersShiftsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateWorkTable extends Migration
      */
     public function up()
     {
-        Schema::create('work', function (Blueprint $table) {
+        Schema::create('teachers_shifts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('type')->nullable();
-            $table->integer('numOfHours');
-            $table->string('shift')->default('صباحى');
+            $table->unsignedInteger('teacher_id');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+
+            $table->unsignedInteger('shift_id');
+            $table->foreign('shift_id')->references('id')->on('shift');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateWorkTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('work');
+        Schema::dropIfExists('teachers_shifts');
     }
 }
