@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Status;
+use App\Teacher;
+use App\Incusubject;
+use App\Student;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Teacher::all()->where('type_id', 1);
+        return view('incu.teacher.index',compact('teachers'));
     }
 
     /**
@@ -23,7 +32,8 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        $incusubjects = Incusubject::all();
+        return view('incu.incustudent.create', compact('incusubjects'));
     }
 
     /**

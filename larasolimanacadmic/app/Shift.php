@@ -17,4 +17,10 @@ class Shift extends Model
     {
         return $this->hasMany('App\Student');
     }
+
+    /* Many To Many with Teacher */
+    public function teacher()
+    {
+        return $this->belongsToMany('App\Shift', 'teachers_shifts');
+    }
 }

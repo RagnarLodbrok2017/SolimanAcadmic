@@ -7,8 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Teacher extends Model
 {
   public $table = "teachers";
-    protected $fillable = ['id', 'name', 'sex', 'salary' , 'region', 'phone', 'address' , 'created_at', 'updated_at'];
+    protected $fillable = ['name', 'sex', 'salary' , 'region', 'phone', 'address', 'type_id' , 'created_at', 'updated_at'];
 
     public $timestamps = true;
-
+    public function type(){
+        return $this->belongsTo('App\Type','type_id');
+    }
+    //Many To Many relations
+    public function Incusubject()
+    {
+        return $this->belongsToMany('App\Incusubject', 'teachers_incusubjects');
+    }
+    public function student()
+    {
+        return $this->belongsToMany('App\Student', 'teachers_students');
+    }
+    public function shift()
+    {
+        return $this->belongsToMany('App\Shift', 'teachers_shifts');
+    }
 }

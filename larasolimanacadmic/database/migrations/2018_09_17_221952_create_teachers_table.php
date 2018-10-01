@@ -18,10 +18,10 @@ class CreateTeachersTable extends Migration
           $table->string('name');
           $table->boolean('sex')->default('1');
           $table->bigInteger('salary')->default(0);
+          $table->integer('salary_get')->default(0);
           $table->string('region', 50)->nullable()->default('مسلم');
           $table->string('phone', 50)->nullable();
           $table->string('address',200)->nullable();
-
           $table->unsignedInteger('type_id')->nullable();
           $table->foreign('type_id')->references('id')->on('type');
 

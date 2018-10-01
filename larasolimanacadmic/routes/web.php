@@ -19,6 +19,7 @@ Auth::routes();
 //incubation routes
 
 Route::get('/incubation', 'IncuHomeController@index')->name('incubation');
+
 // Incustudent routes
 Route::resource('incustudent', 'StudentController');
 Route::get('/getUpdate','StudentController@getUpdate')->name('getUpdate');
@@ -31,3 +32,6 @@ Route::post('/newUpdateSubject','IncusubjectController@newUpdateSubject')->name(
 // SuperAdmin Budget  ميزانية السوبر ادمين
 Route::resource('budget', 'SuperadminbudgetController');
 Route::post('/updatebudget','SuperadminbudgetController@newUpdateBudget')->name('newUpdateBudget');
+
+// Teacher In incu routes
+Route::resource('teacher', 'TeacherController');

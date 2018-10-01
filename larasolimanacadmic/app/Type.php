@@ -13,6 +13,10 @@ class Type extends Model
     public function budget(){
         return $this->hasMany('App\Superadminbudget');
     }
-
-
+    public function student(){
+        return $this->hasMany('App\Student');
+    }
+    public function teacher(){
+        return $this->hasMany('App\Teacher');
+    }
 }

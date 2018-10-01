@@ -201,10 +201,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="admin-add-teacher.html"><i class="fa fa-caret-right"></i>اضافة مدرس</a>
+                                <a href="../teacher/create"><i class="fa fa-caret-right"></i>اضافة مدرس</a>
                             </li>
                             <li>
-                                <a href="admin-teacher-list.html"><i class="fa fa-caret-right"></i>كل المدرسين</a>
+                                <a href="../teacher"><i class="fa fa-caret-right"></i>كل المدرسين</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>

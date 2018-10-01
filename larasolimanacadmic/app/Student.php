@@ -10,6 +10,15 @@ class Student extends Model
     public $fillable = ['first_name','middle_name','last_name','sex','region','phone','photo','dob','address','created_at','updated_at'];
 
     public $timestamps = true;
+    public function type(){
+        return $this->belongsTo('App\Type','type_id');
+    }
+    //mant to many with teacher
+    public function teacher()
+    {
+        return $this->belongsToMany('App\Teacher', 'teachers_students');
+    }
+
     public  function attendance()
     {
         return $this->hasMany('App\Attendance', 'student_id');
