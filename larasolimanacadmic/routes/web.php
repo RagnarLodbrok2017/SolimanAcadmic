@@ -35,3 +35,5 @@ Route::post('/updatebudget','SuperadminbudgetController@newUpdateBudget')->name(
 
 // Teacher In incu routes
 Route::resource('teacher', 'TeacherController');
+Route::get('/getUpdateIncuTeacher','TeacherController@getUpdateIncuTeacher')->name('getUpdateIncuTeacher');
+Route::post('/newUpdateIncuTeacher','TeacherController@newUpdateIncuTeacher')->name('newUpdateIncuTeacher');

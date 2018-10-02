@@ -7,6 +7,7 @@ $(document).ready(function () {
         enableCaseInsensitiveFiltering: true,
         buttonWidth: '280px'
     });
+    /* ************************************** Incu Student Operations***************************** */
     // function validator() {
     $("#addIncustudentForm").validate({
         rules: {
@@ -163,7 +164,7 @@ $(document).ready(function () {
     });
 
 
-    // ************** Delete Form of Incustudent 24/9 **************************
+    // ***** Delete Form of Incustudent 24/9 ********
     //Button delete in all students table
     $('.DeleteIncuStudent').on('click', function (e) {
         e.preventDefault();
@@ -494,7 +495,8 @@ $(document).ready(function () {
 
 
 });
-/* ************************************************* Add Incu teacher  *********************************************** */
+/* ************************************************* Incu teacher  *********************************************** */
+//Incu Teacher add
 $("#addIncuTeacherForm").validate({
     rules: {
         name: {
@@ -508,6 +510,7 @@ $("#addIncuTeacherForm").validate({
         sex: "required",
         salary: "required",
         salary_get: "required",
+        work_date: "required",
         phone: {
             required: true,
             number: true,
@@ -536,6 +539,55 @@ $("#addIncuTeacherForm").validate({
     success: function () {
     }
 });
+
+//Button delete in all teachers table
+$('.DeleteIncuTeacher').on('click', function (e) {
+    e.preventDefault();
+    let IncuTeacher_id = $(this).data('id');
+    $('#deleteDetailModal #DeleteIncuTeacher_Id').val(IncuTeacher_id);
+});
+
+$('#deleteDetailModal .Delete_Teacher_confirmed').on('click', function (e) {
+    e.preventDefault();
+    let id = $('#deleteDetailModal #DeleteIncuTeacher_Id').val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'DELETE',
+        dataType: 'json',
+        url: 'teacher/' + id,
+        data: {
+            'id': id,
+        },
+        async: true,
+        success: function (data) {
+            $('.Cancel_Delete_Form').click();
+            var message = ' ' + data.name + ' ' + "<br> تم حذفه بنجاح";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        fail: function (error) {
+            var message = "عذرا لم يتم حذفه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+        }
+    });
+});
+
 
 /*
 Comment Update Form Of Incustudent

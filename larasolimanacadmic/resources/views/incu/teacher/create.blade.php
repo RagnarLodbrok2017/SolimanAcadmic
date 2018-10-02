@@ -46,12 +46,16 @@
                                         {!!Form::text('name','',['placeholder' => '','tabindex'=>'1'])!!}
                                     </div>
                                     <div class="clearfix"></div>
-                                    <div class="col-sm-6">
-                                        <label class="" style="margin-top: 32px"><i class="fa fa-money"></i>هل تم دفع المرتب</label>
-                                        <select name="salary_get" tabindex="7">
+                                    <div class="col-sm-3">
+                                        <label class=""><i class="fa fa-money"></i>هل تم دفع المرتب</label>
+                                        <select name="salary_get" tabindex="8">
                                             <option value="0">لا</option>
                                             <option value="1">نعم</option>
                                         </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class=""><i class="fa fa-database"></i>تاريخ العمل</label>
+                                        {!!Form::date('work_date','',['placeholder' => '','tabindex'=>'7'])!!}
                                     </div>
                                     <div class="col-sm-3">
                                         <label><i class="fa fa-address-book"></i>العنوان #</label>
