@@ -44,7 +44,33 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate( $request, [
+        //required Student Information
+        'name' => 'required | max:100 | string',
+        'address' => 'max:100 | string',
+        'phone' => 'required | digits:11',
+        'sex' => 'required | integer',
+        'salary' => 'required',
+        'salary_get' => 'required | integer',
+        'incusubjects' => 'required',
+    ]);
+        $teacher = new Teacher();
+        if ($request->ajax()){
+            $teacher->name = $request->name;
+            if ($request->address != null)
+            {
+                $teacher->address = $request->address;
+            }
+            $teacher->phone = $request->phone;
+            $teacher->sex = $request->sex;
+            $teacher->salary = $request->salary;
+            $teacher->salary_get = $request->salary_get;
+            $teacher->type_id = 1;
+            $teacher->save();
+            $teacher->Incusubjects()->attach($request->incusubjects);
+        }
+        return response($teacher);
+
     }
 
     /**

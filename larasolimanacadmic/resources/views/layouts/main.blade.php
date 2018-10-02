@@ -16,8 +16,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <link href="{{ asset('fonts/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" media="screen">
     <!-- Styles -->
-    <link href="{{ asset('css/main/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('plugins/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/main/animate.css') }}" rel="stylesheet" media="screen">
+    {{--<script src="{{asset('js/bootstrap-multiselect.js')}}"></script>--}}
+    {{--<link href="{{ asset('css/bootstrap-multiselect.css')}}" rel="stylesheet" media="screen">--}}
     <link href="{{ asset('css/main/chartist.min.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/main/owl.carousel.min.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/main/owl.theme.default.min.css') }}" rel="stylesheet" media="screen">
@@ -308,17 +310,28 @@
         </div>
 
     </div>
-
+    {{--<script>--}}
+        {{--$(document).ready(function() {--}}
+                {{--$('#framework').multiselect({--}}
+                    {{--nonSelectedText: 'Select Framework',--}}
+                    {{--enableFiltering: true,--}}
+                    {{--enableCaseInsensitiveFiltering: true,--}}
+                    {{--buttonWidth: '400px'--}}
+                {{--});--}}
+            {{--});--}}
+    {{--</script>--}}
     <script src="{{asset('js/jQuery_v3_2_0.min.js')}}"></script>
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('plugins/jquery.validate.min.js')}}"></script>
     <script src="{{asset('plugins/jquery.form.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('plugins/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('plugins/owl.carousel.min.js')}}"></script>
     <script src="{{asset('plugins/Chart.min.js')}}"></script>
     <script src="{{asset('plugins/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('plugins/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('plugins/jquery.bootstrap-growl.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap-multiselect.js')}}"></script>
+    <link href="{{ asset('css/bootstrap-multiselect.css') }}" rel="stylesheet" media="screen">
     <script src="{{asset('js/js.js')}}"></script>
     <script src="{{asset('js/style.js')}}"></script>
     <script src="{{asset('js/validator.js')}}"></script>

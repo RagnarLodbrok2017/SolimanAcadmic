@@ -14,15 +14,15 @@ class Teacher extends Model
         return $this->belongsTo('App\Type','type_id');
     }
     //Many To Many relations
-    public function Incusubject()
+    public function Incusubjects()
     {
         return $this->belongsToMany('App\Incusubject', 'teachers_incusubjects');
     }
-    public function student()
+    public function students()
     {
         return $this->belongsToMany('App\Student', 'teachers_students');
     }
-    public function shift()
+    public function shifts()
     {
         return $this->belongsToMany('App\Shift', 'teachers_shifts');
     }

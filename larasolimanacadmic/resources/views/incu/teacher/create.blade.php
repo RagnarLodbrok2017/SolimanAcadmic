@@ -3,7 +3,7 @@
 @section('content')
     <!-- MAIN CONTENT -->
     <div class="main-content" id="content-wrapper">
-        <div class="container-fluid">
+        <div class="container-fluid animated bounceInDown">
             {{--@if(session()->has('message'))--}}
             <div class="message_lara text-center animated bounceInRight" id="message_lara">
                 <div class="alert alert-success">
@@ -58,9 +58,9 @@
                                         {!! Form::text('address','',['placeholder'=>'','tabindex'=>'6']) !!}
                                     </div>
                                     @if(isset($incusubjects))
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-3 multi_select">
                                             <label><i class="fa fa-flag"></i>المواد التى يدرسها</label>
-                                            <select name="incusubjects[]" tabindex="5" multiple="multiple">
+                                            <select id="" name="incusubjects[]" tabindex="5" multiple class="form-control framework" required>
                                                 @foreach($incusubjects as $incusubject)
                                                     <option value="{{$incusubject->id}}">{{$incusubject->name}}</option>
                                                 @endforeach

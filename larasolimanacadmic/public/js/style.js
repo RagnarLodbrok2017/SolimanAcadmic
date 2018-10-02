@@ -1,5 +1,12 @@
 $(document).ready(function () {
     "use strict";
+    //multiselect bootstrap
+    $('.framework').multiselect({
+        nonSelectedText: 'أختار',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true,
+        buttonWidth: '280px'
+    });
     // function validator() {
     $("#addIncustudentForm").validate({
         rules: {
@@ -485,9 +492,50 @@ $(document).ready(function () {
         });
     });
 
+
 });
-
-
+/* ************************************************* Add Incu teacher  *********************************************** */
+$("#addIncuTeacherForm").validate({
+    rules: {
+        name: {
+            required: true,
+            maxlength: 100,
+            minlength:10,
+        },
+        address: {
+            maxlength: 100,
+        },
+        sex: "required",
+        salary: "required",
+        salary_get: "required",
+        phone: {
+            required: true,
+            number: true,
+            maxlength: 11,
+            minlength: 11,
+        },
+    },
+    debug: true,
+    submitHandler: function (form) {
+        $(form).ajaxSubmit({
+            success: function () {
+                var message = "<br>تم اضاة المدرس بنجاح    ";
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+            }
+        });
+        var formid = $("#addIncuTeacherForm");
+        var FormV = formid.validate();
+        FormV.resetForm();
+    },
+    success: function () {
+    }
+});
 
 /*
 Comment Update Form Of Incustudent
