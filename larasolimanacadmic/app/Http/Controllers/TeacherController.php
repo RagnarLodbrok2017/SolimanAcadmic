@@ -23,7 +23,16 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = Teacher::all()->where('type_id', 1);
-        return view('incu.teacher.index', compact('teachers'));
+
+        //send it to the UpdateList of Teacher
+        $incusubjects = Incusubject::all();
+
+        $TotalIncuTeachers = Teacher::all()->where('type_id', 1)->count();
+        $TotalSalaries = Teacher::all()->where('type_id', 1)->sum('salary');
+        $TotalSalaries_done = Teacher::all()->where('type_id', 1)->where('salary_get', 1)->sum('salary');
+        $TotalSalaries_not_done = Teacher::all()->where('type_id', 1)->where('salary_get', 0)->sum('salary');
+
+        return view('incu.teacher.index', compact('teachers', 'incusubjects', 'TotalSalaries', 'TotalSalaries_done', 'TotalSalaries_not_done', 'TotalIncuTeachers'));
     }
 
     /**
@@ -78,13 +87,17 @@ class TeacherController extends Controller
     public function getUpdateIncuTeacher(Request $request)
     {
         if ($request->ajax()) {
-            $Update_Student = Student::find($request->id);
-            $Update_Statuses = Status::all();
-            $Update_Classes = Classroom::all();
-            $Update_Shifts = Shift::all();
-            $Update_Payment = Payment::where('student_id', $request->id)->first();
-            //$payments = Payment::all();
-            $data = compact('Update_Student', 'Update_Statuses', 'Update_Classes', 'Update_Shifts', 'Update_Payment');
+            $Update_Teacher = Teacher::find($request->id);
+            $incusubjects = $Update_Teacher->Incusubjects;
+            $T_incusubjects_id = $incusubjects->pluck('id');
+
+            //implode change $incusubjects names from array to string
+            $T_incusubjects_name = $incusubjects->pluck('name')->implode(',');
+
+            /*$T_incusubjects = $incusubjects->map(function ($incusubject) {
+                return $incusubject->only(['id'])->value();
+            });*/
+            $data = compact('Update_Teacher', 'T_incusubjects_id', 'T_incusubjects_name');
             return Response($data);
         }
     }
@@ -93,31 +106,17 @@ class TeacherController extends Controller
     function newUpdateIncuTeacher(Request $request)
     {
         if ($request->ajax()) {
-            $nStudent = Student::find($request->id);
-            /**
-             * @var $nStudent App\Student
-             * @var $nPayment App\Payment
-             */
-            $nStudent->first_name = $request->first_name;
-            $nStudent->middle_name = $request->middle_name;
-            $nStudent->last_name = $request->last_name;
-            $nStudent->phone = $request->phone;
-            $nStudent->status_id = $request->status_id;
-            $nStudent->shift_id = $request->shift_id;
-            $nStudent->classroom_id = $request->classroom_id;
-
-            //update new price
-            $nPayment = Payment::find($request->payment_id);
-            $nPayment->price = $request->payment;
-
-            //update new Parent
-            $nParent = Parents::find($nStudent->parents_id);
-            $nParent->father_name = $request->middle_name . ' ' . $request->last_name;
-
-            $nStudent->save();
-            $nPayment->save();
-            $nParent->save();
-            return Response($nStudent);
+            $nTeacher = Teacher::find($request->id);
+            $nTeacher->name = $request->name;
+            $nTeacher->phone = $request->phone;
+            $nTeacher->salary = $request->salary;
+            $nTeacher->salary_get = $request->salary_get;
+            $nTeacher->address = $request->address;
+            $nTeacher->sex = $request->sex;
+            $nTeacher->work_date = $request->work_date;
+            $nTeacher->Incusubjects()->sync($request->incusubjects);
+            $nTeacher->save();
+            return Response($nTeacher);
         }
     }
 
@@ -172,5 +171,25 @@ class TeacherController extends Controller
             return Response($teacher);
         }
 
+    }
+
+    /* Actions in details of Incu teachers */
+    public function changesalarygetto0(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->action == 0) {
+                Teacher::where('type_id', '=', 1)->update(['salary_get' => 0]);
+            }
+        }
+        return Response('success');
+    }
+    public function changesalarygetto1(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->action == 1) {
+                Teacher::where('type_id', '=', 1)->update(['salary_get' => 1]);
+            }
+        }
+        return Response('success');
     }
 }

@@ -29,11 +29,15 @@ Route::post('/newUpdate','StudentController@newUpdate')->name('newUpdate');
 Route::resource('incusubject', 'IncusubjectController');
 Route::post('/newUpdateSubject','IncusubjectController@newUpdateSubject')->name('newUpdateSubject');
 
-// SuperAdmin Budget  ميزانية السوبر ادمين
+/*                   SuperAdmin Budget  ميزانية السوبر ادمين              */
 Route::resource('budget', 'SuperadminbudgetController');
 Route::post('/updatebudget','SuperadminbudgetController@newUpdateBudget')->name('newUpdateBudget');
 
-// Teacher In incu routes
+/*           Teacher In incu routes       */
 Route::resource('teacher', 'TeacherController');
 Route::get('/getUpdateIncuTeacher','TeacherController@getUpdateIncuTeacher')->name('getUpdateIncuTeacher');
 Route::post('/newUpdateIncuTeacher','TeacherController@newUpdateIncuTeacher')->name('newUpdateIncuTeacher');
+Route::post('/newUpdateIncuTeacher','TeacherController@newUpdateIncuTeacher')->name('newUpdateIncuTeacher');
+//actions in IncuTeachers Details
+Route::get('/changesalarygetto0','TeacherController@changesalarygetto0');
+Route::get('/changesalarygetto1','TeacherController@changesalarygetto1');

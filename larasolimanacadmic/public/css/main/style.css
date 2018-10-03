@@ -1093,6 +1093,13 @@ table.dataTable > tbody > tr.child span.dtr-title i {
 .details_of_any .head_p{
     font-size: 17px !important;
 }
+.details_of_any .btn_in_details{
+    float: right;
+    width: 80%;
+    height: 50px;
+    font-style: italic;
+    font-size: 18px;
+}
 
 /* **************************Multiselect Bootstarp plugin disable effects of this css file **********************/
 .multi_select a{

@@ -5,7 +5,7 @@ $(document).ready(function () {
         nonSelectedText: 'أختار',
         enableFiltering: true,
         enableCaseInsensitiveFiltering: true,
-        buttonWidth: '280px'
+        buttonWidth: '100%'
     });
     /* ************************************** Incu Student Operations***************************** */
     // function validator() {
@@ -588,7 +588,156 @@ $('#deleteDetailModal .Delete_Teacher_confirmed').on('click', function (e) {
     });
 });
 
+// Update of the Teacher
+// ************ Update Form Of Incustudent new 23/9/2018
+$(".EditIncuTeacherUpdate").on('click', function () {
+    let id = $(this).data('id');
+    $.ajax({
+        type: 'get',
+        url: 'getUpdateIncuTeacher',
+        data: {
+            'id': id
+        },
+        success: function (data) {
+            $(".T_id").val(data.Update_Teacher.id);
+            $(".T_name").val(data.Update_Teacher.name);
+            $(".T_phone").val(data.Update_Teacher.phone);
+            $(".T_salary").val(data.Update_Teacher.salary);
+            $(".T_salary_get").val(data.Update_Teacher.salary_get);
+            $(".T_address").val(data.Update_Teacher.address);
+            $(".T_sex").val(data.Update_Teacher.sex);
+            $(".T_work_date").val(data.Update_Teacher.work_date);
+            $(".T_incusubjects_id").val(data.T_incusubjects_id);
+            $(".T_incusubjects_name").val(data.T_incusubjects_name);
+        }
+    });
+});
+// Send Updated Information to controller
+$('.updateIncuTeacherForm').on('submit', function (e) {
+    e.preventDefault();
+    var id = $(".T_id").val();
+    var name = $(".T_name").val();
+    var phone = $(".T_phone").val();
+    var salary = $(".T_salary").val();
+    var salary_get = $(".T_salary_get").val();
+    var address = $(".T_address").val();
+    var sex = $(".T_sex").val();
+    var work_date = $(".T_work_date").val();
+    var incusubjects = $(".T_incusubjects_id").val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '/newUpdateIncuTeacher',
+        data: {
+            id: id,
+            name: name,
+            phone: phone,
+            salary: salary,
+            salary_get: salary_get,
+            address: address,
+            sex: sex,
+            work_date: work_date,
+            incusubjects: incusubjects,
+        },
+        async: true,
+        //notification
+        success: function (data) {
+            var message = ' ' + data.name + "<br> تم تعديله بنجاح";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#CancelUpdateForm').click();
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        }
+    });
+});
 
+/* Actions in Incu Teachers Details */
+$('#make_all_salary_get_0 .make_all_salary_get_0_confirmed').on('click', function (e) {
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/changesalarygetto0',
+        data: {
+            'action': 0,
+        },
+        async: true,
+        success: function (data) {
+            $('.Cancel_Form').click();
+            var message = "تم جعل كل المرتبات غير مدفوعه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        fail: function (error) {
+            var message = "عذرا هناك مشكله من فضلك اعد تحميل الصفحه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+        }
+    });
+});
+$('#make_all_salary_get_1 .make_all_salary_get_1_confirmed').on('click', function (e) {
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/changesalarygetto1',
+        data: {
+            'action': 1,
+        },
+        success: function () {
+            $('#make_all_salary_get_1 .Cancel_Form').click();
+            var message = "تم جعل كل المرتبات مدفوعه";
+            setTimeout(function (data) {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        fail: function (error) {
+            var message = "عذرا هناك مشكله من فضلك اعد تحميل الصفحه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+        }
+    });
+});
 /*
 Comment Update Form Of Incustudent
 var Incustudentid ;
