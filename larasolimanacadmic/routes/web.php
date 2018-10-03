@@ -41,3 +41,12 @@ Route::post('/newUpdateIncuTeacher','TeacherController@newUpdateIncuTeacher')->n
 //actions in IncuTeachers Details
 Route::get('/changesalarygetto0','TeacherController@changesalarygetto0');
 Route::get('/changesalarygetto1','TeacherController@changesalarygetto1');
+
+/*           all Stuff In Site routes       */
+Route::resource('stuff', 'StuffController');
+Route::get('/getUpdateStuff','StuffController@getUpdateStuff')->name('getUpdateStuff');
+Route::post('/newUpdateStuff','StuffController@newUpdateStuff')->name('newUpdateStuff');
+Route::post('/newUpdateStuff','StuffController@newUpdateStuff')->name('newUpdateStuff');
+//actions in IncuTeachers Details
+Route::get('/changesalarygetto0stuff','StuffController@changesalarygetto0stuff');
+Route::get('/changesalarygetto1stuff','StuffController@changesalarygetto1stuff');

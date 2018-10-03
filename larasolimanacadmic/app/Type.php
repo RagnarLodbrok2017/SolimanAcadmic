@@ -19,4 +19,7 @@ class Type extends Model
     public function teacher(){
         return $this->hasMany('App\Teacher');
     }
+    public function stuffs(){
+        return $this->belongsToMany('App\Stuff','stuff_type');
+    }
 }

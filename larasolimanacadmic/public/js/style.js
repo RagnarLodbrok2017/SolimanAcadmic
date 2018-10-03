@@ -589,7 +589,7 @@ $('#deleteDetailModal .Delete_Teacher_confirmed').on('click', function (e) {
 });
 
 // Update of the Teacher
-// ************ Update Form Of Incustudent new 23/9/2018
+// ************ Update Form Of Incuteacher new 3/10/2018
 $(".EditIncuTeacherUpdate").on('click', function () {
     let id = $(this).data('id');
     $.ajax({
@@ -714,7 +714,7 @@ $('#make_all_salary_get_1 .make_all_salary_get_1_confirmed').on('click', functio
         data: {
             'action': 1,
         },
-        success: function () {
+        success: function (data) {
             $('#make_all_salary_get_1 .Cancel_Form').click();
             var message = "تم جعل كل المرتبات مدفوعه";
             setTimeout(function (data) {
@@ -738,6 +738,251 @@ $('#make_all_salary_get_1 .make_all_salary_get_1_confirmed').on('click', functio
         }
     });
 });
+
+
+/* ************************************************* Stuff *********************************************** */
+//ٍStuff add
+$("#addStuffForm").validate({
+    rules: {
+        name: {
+            required: true,
+            maxlength: 100,
+            minlength:10,
+        },
+        job: {
+            maxlength: 100,
+        },
+        shift: "required",
+        salary: "required",
+        salary_get: "required",
+        work_date: "required",
+        phone: {
+            required: true,
+            number: true,
+            maxlength: 11,
+            minlength: 11,
+        },
+    },
+    debug: true,
+    submitHandler: function (form) {
+        $(form).ajaxSubmit({
+            success: function () {
+                var message = "<br>تم اضافة الموظف  بنجاح    ";
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+            }
+        });
+        var formid = $("#addStuffForm");
+        var FormV = formid.validate();
+        FormV.resetForm();
+    },
+});
+
+// Update of the Stuff
+// ************ Update Form Of ٍ Stuff new 3/10/2018
+$(".EditStuff").on('click', function () {
+    let id = $(this).data('id');
+    $.ajax({
+        type: 'get',
+        url: 'getUpdateStuff',
+        data: {
+            'id': id
+        },
+        success: function (data) {
+            $(".id").val(data.stuff.id);
+            $(".name").val(data.stuff.name);
+            $(".phone").val(data.stuff.phone);
+            $(".salary").val(data.stuff.salary);
+            $(".salary_get").val(data.stuff.salary_get);
+            $(".job").val(data.stuff.job);
+            $(".shift").val(data.stuff.shift);
+            $(".work_date").val(data.stuff.work_date);
+            $(".types_ids").val(data.types_ids);
+            $(".types_names").val(data.types_names);
+        }
+    });
+});
+// Send Updated Information to controller
+$('.updateStuffForm').on('submit', function (e) {
+    e.preventDefault();
+    var id = $(".id").val();
+    var name = $(".name").val();
+    var phone = $(".phone").val();
+    var salary = $(".salary").val();
+    var salary_get = $(".salary_get").val();
+    var job = $(".job").val();
+    var shift = $(".shift").val();
+    var work_date = $(".work_date").val();
+    var types = $(".types_ids").val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '/newUpdateStuff',
+        data: {
+            id: id,
+            name: name,
+            phone: phone,
+            salary: salary,
+            salary_get: salary_get,
+            job: job,
+            shift: shift,
+            work_date: work_date,
+            types: types,
+        },
+        async: true,
+        //notification
+        success: function (data) {
+            var message = ' ' + data.name + "<br> تم تعديله بنجاح";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#CancelUpdateForm').click();
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        }
+    });
+});
+
+//Button delete in all teachers table
+$('.DeleteStuff').on('click', function (e) {
+    e.preventDefault();
+    let id = $(this).data('id');
+    $('#deleteDetailModal #DeleteStuff_Id').val(id);
+});
+$('#deleteDetailModal .Delete_Stuff_confirmed').on('click', function (e) {
+    e.preventDefault();
+    let id = $('#deleteDetailModal #DeleteStuff_Id').val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'DELETE',
+        dataType: 'json',
+        url: 'stuff/' + id,
+        data: {
+            'id': id,
+        },
+        async: true,
+        success: function (data) {
+            $('.Cancel_Delete_Form').click();
+            var message = ' ' + data.name + ' ' + "<br> تم حذفه بنجاح";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        fail: function (error) {
+            var message = "عذرا لم يتم حذفه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+        }
+    });
+});
+
+/* Actions in Stuffs Details */
+$('#changesalarygetto0stuff .make_all_salary_get_0_confirmed').on('click', function (e) {
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/changesalarygetto0stuff',
+        data: {
+            'action': 0,
+        },
+        async: true,
+        success: function (data) {
+            $('.Cancel_Form').click();
+            var message = "تم جعل كل المرتبات غير مدفوعه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        fail: function (error) {
+            var message = "عذرا هناك مشكله من فضلك اعد تحميل الصفحه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+        }
+    });
+});
+$('#changesalarygetto1stuff .make_all_salary_get_1_confirmed').on('click', function (e) {
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/changesalarygetto1stuff',
+        data: {
+            'action': 1,
+        },
+        success: function (data) {
+            $('#changesalarygetto1stuff .Cancel_Form').click();
+            var message = "تم جعل كل المرتبات مدفوعه";
+            setTimeout(function (data) {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        fail: function (error) {
+            var message = "عذرا هناك مشكله من فضلك اعد تحميل الصفحه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+        }
+    });
+});
+
+
+
 /*
 Comment Update Form Of Incustudent
 var Incustudentid ;

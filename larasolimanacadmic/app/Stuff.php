@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stuff extends Model
 {
-    protected $fillable = ['id', 'name', 'salary', 'work_date' , 'created_at', 'updated_at'];
+    public $table = "stuff";
+    protected $fillable = ['name', 'salary','salary_get','phone', 'work_date' , 'created_at', 'updated_at'];
 
     public $timestamps = true;
 
+    public function types(){
+        return $this->belongsToMany('App\Type','stuff_type');
+    }
 }

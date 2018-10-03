@@ -217,10 +217,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="admin-add-teacher.html"><i class="fa fa-caret-right"></i>اضافة موظف</a>
+                                <a href="../stuff/create"><i class="fa fa-caret-right"></i>اضافة موظف</a>
                             </li>
                             <li>
-                                <a href="admin-teacher-list.html"><i class="fa fa-caret-right"></i>كل الموظفين</a>
+                                <a href="../stuff"><i class="fa fa-caret-right"></i>كل الموظفين</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>

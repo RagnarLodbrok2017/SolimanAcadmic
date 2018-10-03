@@ -17,7 +17,9 @@ class CreateStuffTable extends Migration
             $table->increments('id');
             $table->string('name', 200)->unique();
             $table->string('job')->nullable();
+            $table->string('phone')->nullable();
             $table->bigInteger('salary')->default(0);
+            $table->boolean('salary_get')->default(0);
             $table->date('work_date')->nullable();
             $table->integer('numOfHours')->nullable();
             $table->string('shift')->default('صباحى')->nullable();

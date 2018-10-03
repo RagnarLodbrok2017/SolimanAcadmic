@@ -181,7 +181,7 @@ class TeacherController extends Controller
                 Teacher::where('type_id', '=', 1)->update(['salary_get' => 0]);
             }
         }
-        return Response('success');
+        return Response($request);
     }
     public function changesalarygetto1(Request $request)
     {
@@ -190,6 +190,6 @@ class TeacherController extends Controller
                 Teacher::where('type_id', '=', 1)->update(['salary_get' => 1]);
             }
         }
-        return Response('success');
+        return Response($request);
     }
 }
