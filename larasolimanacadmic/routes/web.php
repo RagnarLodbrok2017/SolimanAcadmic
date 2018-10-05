@@ -16,8 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-//incubation routes
 
+//incubation routes
 Route::get('/incubation', 'IncuHomeController@index')->name('incubation');
 
 // Incustudent routes
