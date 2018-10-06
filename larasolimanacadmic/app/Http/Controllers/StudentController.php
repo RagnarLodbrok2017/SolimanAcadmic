@@ -16,7 +16,7 @@ class StudentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('superAdmin');
     }
 
     public function debug_to_console($data)

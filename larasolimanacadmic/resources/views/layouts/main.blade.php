@@ -183,6 +183,7 @@
                     <li>
                         <a href="../incubation"><i class="fa fa-home menu-icon"></i> الحضانة</a>
                     </li>
+                    @if(Auth::user()->admin == 'superadmin')
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-users menu-icon"></i> الطلاب <span class="caret"></span>
@@ -253,6 +254,7 @@
                     <li>
                         <a href="../budget"><i class="fa fa-money menu-icon"></i> الميزاينه والمصاريف</a>
                     </li>
+                    @endif
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-address-card menu-icon"></i> تقرير <span class="caret"></span>

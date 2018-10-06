@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class IncusubjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('superAdmin');
+    }
 
     public function index()
     {

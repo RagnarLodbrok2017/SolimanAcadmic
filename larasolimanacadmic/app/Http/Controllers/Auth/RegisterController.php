@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/incubation';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -37,7 +37,6 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $user_count = User::all()->where('admin' , 'admin')->count();
         $this->middleware('guest');
     }
 
@@ -67,6 +66,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'admin' => 'superadmin',
             'password' => Hash::make($data['password']),
         ]);
     }
