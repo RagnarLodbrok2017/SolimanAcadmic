@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Student;
+use App\Superadminbudget;
+use App\Teacher;
 use Illuminate\Http\Request;
 
 class IncuHomeController extends Controller
@@ -23,6 +26,18 @@ class IncuHomeController extends Controller
      */
     public function index()
     {
-        return view('incu.incubation');
+        $numberOfStudents = Student::all()->where('type_id', 1 )->count();
+        $numberOfTeachers = Teacher::all()->where('type_id', 1 )->count();
+        $students = Student::all()->where('type_id', 1 );
+        $allPayments = $students->map(function ($student) {
+            return $student->payment->price;
+        });
+        $totalPayments = $allPayments->sum();
+        $budgets = Superadminbudget::all()->where('type_id', 1);
+        $allBudgets =$budgets->map(function ($budget){
+            return $budget->salary;
+        });
+        $totalBudgets = $allBudgets->sum();
+        return view('incu.incubation',compact('numberOfStudents','numberOfTeachers','totalPayments','totalBudgets'));
     }
 }

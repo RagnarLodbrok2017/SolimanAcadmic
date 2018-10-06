@@ -13,16 +13,18 @@
                                 <div class="stat-item">
                                     <div class="stats">
                                         <div class="col-xs-8 count">
-                                            <h1>199</h1>
-                                            <p>الطلاب</p>
+                                            <h1>@if(isset($totalBudgets))
+                                                    {{ $totalBudgets }}
+                                                @endif</h1>
+                                            <p>اجمالى الفواتير</p>
                                         </div>
                                         <div class="col-xs-4 icon">
-                                            <i class="fa fa-users ex-icon"></i>
+                                            <i class="fa fa-money success-icon"></i>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="status">
-                                        <p class="text-ex"><i class="fa fa-pencil-square-o"></i>عدد طلاب الحضانة</p>
+                                        <p class="text-success"><i class="fa fa-money"></i>اجمالى سعر الفواتير المصروفة بالحضانه بالجنيه</p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -31,7 +33,32 @@
                                 <div class="stat-item">
                                     <div class="stats">
                                         <div class="col-xs-8 count">
-                                            <h1>8</h1>
+                                            <h1>@if(isset($totalPayments))
+                                                    {{ $totalPayments }}
+                                                @endif</h1>
+                                            <p>مصاريف الطلاب</p>
+                                        </div>
+                                        <div class="col-xs-4 icon">
+                                            <i class="fa fa-credit-card look-icon"></i>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="status">
+                                        <p class="text-look"><i class="fa fa-cc-visa"></i>اجمالى المصاريف الكليه للطلاب</p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix visible-sm"></div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="stat-item">
+                                    <div class="stats">
+                                        <div class="col-xs-8 count">
+                                            <h1>
+                                                @if(isset($numberOfTeachers))
+                                                    {{$numberOfTeachers}}
+                                                @endif
+                                            </h1>
                                             <p>المدرسين</p>
                                         </div>
                                         <div class="col-xs-4 icon">
@@ -45,39 +72,24 @@
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
-                            <div class="clearfix visible-sm"></div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="stat-item">
                                     <div class="stats">
                                         <div class="col-xs-8 count">
-                                            <h1>900</h1>
-                                            <p>الموظفين</p>
+                                            <h1>
+                                                @if(isset($numberOfStudents))
+                                                    {{$numberOfStudents}}
+                                                @endif
+                                            </h1>
+                                            <p>الطلاب</p>
                                         </div>
                                         <div class="col-xs-4 icon">
-                                            <i class="fa fa-flag look-icon"></i>
+                                            <i class="fa fa-users ex-icon"></i>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="status">
-                                        <p class="text-look"><i class="fa fa-clock-o"></i>عدد موظفين الحضانة</p>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="stat-item">
-                                    <div class="stats">
-                                        <div class="col-xs-8 count">
-                                            <h1>12</h1>
-                                            <p>المسؤولين</p>
-                                        </div>
-                                        <div class="col-xs-4 icon">
-                                            <i class="fa fa-user-secret danger-icon"></i>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div class="status">
-                                        <p class="text-success"><i class="fa fa-folder-open-o"></i>عدد مسؤولين الحضانة</p>
+                                        <p class="text-ex"><i class="fa fa-pencil-square-o"></i>عدد طلاب الحضانة</p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -110,58 +122,58 @@
                         <div class="col-sm-4">
                             <div>
                                 <div class="my-msg dash-item">
-                                    <h6 class="item-title"><i class="fa fa-calendar"></i>TODAY'S TASK</h6>
+                                    <h6 class="item-title"><i class="fa fa-calendar"></i>Recent Links</h6>
                                     <div class="inner-item">
                                         <div class="timetable-item">
                                             <div class="col-xs-3 clear-padding">
-                                                <p><span class="time">10 AM</span></p>
+                                                <p><span class="time">الطلاب</span></p>
                                             </div>
                                             <div class="col-xs-9">
-                                                <p class="title">Teacher Meeting</p>
-                                                <p class="sent-by"><i class="fa fa-map-marker"></i> ROOM NO - 601</p>
+                                                <p class="title"><a href="../incustudent"> الطلاب</a></p>
+                                                <p class="sent-by"><i class="fa fa-map-marker"></i> Link</p>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="timetable-item">
                                             <div class="col-xs-3 clear-padding">
-                                                <p><span class="time">11 AM</span></p>
+                                                <p><span class="time">المدرسين</span></p>
                                             </div>
                                             <div class="col-xs-9">
-                                                <p class="title">Campus Tour</p>
-                                                <p class="sent-by"><i class="fa fa-map-marker"></i> CAMPUS</p>
+                                                <p class="title"><a href="../teacher">المدرسين</a> </p>
+                                                <p class="sent-by"><i class="fa fa-map-marker"></i> Link</p>
 
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="timetable-item">
                                             <div class="col-xs-3 clear-padding">
-                                                <p><span class="time">12 PM</span></p>
+                                                <p><span class="time">الموظفين</span></p>
                                             </div>
                                             <div class="col-xs-9">
-                                                <p class="title">Parent Meeting</p>
-                                                <p class="sent-by"><i class="fa fa-map-marker"></i> ROOM NO - 601</p>
+                                                <p class="title"><a href="../stuff">الموظفين</a> </p>
+                                                <p class="sent-by"><i class="fa fa-map-marker"></i> Link</p>
 
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="timetable-item">
                                             <div class="col-xs-3 clear-padding">
-                                                <p><span class="time">01 PM</span></p>
+                                                <p><span class="time">المواد</span></p>
                                             </div>
                                             <div class="col-xs-9">
-                                                <p class="title">Guest Lecture</p>
-                                                <p class="sent-by"><i class="fa fa-map-marker"></i> ROOM NO - 601</p>
+                                                <p class="title"><a href="../incusubject">المواد</a></p>
+                                                <p class="sent-by"><i class="fa fa-map-marker"></i>Link</p>
 
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="timetable-item">
                                             <div class="col-xs-3 clear-padding">
-                                                <p><span class="time">02 PM</span></p>
+                                                <p><span class="time">الميزانية</span></p>
                                             </div>
                                             <div class="col-xs-9">
-                                                <p class="title">Teacher Meeting</p>
-                                                <p class="sent-by"><i class="fa fa-map-marker"></i> ROOM NO - 601</p>
+                                                <p class="title"><a href="../budget">الميزانية والمصاريف</a></p>
+                                                <p class="sent-by"><i class="fa fa-map-marker"></i> Link</p>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>

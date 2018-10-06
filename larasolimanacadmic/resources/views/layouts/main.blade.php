@@ -109,7 +109,7 @@
                             <li>
                                 <div class="list-msg">
                                     <div class="col-xs-2 image clear-padding">
-                                        <img src="{{ asset('img/soliman2.jpg') }}" alt="Admin" />
+                                        <img src="{{ asset('img/welcomeImages/avatars/avatar1.jpg') }}" alt="Admin" />
                                     </div>
                                     <div class="col-sm-10 desc">
                                         <h5><a href="#">Mohamed Soliman</a></h5>
@@ -122,7 +122,7 @@
                             <li>
                                 <div class="list-msg">
                                     <div class="col-xs-2 image clear-padding">
-                                        <img src="assets/img/soliman2.jpg" alt="Admin" />
+                                        <img src="{{asset('img/welcomeImages/avatars/avatar3.png')}}" alt="Admin" />
                                     </div>
                                     <div class="col-sm-10 desc">
                                         <h5><a href="#">Mona Hesham</a></h5>
@@ -141,7 +141,7 @@
                     </li>
                     <li class="user dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span><img src="{{ asset('img/soliman2.jpg') }}" alt="user">محمد سليمان<span class="caret"></span></span>
+                            <span><img src="{{ asset('img/welcomeImages/avatars/avatar1.jpg') }}" alt="user">{{Auth::user()->name}}<span class="caret"></span></span>
                         </a>
                         <ul class="dropdown-menu notification-list">
                             <li>
@@ -199,7 +199,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-user-secret menu-icon"></i> المدرسين <span class="caret"></span>
+                            <i class="fa fa-user-circle menu-icon"></i> المدرسين <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
@@ -213,7 +213,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-user-secret menu-icon"></i> الموظفين <span class="caret"></span>
+                            <i class="fa fa-user-plus menu-icon"></i> الموظفين <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
@@ -250,56 +250,16 @@
                         </ul>
                         <div class="clearfix"></div>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-calendar menu-icon"></i> المصروفات <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="admin-create-timetable.html"><i class="fa fa-caret-right"></i>انشاء</a>
-                            </li>
-                            <li>
-                                <a href="admin-class-timetable.html"><i class="fa fa-caret-right"></i>كل المصروفات</a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </li>
                     <li>
-                        <a href="message.html"><i class="fa fa-envelope menu-icon"></i> MY MESSAGES</a>
-                    </li>
-                    <li>
-                        <a href="../budget"><i class="fa fa-bullhorn menu-icon"></i> الميزاينه والمصاريف</a>
+                        <a href="../budget"><i class="fa fa-money menu-icon"></i> الميزاينه والمصاريف</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-file-o menu-icon"></i> CLASSES <span class="caret"></span>
+                            <i class="fa fa-address-card menu-icon"></i> تقرير <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="admin-add-class.html"><i class="fa fa-caret-right"></i>ADD CLASS</a>
-                            </li>
-                            <li>
-                                <a href="admin-add-section.html"><i class="fa fa-caret-right"></i>ADD SECTION</a>
-                            </li>
-                            <li>
-                                <a href="admin-add-class.html"><i class="fa fa-caret-right"></i>VIEW SECTIONS</a>
-                            </li>
-                            <li>
-                                <a href="admin-add-section.html"><i class="fa fa-caret-right"></i>VIEW CLASSES</a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-address-card menu-icon"></i> REPORTS <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="teacher-attendence-report.html"><i class="fa fa-caret-right"></i>ATTENDENCE</a>
-                            </li>
-                            <li>
-                                <a href="teacher-marks-report.html"><i class="fa fa-caret-right"></i>MARKS</a>
+                                <a href="teacher-attendence-report.html"><i class="fa fa-caret-right"></i>الغيابات</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>

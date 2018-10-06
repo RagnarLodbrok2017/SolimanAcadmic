@@ -37,6 +37,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        $user_count = User::all()->where('admin' , 'admin')->count();
         $this->middleware('guest');
     }
 
