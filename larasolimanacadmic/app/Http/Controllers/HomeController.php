@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController1 extends Controller
+class HomeController extends Controller
 {
     /**
      * Create a new controller instance.

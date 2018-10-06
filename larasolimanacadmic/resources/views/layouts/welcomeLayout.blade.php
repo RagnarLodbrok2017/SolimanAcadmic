@@ -39,7 +39,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="logo pull-left"><a href="../"><img src="{{asset('img/welcomeImages/logo2.png')}}" alt="academy" class="img-responsive" style="width: 160px;height: 35px"></a></div>
+                    <div class="logo pull-left"><a href="../"><img src="{{asset('img/welcomeImages/logo2.png')}}"
+                                                                   alt="academy" class="img-responsive"
+                                                                   style="width: 160px;height: 35px"></a></div>
                     <a href="#" class="nav-opener pull-right"><i class="fa fa-bars" aria-hidden="true"></i></a>
                     <!-- page navigation start here -->
                     <nav id="nav">
@@ -51,12 +53,17 @@
                                     <li><a href="{{route('login')}}" class="smooth">تسجيل الدخول</a></li>
                                 @endauth
                             @endif
-                            <li><a href="#" data-scroll-nav="6" class="smooth">الأسعار</a></li>
+                            @if(Request()->is('/'))
+                                <li><a href="#" data-scroll-nav="6" class="smooth">الأسعار</a></li>
                             <li><a href="#" data-scroll-nav="5" class="smooth">الخدمات</a></li>
                             <li><a href="#" data-scroll-nav="4" class="smooth">المدرسين</a></li>
                             <li><a href="#" data-scroll-nav="3" class="smooth">ماذا نفعل</a></li>
                             <li><a href="#" data-scroll-nav="2" class="smooth">معلومات عنا</a></li>
                             <li><a href="#" data-scroll-nav="0" class="smooth active">الرئيسيه</a></li>
+                                @else
+                                    <li><a href="../" class="smooth active">السابقة</a></li>
+                                    <li><a href="../logout" class="smooth active">تسجيل الخروج</a></li>
+                                @endif
                         </ul>
                     </nav>
                     <!-- page navigation end here -->
@@ -67,26 +74,9 @@
 </header><!-- end of page header -->
 
 @yield('content')
-<!-- start of footer -->
-<footer id="footer" class="dark-bg text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="logo"><a href="#"><img src="{{asset('img/welcomeImages/logo1.png')}}" alt="img" class="img-responsive" style="width: 130px;height: 110px"></a></div>
-                <!-- start of social -->
-                <ul class="social list-inline">
-                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-vimeo" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
-                </ul><!-- end of social -->
-                <p>2018 © Ahmed R.Mohamed . All rights reserved.</p>
-            </div>
-        </div>
-    </div>
-</footer><!-- end of footer -->
+
 <!-- start of form pop up -->
-<div id="popup1"  style="display: none;">
+<div id="popup1" style="display: none;">
     <!-- start of quote-form style2 -->
     <div class="quote-form style2">
         <form id="contactForm2" data-toggle="validator">
@@ -94,13 +84,16 @@
                 <span class="title">الحجز</span>
                 <span class="txt">أختار الخطه</span>
                 <div class="form-group">
-                    <input type="text" id="name2" placeholder="الأسم" class="form-control" required data-error="NEW ERROR MESSAGE">
+                    <input type="text" id="name2" placeholder="الأسم" class="form-control" required
+                           data-error="NEW ERROR MESSAGE">
                 </div>
                 <div class="form-group">
-                    <input type="email" id="email2" placeholder="الأميل" class="form-control" required data-error="NEW ERROR MESSAGE">
+                    <input type="email" id="email2" placeholder="الأميل" class="form-control" required
+                           data-error="NEW ERROR MESSAGE">
                 </div>
                 <div class="form-group">
-                    <input type="tel" id="phone2" placeholder="التليفون" class="form-control" required data-error="NEW ERROR MESSAGE">
+                    <input type="tel" id="phone2" placeholder="التليفون" class="form-control" required
+                           data-error="NEW ERROR MESSAGE">
                 </div>
                 <div class="form-group">
                     <select id="choose_plan" name="choose_plan" class="form-control">

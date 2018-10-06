@@ -297,4 +297,22 @@
             </div>
         </section><!-- end of quote-section -->
     </main><!-- end of main -->
+    <!-- start of footer -->
+    <footer id="footer" class="dark-bg text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="logo"><a href="#"><img src="{{asset('img/welcomeImages/logo1.png')}}" alt="img" class="img-responsive" style="width: 130px;height: 110px"></a></div>
+                    <!-- start of social -->
+                    <ul class="social list-inline">
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-vimeo" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+                    </ul><!-- end of social -->
+                    <p>2018 © Ahmed R.Mohamed . All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer><!-- end of footer -->
 @endsection

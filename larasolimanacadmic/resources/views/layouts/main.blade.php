@@ -178,7 +178,7 @@
             <div class="sidebar-nav-wrapper" id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <li>
-                        <a href="admin-dashboard.html"><i class="fa fa-hotel menu-icon"></i> الرئيسية</a>
+                        <a href="../"><i class="fa fa-hotel menu-icon"></i> الرئيسية</a>
                     </li>
                     <li>
                         <a href="../incubation"><i class="fa fa-home menu-icon"></i> الحضانة</a>
