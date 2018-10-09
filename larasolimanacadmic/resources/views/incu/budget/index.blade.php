@@ -94,7 +94,7 @@
                                                 <td>{{ $budget->type->name }}</td>
                                                 <td>{{ $budget->salary }}</td>
                                                 <td>{{$budget->created_at}}</td>
-                                                <td>{{$budget->user->name}}</td>
+                                                <td>{{$budget->user['name']}}</td>
                                                 <td>{{$budget->day}}</td>
                                                 <td>{{$index+1}}</td>
                                             </tr>

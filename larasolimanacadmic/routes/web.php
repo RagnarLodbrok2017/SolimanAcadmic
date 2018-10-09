@@ -11,6 +11,15 @@
 |
 */
 
+use App\Exports\StudentExport;
+use App\Exports\UsersExport;
+
+Route::get('/downloadUsers', function () {
+    return Excel::download(new UsersExport, 'users.xlsx');
+});
+Route::get('/downloadStudents', function () {
+    return Excel::download(new StudentExport , 'Students.xlsx');
+});
 Route::get('/', function () {
     return view('welcome');
 });
