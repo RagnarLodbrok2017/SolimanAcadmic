@@ -18,7 +18,7 @@ class StudentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('superAdmin');
+        $this->middleware('superAdmin')->except(['downloadIncuStudents']);
     }
 
     public function debug_to_console($data)
@@ -254,11 +254,7 @@ class StudentController extends Controller
         }
     }
 
-    /**
-     * @return \Maatwebsite\Excel\BinaryFileResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
-     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
-     */
+
     public function downloadIncuStudents(){
         return Excel::download(new IncuStudentExport , 'غياب حضانة.xlsx');
     }
