@@ -11,15 +11,15 @@
 |
 */
 
-use App\Exports\StudentExport;
+use App\Exports\IncuStudentExport;
 use App\Exports\UsersExport;
 
 Route::get('/downloadUsers', function () {
     return Excel::download(new UsersExport, 'users.xlsx');
 });
-Route::get('/downloadStudents', function () {
-    return Excel::download(new StudentExport , 'Students.xlsx');
-});
+/*Route::get('/downloadStudents', function () {
+    return Excel::download(new IncuStudentExport , 'Students.xlsx');
+});*/
 Route::get('/', function () {
     return view('welcome');
 });
@@ -35,6 +35,10 @@ Route::get('/incubation', 'IncuHomeController@index')->name('incubation');
 Route::resource('incustudent', 'StudentController');
 Route::get('/getUpdate','StudentController@getUpdate')->name('getUpdate');
 Route::post('/newUpdate','StudentController@newUpdate')->name('newUpdate');
+//actions in IncuStudents Details
+Route::get('/downloadIncuStudents','StudentController@downloadIncuStudents');
+Route::get('/changepaymentsgetto0incustudent','StudentController@changepaymentsgetto0incustudent');
+Route::get('/changepaymentsgetto1incustudent','StudentController@changepaymentsgetto1incustudent');
 
 /* Incusubject routes  */
 Route::resource('incusubject', 'IncusubjectController');
@@ -61,3 +65,6 @@ Route::post('/newUpdateStuff','StuffController@newUpdateStuff')->name('newUpdate
 //actions in IncuTeachers Details
 Route::get('/changesalarygetto0stuff','StuffController@changesalarygetto0stuff');
 Route::get('/changesalarygetto1stuff','StuffController@changesalarygetto1stuff');
+
+/* Admins Route */
+Route::resource('admin', 'UserController');

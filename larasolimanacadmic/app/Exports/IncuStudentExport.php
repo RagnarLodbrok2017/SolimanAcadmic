@@ -9,12 +9,12 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
 
-class StudentExport implements FromQuery, WithMapping, WithHeadings
+class IncuStudentExport implements FromQuery, WithMapping, WithHeadings
 {
 
     public function query()
     {
-        return Student::where('stage_id', null)->orderBy('classroom_id', 'asc');
+        return Student::where('stage_id', null)->where('type_id', 1)->orderBy('classroom_id', 'asc');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classroom;
+use App\Exports\IncuStudentExport;
 use App\Level;
 use App\Parents;
 use App\Shift;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Status;
 use App\Payment;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -250,5 +252,42 @@ class StudentController extends Controller
             }
             return Response($Student);
         }
+    }
+
+    /**
+     * @return \Maatwebsite\Excel\BinaryFileResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     */
+    public function downloadIncuStudents(){
+        return Excel::download(new IncuStudentExport , 'غياب حضانة.xlsx');
+    }
+
+    /* Actions in details of Incu Students */
+    public function changepaymentsgetto0incustudent(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->action == 0) {
+//                Payment::all()->student()->where('type_id', '=', 1)->update(['price' => 0]);
+//                Student::where('type_id', '=', 1)->payment()->update(['price' => 0]);
+                $students = Student::all()->where('type_id', '=', 1);
+                $allStudents =$students->map(function ($student){
+                    return $student->payment->update(['price' => 0]);
+                });
+            }
+        }
+        return Response($request);
+    }
+    public function changepaymentsgetto1incustudent(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->action == 1) {
+                $students = Student::all()->where('type_id', '=', 1);
+                $allStudents =$students->map(function ($student){
+                    return $student->payment->update(['price' => 300]);
+                });
+            }
+        }
+        return Response($request);
     }
 }

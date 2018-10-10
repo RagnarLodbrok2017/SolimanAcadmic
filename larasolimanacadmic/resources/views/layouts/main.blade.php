@@ -232,10 +232,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="admin-add-teacher.html"><i class="fa fa-caret-right"></i>اضافة مسؤول</a>
-                            </li>
-                            <li>
-                                <a href="admin-teacher-list.html"><i class="fa fa-caret-right"></i>كل المسؤولين</a>
+                                <a href="../admin"><i class="fa fa-caret-right"></i>كل المسؤولين</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
@@ -265,6 +262,9 @@
                             </li>
                         </ul>
                         <div class="clearfix"></div>
+                    </li>
+                    <li>
+                        <a href="../downloadIncuStudents" class=""><i class="fa fa-download menu-icon"></i> تحميل الغياب</a>
                     </li>
                 </ul>
             </div>

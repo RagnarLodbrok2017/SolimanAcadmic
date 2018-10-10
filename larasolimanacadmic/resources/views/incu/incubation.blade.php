@@ -163,7 +163,6 @@
                                             <div class="col-xs-9">
                                                 <p class="title"><a href="../incusubject">المواد</a></p>
                                                 <p class="sent-by"><i class="fa fa-map-marker"></i>Link</p>
-
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>

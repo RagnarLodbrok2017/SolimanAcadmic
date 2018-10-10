@@ -208,7 +208,87 @@ $(document).ready(function () {
         });
     });
 
-/* ******************************************* Add The Incu Subject 25/9  ************************************************************** */
+    // Actions on Incustudents
+    $('#changepaymentsgetto0incustudent .make_allIncustudent_payments_get_0_confirmed').on('click', function (e) {
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: '/changepaymentsgetto0incustudent',
+            data: {
+                'action': 0,
+            },
+            async: true,
+            success: function (data) {
+                $('.Cancel_Form').click();
+                var message = "تم جعل كل المصروفات غير مدفوعه";
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+                $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+            },
+            fail: function (error) {
+                var message = "عذرا هناك مشكله من فضلك اعد تحميل الصفحه";
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+            }
+        });
+    });
+    $('#changepaymentsgetto1incustudent .make_allIncustudent_payments_get_1_confirmed').on('click', function (e) {
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: '/changepaymentsgetto1incustudent',
+            data: {
+                'action': 1,
+            },
+            success: function (data) {
+                $('#changesalarygetto1stuff .Cancel_Form').click();
+                var message = "تم جعل كل المصروفات مدفوعه";
+                setTimeout(function (data) {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+                $('.Cancel_Form').click();
+                $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+            },
+            fail: function (error) {
+                var message = "عذرا هناك مشكله من فضلك اعد تحميل الصفحه";
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+            }
+        });
+    });
+
+    /* ******************************************* Add The Incu Subject 25/9  ************************************************************** */
     $('.submit_incusubject').on('click', function (e) {
         e.preventDefault();
         var name = $('.Subject_name').val();
@@ -291,20 +371,20 @@ $(document).ready(function () {
     });
 
     /* Edit Incu Subject */
-    $('.EditIncuSubjectButton').on('click',function () {
+    $('.EditIncuSubjectButton').on('click', function () {
         let id = $(this).data('id');
         $.ajax({
-            type:'GET',
-            url:'incusubject/'+id+'/edit',
-            data:{'id':id},
-            success:function (data) {
+            type: 'GET',
+            url: 'incusubject/' + id + '/edit',
+            data: {'id': id},
+            success: function (data) {
                 $('.EditIncuSubjectForm .IncuSubject_id').val(id);
                 $('.EditIncuSubjectForm .IncuSubject_code').val(data.code);
                 $('.EditIncuSubjectForm .IncuSubject_name').val(data.name);
             }
         });
     });
-    $('.ButtonSubmitEditedIncuSubject').on('click',function (e) {
+    $('.ButtonSubmitEditedIncuSubject').on('click', function (e) {
         e.preventDefault();
         let id = $('.EditIncuSubjectForm .IncuSubject_id').val();
         let name = $('.EditIncuSubjectForm .IncuSubject_name').val();
@@ -315,12 +395,12 @@ $(document).ready(function () {
             }
         });
         $.ajax({
-            method:'POST',
-            url:'/newUpdateSubject',
-            data:{
-                'id':id,
-                'name':name,
-                'code':code,
+            method: 'POST',
+            url: '/newUpdateSubject',
+            data: {
+                'id': id,
+                'name': name,
+                'code': code,
             },
             success: function (data) {
                 $('.ExitIncuSubject').click();
@@ -363,7 +443,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             url: 'budget',
-            data: {'salary': salary, 'type_id': type_id, 'day': day,'description':description},
+            data: {'salary': salary, 'type_id': type_id, 'day': day, 'description': description},
             async: true,
             success: function (data) {
                 var message = 'تم اضافة الفاتورة شكرا لك';
@@ -431,13 +511,13 @@ $(document).ready(function () {
         });
     });
     //Edit Budget
-    $('.EditBudgetButton').on('click',function () {
+    $('.EditBudgetButton').on('click', function () {
         let id = $(this).data('id');
         $.ajax({
-            type:'GET',
-            url:'budget/'+id+'/edit',
-            data:{'id':id},
-            success:function (data) {
+            type: 'GET',
+            url: 'budget/' + id + '/edit',
+            data: {'id': id},
+            success: function (data) {
                 $('.EditBudgetForm .Budget_Id').val(id);
                 $('.EditBudgetForm .Budget_Type').val(data.type_id);
                 $('.EditBudgetForm .Budget_Salary').val(data.salary);
@@ -447,7 +527,7 @@ $(document).ready(function () {
             }
         });
     });
-    $('.ButtonSubmitEditedBudget').on('click',function (e) {
+    $('.ButtonSubmitEditedBudget').on('click', function (e) {
         e.preventDefault();
         let id = $('.EditBudgetForm .Budget_Id').val();
         let type_id = $('.EditBudgetForm .Budget_Type').val();
@@ -460,14 +540,14 @@ $(document).ready(function () {
             }
         });
         $.ajax({
-            method:'POST',
-            url:'/updatebudget',
-            data:{
-                'id':id,
-                'type_id':type_id,
-                'salary':salary,
-                'description':description,
-                'day':day,
+            method: 'POST',
+            url: '/updatebudget',
+            data: {
+                'id': id,
+                'type_id': type_id,
+                'salary': salary,
+                'description': description,
+                'day': day,
             },
             success: function (data) {
                 var message = "<br> تم تعديل الفاتورة بنجاح لقبول اى تعديل قم باعادة تحميل الصفحة";
@@ -502,7 +582,7 @@ $("#addIncuTeacherForm").validate({
         name: {
             required: true,
             maxlength: 100,
-            minlength:10,
+            minlength: 10,
         },
         address: {
             maxlength: 100,
@@ -747,7 +827,7 @@ $("#addStuffForm").validate({
         name: {
             required: true,
             maxlength: 100,
-            minlength:10,
+            minlength: 10,
         },
         job: {
             maxlength: 100,
@@ -980,6 +1060,7 @@ $('#changesalarygetto1stuff .make_all_salary_get_1_confirmed').on('click', funct
         }
     });
 });
+
 
 
 

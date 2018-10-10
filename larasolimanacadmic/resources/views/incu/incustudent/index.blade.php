@@ -167,6 +167,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-12 clear-padding-xs" style="margin-top: 30px;">
+                        <div class="dashboard-stats">
+                            <div class="col-md 12" style="overflow: hidden">
+                                <div class="col-md-4">
+                                    <button class="btn btn-danger btn_in_details make_all_salary_get_0" data-toggle="modal" data-target="#changepaymentsgetto0incustudent">جعل كل الرواتب غير مدفوعه</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-danger btn_in_details remove_all_incu_teachers">مسح كل الطلاب</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-success btn_in_details make_all_salary_get_1" data-toggle="modal" data-target="#changepaymentsgetto1incustudent">جعل كل الرواتب مدفوعه</button>
+                                </div>
+                            </div>
+                            <div class="section-divid"></div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -445,6 +463,42 @@
                             <a href="#" class="save"><i class="fa fa-check"></i>SAVE</a>
                             <a href="#" class="cancel" data-dismiss="modal"><i class="fa fa-ban"></i>CLOSE</a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="changepaymentsgetto0incustudent" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa-trash"></i>هل تريد جعل كل المصاريف غير مدفوعه ؟</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-action-box">
+                            <a href="#" class="save make_allIncustudent_payments_get_0_confirmed"><i class="fa fa-check"></i>حسنا</a>
+                            <a href="#" class="cancel Cancel_Form" data-dismiss="modal"><i class="fa fa-ban"></i>الغاء</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="changepaymentsgetto1incustudent" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="fa fa-trash"></i>هل تريد جعل كل المصاريف مدفوعه ؟</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-action-box">
+                            <a href="#" class="save make_allIncustudent_payments_get_1_confirmed"><i class="fa fa-check"></i>حسنا</a>
+                            <a href="#" class="cancel Cancel_Form" data-dismiss="modal"><i class="fa fa-ban"></i>الغاء</a>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
