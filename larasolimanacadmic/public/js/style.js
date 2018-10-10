@@ -1061,7 +1061,153 @@ $('#changesalarygetto1stuff .make_all_salary_get_1_confirmed').on('click', funct
     });
 });
 
+/* ******************************************* Add The Admin 10/10  ************************************************************** */
+$('.submit_admin').on('click', function (e) {
+    e.preventDefault();
+    var name = $('.Admin_name').val();
+    var email = $('.Admin_email').val();
+    var password = $('.Admin_password').val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: 'admin',
+        data: {'name': name, 'email': email, 'password': password},
+        async: true,
+        dataType: 'json',
+        success: function (data) {
+            var message = ' ' + data.name + "<br> تم اضافته بنجاح";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $("#addAdminForm")[0].reset();
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            var message =' ' + JSON.stringify(errors.errors) + ' ';
+            setTimeout(function () {
+                $.bootstrapGrowl(message , {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 500);
+        }
 
+    });
+});
+
+//*********** Delete Incu Subject *******************
+$(".DeleteAdmin").on('click', function () {
+    let Admin_id = $(this).data('id');
+    $('.DeleteAdminConfirmation #id_of_admin').val(Admin_id);
+});
+$('#DeleteAdminConfirmed').on('click', function (e) {
+    e.preventDefault();
+    let id = $('#id_of_admin').val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'DELETE',
+        dataType: 'json',
+        url: 'admin/' + id,
+        data: {'id': id},
+        success: function (data) {
+            var message = ' ' + data.name + "<br> تم مسح المسؤول بنجاح";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('.ExitDeleteِAdminForm').click();
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            var message =' ' + JSON.stringify(errors.errors) + ' ';
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 500);
+        }
+    });
+});
+
+/* Edit Incu Subject */
+$('.EditAdminButton').on('click', function () {
+    let id = $(this).data('id');
+    $.ajax({
+        type: 'GET',
+        url: 'admin/' + id + '/edit',
+        data: {'id': id},
+        success: function (data) {
+            console.log(data);
+            $('.EditAdminForm .admin_id').val(id);
+            $('.EditAdminForm .admin_name').val(data.name);
+            $('.EditAdminForm .admin_email').val(data.email);
+        }
+    });
+});
+$('.ButtonSubmitEditedAdmin').on('click', function (e) {
+    e.preventDefault();
+    let id = $('.EditAdminForm .admin_id').val();
+    let name = $('.EditAdminForm .admin_name').val();
+    let email = $('.EditAdminForm .admin_email').val();
+    let password = $('.EditAdminForm .admin_password').val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        method: 'POST',
+        url: '/UpdateAdmin',
+        data: {
+            'id': id,
+            'name': name,
+            'email': email,
+            'password': password,
+        },
+        success: function (data) {
+            $('.ExitIncuSubject').click();
+            var message = ' ' + data.name + ' '+ "<br> تم تعديل المسؤول بنجاح لقبول اى تعديل قم باعادة تحميل الصفحة";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('.ExitEditAdminForm').click();
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        error: function (data) {
+            setTimeout(function () {
+                $.bootstrapGrowl('المادة لا يمكن تعديلها من فضلك قم باعادة تحميل الصفحة !', {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 500);
+        }
+    });
+});
 
 
 /*

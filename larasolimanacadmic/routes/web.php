@@ -68,3 +68,4 @@ Route::get('/changesalarygetto1stuff','StuffController@changesalarygetto1stuff')
 
 /* Admins Route */
 Route::resource('admin', 'UserController');
+Route::post('/UpdateAdmin','UserController@UpdateAdmin')->name('UpdateAdmin');

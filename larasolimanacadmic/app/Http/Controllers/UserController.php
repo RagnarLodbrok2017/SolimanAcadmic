@@ -23,21 +23,26 @@ class UserController extends Controller
         //
     }
 
+
     public function store(Request $request)
     {
         $this->validate($request, [
-            //required incusubject Information
-            'name' => 'required | max:20 | string',
-            'code' => 'nullable |max:15']);
-        $incusubject = new Incusubject();
+            //required Admin Information
+            'name' => 'required | max:30 | string',
+            'email' => 'required | max:80 | email | unique:users',
+            'password' => 'required | max:16 | min:6',
+        ]);
+        $user = new User();
         if ($request->ajax()) {
-            $incusubject->name = $request->name;
-            if ($request->code != null) {
-                $incusubject->code = $request->code;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->admin = 'admin';
+            if ($request->password != null) {
+                $user->password = \Hash::make($request->password);
+                $user->save();
             }
-            $incusubject->save();
         }
-        return Response($incusubject);
+        return Response($user);
     }
 
     public function show($id)
@@ -48,32 +53,41 @@ class UserController extends Controller
 
     public function edit($id, Request $request)
     {
-        $IncuSubject = new Incusubject();
+        $user = new User();
         if($request->ajax()) {
-            $IncuSubject = Incusubject::find($id);
+            $user = User::find($id);
         }
-        return Response($IncuSubject);
+        return Response($user);
     }
     public function update($id, Request $request){
 
     }
-    public function newUpdateSubject(Request $request)
+    public function UpdateAdmin(Request $request)
     {
-        $NewIncuSubject = Incusubject::find($request->id);
+        $this->validate($request, [
+            //required Admin Information
+            'name' => 'required | max:30 | string',
+            'email' => 'required | max:80 | email | unique:users,email,' . $request->id,
+            'password' => 'nullable |max:16 | min:6',
+        ]);
+        $user = User::find($request->id);
         if ($request->ajax()){
-            $NewIncuSubject->name = $request->name;
-            $NewIncuSubject->code = $request->code;
-            $NewIncuSubject->save();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            if ($request->password != null && $request->password !== '' && strlen($request->password) != 0) {
+                $user->password = \Hash::make($request->password);
+            }
+            $user->save();
         }
-        return Response($NewIncuSubject);
+        return Response($user);
     }
 
     public function destroy($id, Request $request)
     {
         if ($request->ajax()) {
-            $Incu_Subject = Incusubject::find($id);
-            Incusubject::destroy($id);
-            return Response($Incu_Subject);
+            $user = User::find($id);
+            User::destroy($id);
+            return Response($user);
         }
     }
 }
