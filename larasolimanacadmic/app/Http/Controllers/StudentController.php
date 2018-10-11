@@ -7,6 +7,8 @@ use App\Exports\IncuStudentExport;
 use App\Level;
 use App\Parents;
 use App\Shift;
+use App\Stage;
+use Carbon\Carbon;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Student;
@@ -286,4 +288,157 @@ class StudentController extends Controller
         }
         return Response($request);
     }
+
+
+
+    /* **************************************** Center Functions ************************************* */
+    public function centerIndex(){
+        $students = Student::all()->where('type_id', 2);
+        //$statuss = Status::all();
+        $classes = Classroom::all();
+        //$levels = Level::all();
+        $stages = Stage::all();
+        $shifts = Shift::all();
+        //total payment
+        $Total_Payment = 0;
+        foreach ($students as $student){
+            $payment = $student->payment->price;
+            $Total_Payment = $Total_Payment + $payment;
+        }
+        //number of student that price = 0
+        $Total_Students_Payment_Zero = 0;
+        foreach ($students as $student){
+            if($student->payment->price == 0){
+                $Total_Students_Payment_Zero ++;
+            }
+        }
+        //number of student that price > 0
+        $Total_Students_Payment_Not_Zero = 0;
+        foreach ($students as $student){
+            if($student->payment->price !== 0){
+                $Total_Students_Payment_Not_Zero ++;
+            }
+        }
+        //number of student that the father or mother is dead > 0
+        $Total_Students_Parents_Dead = 0;
+        foreach ($students as $student){
+            if($student->status_id !== 1){
+                $Total_Students_Parents_Dead ++;
+            }
+        }
+        return view('center.student.index', compact('students', 'classes', 'stages', 'shifts',
+            'Total_Payment','Total_Students_Payment_Zero','Total_Students_Payment_Not_Zero','Total_Students_Parents_Dead'));
+    }
+
+    public function createStudent()
+    {
+        $stages = Stage::all();
+        //$payment = Payment::all();
+        return view('center.student.create', compact('stages'));
+    }
+
+    public function storeStudentCenter(Request $request)
+    {
+        $this->validate($request, [
+            //required Student Information
+            'first_name' => 'required | max:15 | string',
+            'middle_name' => 'required | max:15 | string',
+            'last_name' => 'required | max:15 | string',
+            'phone' => 'nullable | digits:11',
+            'stage_id' => 'required | integer',
+            'payment' => 'required | integer | digits_between:0,5',
+        ]);
+        $student = new Student();
+        $student->first_name = $request->first_name;
+        $student->middle_name = $request->middle_name;
+        $student->last_name = $request->last_name;
+        $student->sex = $request->sex;
+        $student->classroom_id = 1;
+//        $student->phone = $request->phone;
+        if(strlen($request->phone) != 0 && $request->phone != null )
+        {
+            $student->phone = $request->phone;
+        }
+        if(strlen($request->addess) != 0 && $request->address != null)
+        {
+            $student->address = $request->address;
+        }
+        $student->dob = Carbon::now();
+        $student->stage_id = $request->stage_id;
+        $student->type_id = 2;
+        $student->save();
+
+        //add price in payment
+        $newStudentId = Student::where([
+            ['first_name', $student->first_name],
+            ['middle_name', $student->middle_name],
+            ['last_name', $student->last_name],
+            ['phone', $student->phone],
+            ['type_id', 2],
+        ])->first()->id;
+        $payment = new Payment();
+        $payment->price = $request->payment;
+        $payment->student_id = $newStudentId;
+        $payment->save();
+        return Response($student);
+
+//        session()->flash('message', 'تم اضافة الطالب !');
+//        return response()->json(['message' => 'تم اضافة الطالب !', 'success' => true]);
+//        return redirect()->back()->with('message', 'تم اضافة الطالب');
+//        return redirect()->back();
+//        return back()->with('message', 'تم اضافة الطالب');
+    }
+
+    public function getUpdateStudentCenter(Request $request)
+    {
+        if ($request->ajax()) {
+            $Update_Student = Student::find($request->id);
+            $Update_Payment = Payment::where('student_id', $request->id)->first();
+            $data = compact('Update_Student', 'Update_Payment');
+            return Response($data);
+        }
+    }
+
+    public
+    function newUpdateStudentCenter(Request $request)
+    {
+        if ($request->ajax()) {
+            $this->validate($request, [
+                //required Student Information
+                'first_name' => 'required | max:15 | string',
+                'middle_name' => 'required | max:15 | string',
+                'last_name' => 'required | max:15 | string',
+                'phone' => 'nullable | digits:11',
+                'stage_id' => 'required | integer',
+                'payment' => 'required | integer | digits_between:0,5',
+            ]);
+            $student = Student::find($request->id);
+            /**
+             * @var $nStudent App\Student
+             * @var $nPayment App\Payment
+             */
+            $student->first_name = $request->first_name;
+            $student->middle_name = $request->middle_name;
+            $student->last_name = $request->last_name;
+            $student->stage_id = $request->stage_id;
+            $student->sex = $request->sex;
+            if(strlen($request->phone) != 0 && $request->phone != null )
+            {
+                $student->phone = $request->phone;
+            }
+            if(strlen($request->addess) != 0 && $request->address != null)
+            {
+                $student->address = $request->address;
+            }
+
+            //update new price
+            $nPayment = Payment::find($request->payment_id);
+            $nPayment->price = $request->payment;
+
+            $student->save();
+            $nPayment->save();
+            return Response($student);
+        }
+    }
+
 }

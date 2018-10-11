@@ -28,6 +28,7 @@ Route::get('/logout', 'Auth\LoginController@logout');
 
 Auth::routes();
 
+/*  *********************************************************** Incubation Routes *********************************************************  */
 //incubation routes
 Route::get('/incubation', 'IncuHomeController@index')->name('incubation');
 
@@ -69,3 +70,12 @@ Route::get('/changesalarygetto1stuff','StuffController@changesalarygetto1stuff')
 /* Admins Route */
 Route::resource('admin', 'UserController');
 Route::post('/UpdateAdmin','UserController@UpdateAdmin')->name('UpdateAdmin');
+
+/*  *********************************************************** Center Routes *********************************************************  */
+Route::get('/center', 'CenterController@index')->name('incubation');
+// Student Routes
+Route::get('/students','StudentController@centerIndex')->name('centerIndex');
+Route::get('/createStudent','StudentController@createStudent')->name('createStudent');
+Route::post('storeStudentCenter','StudentController@storeStudentCenter')->name('storeStudentCenter');
+Route::get('/getUpdateStudentCenter','StudentController@getUpdateStudentCenter')->name('getUpdateStudentCenter');
+Route::post('/newUpdateStudentCenter','StudentController@newUpdateStudentCenter')->name('newUpdateStudentCenter');

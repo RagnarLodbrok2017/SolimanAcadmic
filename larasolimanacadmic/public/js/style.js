@@ -1209,6 +1209,132 @@ $('.ButtonSubmitEditedAdmin').on('click', function (e) {
     });
 });
 
+/* **************************************** Student Of Center 12/10 ***************************** */
+$('.submit_student').on('click', function (e) {
+    e.preventDefault();
+    var first_name = $("input[name=first_name]").val();
+    var middle_name = $("input[name=middle_name]").val();
+    var last_name = $("input[name=last_name]").val();
+    // var dob = $("input[name=dob]").val();
+    var phone = $("input[name=phone]").val();
+    var address = $("input[name=address]").val();
+    var payment = $("input[name=payment]").val();
+    var stage_id = $("select[name=stage_id]").val();
+    var sex = $("select[name=sex]").val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: 'storeStudentCenter',
+        data: {'first_name': first_name, 'middle_name': middle_name,'last_name': last_name, 'sex': sex, 'phone' :phone
+        , 'payment': payment, 'address': address,'stage_id':stage_id},
+        async: true,
+        dataType: 'json',
+        success: function (data) {
+            var message = ' ' + data.name + "<br> تم اضافته بنجاح";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            // $("#addAdminForm")[0].reset();
+            // $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        error: function (data) {
+            var errors = data.responseJSON;
+            var message =' ' + JSON.stringify(errors.errors) + ' ';
+            setTimeout(function () {
+                $.bootstrapGrowl(message , {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 500);
+        }
+
+    });
+});
+
+//Update Student
+$(".EditCenterStudent").on('click', function () {
+    let id = $(this).data('id');
+    $.ajax({
+        type: 'get',
+        url: 'getUpdateStudentCenter',
+        data: {
+            'id': id
+        },
+        success: function (data) {
+            $("#S_id").val(data.Update_Student.id);
+            $("#S_payment").val(data.Update_Payment.id);
+            $("#S_first_name").val(data.Update_Student.first_name);
+            $("#S_middle_name").val(data.Update_Student.middle_name);
+            $("#S_last_name").val(data.Update_Student.last_name);
+            $("#S_phone").val(data.Update_Student.phone);
+            $("#S_address").val(data.Update_Student.address);
+            $("#S_stage").val(data.Update_Student.stage_id);
+            $("#S_sex").val(data.Update_Student.sex);
+            $("#Update_Payment").val(data.Update_Payment.price);
+            // $.each(data.Update_Classes,function(index,val){
+            //     $('#Update_Classes').append($("<option></option>").attr("value",val.id).text(val.name));
+            // });
+        }
+
+    });
+});
+$('.updateStudentForm').on('submit', function (e) {
+    e.preventDefault();
+    var id = $("#S_id").val();
+    var payment_id = $("#S_payment").val();
+    var first_name = $("#S_first_name").val();
+    var middle_name = $("#S_middle_name").val();
+    var last_name = $("#S_last_name").val();
+    var address = $("#S_address").val();
+    var sex = $("#S_sex").val();
+    var phone = $("#S_phone").val();
+    var payment = $("#Update_Payment").val();
+    var stage_id = $("#S_stage").val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '/newUpdateStudentCenter',
+        data: {
+            id: id,
+            payment_id: payment_id,
+            first_name: first_name,
+            middle_name: middle_name,
+            last_name: last_name,
+            phone: phone,
+            payment: payment,
+            address: address,
+            stage_id: stage_id,
+            sex: sex,
+        },
+        async: true,
+        //notification
+        success: function (data) {
+            var message = ' ' + data.first_name + ' ' + data.middle_name + ' ' + data.last_name + "<br> تم تعديله بنجاح";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#CancelUpdateForm').click();
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        }
+    });
+});
 
 /*
 Comment Update Form Of Incustudent

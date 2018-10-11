@@ -45,6 +45,9 @@ class Student extends Model
     public function payment() {
         return $this->hasOne('App\Payment');
     }
+    public function stage() {
+        return $this->belongsTo('App\Stage','stage_id');
+    }
     public function parent() {
         return $this->hasOne('App\Parents');
     }
