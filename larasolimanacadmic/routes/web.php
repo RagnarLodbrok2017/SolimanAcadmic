@@ -79,3 +79,7 @@ Route::get('/createStudent','StudentController@createStudent')->name('createStud
 Route::post('storeStudentCenter','StudentController@storeStudentCenter')->name('storeStudentCenter');
 Route::get('/getUpdateStudentCenter','StudentController@getUpdateStudentCenter')->name('getUpdateStudentCenter');
 Route::post('/newUpdateStudentCenter','StudentController@newUpdateStudentCenter')->name('newUpdateStudentCenter');
+
+/* subject routes in center  */
+Route::resource('subject', 'subjectController');
+Route::post('/newUpdateSubject','subjectController@newUpdateSubject')->name('newUpdateSubject');

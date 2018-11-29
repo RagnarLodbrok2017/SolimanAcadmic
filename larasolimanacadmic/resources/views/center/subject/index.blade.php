@@ -14,7 +14,7 @@
                 <div class="col-lg-12 clear-padding-xs">
                     <div class="col-sm-8">
                         <div class="dash-item first-dash-item">
-                            <h6 class="item-title"><i class="fa fa-sliders"></i>كل المواد</h6>
+                            <h6 class="item-title"><i class="fa fa-sliders"></i>كل مواد السنتر</h6>
                             <div class="inner-item">
                                 <table id="attendenceDetailedTable" class="display responsive nowrap" cellspacing="0" width="100%">
                                     <thead>
@@ -50,13 +50,13 @@
                         <div class="dash-item first-dash-item">
                             {!! Form::open(array('route' => 'incusubject.store', 'method' => 'post', 'id'=> 'addIncusubjectForm'))!!}
                             <input type="hidden" value="{{ csrf_token() }}" id="token">
-                            <h6 class="item-title"><i class="fa fa-plus-circle"></i>اضافة مادة</h6>
+                            <h6 class="item-title"><i class="fa fa-plus-circle"></i> اضافة مادة</h6>
                             <div class="inner-item">
                                 <div class="dash-form">
                                     <label class="clear-top-margin"><i class="fa fa-book"></i>الأسم</label>
-                                    {!!Form::text('name','',['placeholder' => 'حساب','tabindex'=>'1','required','class'=>'Subject_name','maxlength'=>'20'])!!}
+                                    {!!Form::text('name','',['placeholder' => '','tabindex'=>'1','required','class'=>'Subject_name','maxlength'=>'20'])!!}
                                     <label><i class="fa fa-code"></i>كود المادة</label>
-                                    {!!Form::text('code','',['placeholder' => '#1234','tabindex'=>'2','class'=>'Subject_code'])!!}
+                                    {!!Form::text('code','',['placeholder' => '','tabindex'=>'2','class'=>'Subject_code'])!!}
                                     <div>
                                         <button type="submit" class="btn submit_incusubject" tabindex="3"><a onclick="" class="noMargin"><i class="fa fa-paper-plane"></i> اضافة</a></button>
                                     </div>

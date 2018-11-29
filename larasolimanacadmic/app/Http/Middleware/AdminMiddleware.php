@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class AdminMiddleware
 {
@@ -13,11 +14,19 @@ class AdminMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = null)
     {
-        if ($request->user() && $request->user()->admin != 'admin'){
-            return abort(404);
+            if (\Auth::user() && \Auth::user()->admin == 'admin') {
+                return $next($request);
+            }
+            return redirect('../');
+        /*if (Auth::guard($guard)->check()) {
+            if ($request->user() && $request->user()->admin != 'admin'){
+                return abort(404);
+                }
         }
-        return $next($request);
+        else {
+             return $next($request);
+        }*/
     }
 }
