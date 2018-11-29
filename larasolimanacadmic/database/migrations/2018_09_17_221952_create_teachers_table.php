@@ -25,9 +25,9 @@ class CreateTeachersTable extends Migration
           $table->string('address',200)->nullable();
           $table->unsignedInteger('type_id')->nullable();
           $table->foreign('type_id')->references('id')->on('type');
-
-          $table->unsignedInteger('subject_id')->nullable();
-          $table->foreign('subject_id')->references('id')->on('subjects');
+          $table->string('subject')->nullable();
+          /*$table->unsignedInteger('subject_id')->nullable();
+          $table->foreign('subject_id')->references('id')->on('subjects');*/
           $table->timestamps();
         });
     }

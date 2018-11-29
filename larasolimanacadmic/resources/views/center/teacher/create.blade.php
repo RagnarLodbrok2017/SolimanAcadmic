@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main2')
 
 @section('content')
     <!-- MAIN CONTENT -->
@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 clear-padding-xs">
-                    {{ Form::open(array('route' => 'teacher.store', 'method' => 'post', 'id'=> 'addIncuTeacherForm'))}}
+                    {{ Form::open(array('route' => 'storeTeacherOfCenter', 'method' => 'post', 'id'=> 'addCenterTeacherForm'))}}
                     <input type="hidden" value="{{ csrf_token() }}" id="token">
                     <div class="col-md-12">
                         <div class="dash-item first-dash-item">
@@ -61,7 +61,11 @@
                                         <label><i class="fa fa-address-book"></i>العنوان #</label>
                                         {!! Form::text('address','',['placeholder'=>'','tabindex'=>'6']) !!}
                                     </div>
-                                    @if(isset($incusubjects))
+                                    <div class="col-sm-3">
+                                        <label class=""><i class="fa fa-user-circle-o"></i>المادة</label>
+                                        {!!Form::text('subject','',['placeholder' => '','tabindex'=>'5'])!!}
+                                    </div>
+                                    {{--@if(isset($incusubjects))
                                         <div class="col-sm-3 multi_select">
                                             <label><i class="fa fa-flag"></i>المواد التى يدرسها</label>
                                             <select id="" name="incusubjects[]" tabindex="5" multiple class="form-control framework" required>
@@ -70,7 +74,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                    @endif
+                                    @endif--}}
                                     <div class="clearfix"></div>
                                     <div class="col-sm-12 text-center" style="margin-top: 35px">
                                         {{Form::submit('اضافة',['id'=>'addIncuTeacher','tabindex'=>'9'])}}

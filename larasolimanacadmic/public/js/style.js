@@ -935,7 +935,7 @@ $('.updateStuffForm').on('submit', function (e) {
     });
 });
 
-//Button delete in all teachers table
+//Button delete One stuff in all Stuff table
 $('.DeleteStuff').on('click', function (e) {
     e.preventDefault();
     let id = $(this).data('id');
@@ -1335,6 +1335,336 @@ $('.updateStudentForm').on('submit', function (e) {
         }
     });
 });
+// Actions on Incustudents
+$('#changepaymentsgetto0centerstudent .make_allCenterstudent_payments_get_0_confirmed').on('click', function (e) {
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/changepaymentsgetto0centerstudent',
+        data: {
+            'action': 0,
+        },
+        async: true,
+        success: function (data) {
+            $('.Cancel_Form').click();
+            var message = "تم جعل كل المصروفات غير مدفوعه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        fail: function (error) {
+            var message = "عذرا هناك مشكله من فضلك اعد تحميل الصفحه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+        }
+    });
+});
+$('#changepaymentsgetto1centerstudent .make_allCenterstudent_payments_get_1_confirmed').on('click', function (e) {
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/changepaymentsgetto1centerstudent',
+        data: {
+            'action': 1,
+        },
+        success: function (data) {
+            $('#changesalarygetto1stuff .Cancel_Form').click();
+            var message = "تم جعل كل المصروفات مدفوعه";
+            setTimeout(function (data) {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('.Cancel_Form').click();
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        fail: function (error) {
+            var message = "عذرا هناك مشكله من فضلك اعد تحميل الصفحه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+        }
+    });
+});
+
+
+/* **************************************** Teacher Of Center 29/11 ***************************** */
+/* ************************************************* Center  teacher  *********************************************** */
+//Incu Teacher add
+$("#addCenterTeacherForm").validate({
+    rules: {
+        name: {
+            required: true,
+            maxlength: 100,
+            minlength: 10,
+        },
+        address: {
+            maxlength: 100,
+        },
+        subject: {
+            maxlength: 100,
+        },
+        sex: "required",
+        salary: "required",
+        salary_get: "required",
+        work_date: "required",
+        phone: {
+            required: true,
+            number: true,
+            maxlength: 11,
+            minlength: 11,
+        },
+    },
+    debug: true,
+    submitHandler: function (form) {
+        $(form).ajaxSubmit({
+            success: function () {
+                var message = "<br>تم اضاة المدرس بنجاح    ";
+                setTimeout(function () {
+                    $.bootstrapGrowl(message, {
+                        type: 'success',
+                        align: 'right',
+                        stackup_spacing: 30
+                    });
+                }, 1000);
+            }
+        });
+        var formid = $("#addCenterTeacherForm");
+        var FormV = formid.validate();
+        FormV.resetForm();
+    },
+    success: function () {
+    }
+});
+
+//Button delete Center  Single Teacher in all teachers table
+$('.DeleteCenterTeacher').on('click', function (e) {
+    e.preventDefault();
+    let CenterTeacher_id = $(this).data('id');
+    $('#deleteDetailModal #DeleteCenterTeacher_Id').val(CenterTeacher_id);
+});
+
+$('#deleteDetailModal .Delete_CenterTeacher_confirmed').on('click', function (e) {
+    e.preventDefault();
+    let id = $('#deleteDetailModal #DeleteCenterTeacher_Id').val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: 'destroyCenterTeacher/',
+        data: {
+            'id': id,
+        },
+        async: true,
+        success: function (data) {
+            $('.Cancel_Delete_Form').click();
+            var message = ' ' + data.name + ' ' + "<br> تم حذفه بنجاح";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        fail: function (error) {
+            var message = "عذرا لم يتم حذفه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+        }
+    });
+});
+
+// Update of the Teacher
+// ************ Update Form Of Center Teacher new 29/11/2018
+$(".EditTeacherUpdate").on('click', function () {
+    let id = $(this).data('id');
+    $.ajax({
+        type: 'get',
+        url: 'getUpdateCenterTeacher',
+        data: {
+            'id': id
+        },
+        success: function (data) {
+            $(".T_id").val(data.Update_Teacher.id);
+            $(".T_name").val(data.Update_Teacher.name);
+            $(".T_phone").val(data.Update_Teacher.phone);
+            $(".T_salary").val(data.Update_Teacher.salary);
+            $(".T_salary_get").val(data.Update_Teacher.salary_get);
+            $(".T_address").val(data.Update_Teacher.address);
+            $(".T_sex").val(data.Update_Teacher.sex);
+            $(".T_work_date").val(data.Update_Teacher.work_date);
+            $(".T_subject").val(data.Update_Teacher.subject);
+        }
+    });
+});
+// Send Updated Information to controller
+$('.updateCenterTeacherForm').on('submit', function (e) {
+    e.preventDefault();
+    var id = $(".T_id").val();
+    var name = $(".T_name").val();
+    var phone = $(".T_phone").val();
+    var salary = $(".T_salary").val();
+    var salary_get = $(".T_salary_get").val();
+    var address = $(".T_address").val();
+    var sex = $(".T_sex").val();
+    var work_date = $(".T_work_date").val();
+    var subject = $(".T_subject").val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '/newUpdateCenterTeacher',
+        data: {
+            id: id,
+            name: name,
+            phone: phone,
+            salary: salary,
+            salary_get: salary_get,
+            address: address,
+            sex: sex,
+            work_date: work_date,
+            subject: subject,
+        },
+        async: true,
+        //notification
+        success: function (data) {
+            var message = ' ' + data.name + "<br> تم تعديله بنجاح";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#CancelUpdateForm').click();
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        }
+    });
+});
+
+/* Actions in Incu Teachers Details */
+$('#make_all_salary_get_0 .make_all_centerTeacher_salary_get_0_confirmed').on('click', function (e) {
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/changecentersalarygetto0',
+        data: {
+            'action': 0,
+        },
+        async: true,
+        success: function (data) {
+            $('.Cancel_Form').click();
+            var message = "تم جعل كل المرتبات غير مدفوعه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        fail: function (error) {
+            var message = "عذرا هناك مشكله من فضلك اعد تحميل الصفحه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+        }
+    });
+});
+$('#make_all_salary_get_1 .make_all_centerTeacher_salary_get_1_confirmed').on('click', function (e) {
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/changecentersalarygetto1',
+        data: {
+            'action': 1,
+        },
+        success: function (data) {
+            $('#make_all_salary_get_1 .Cancel_Form').click();
+            var message = "تم جعل كل المرتبات مدفوعه";
+            setTimeout(function (data) {
+                $.bootstrapGrowl(message, {
+                    type: 'success',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+            $('#attendenceDetailedTable').load(document.URL + ' #attendenceDetailedTable');
+        },
+        fail: function (error) {
+            var message = "عذرا هناك مشكله من فضلك اعد تحميل الصفحه";
+            setTimeout(function () {
+                $.bootstrapGrowl(message, {
+                    type: 'danger',
+                    align: 'right',
+                    stackup_spacing: 30
+                });
+            }, 1000);
+        }
+    });
+});
+
+
+
 
 /*
 Comment Update Form Of Incustudent

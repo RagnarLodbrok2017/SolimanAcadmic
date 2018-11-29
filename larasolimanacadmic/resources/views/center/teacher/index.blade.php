@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main2')
 
 @section('content')
     <!-- MAIN CONTENT -->
@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 clear-padding-xs">
-                    <h5 class="page-title"><i class="fa fa-users"></i>كل مدرسين الحضانه</h5>
+                    <h5 class="page-title"><i class="fa fa-users"></i>كل مدرسين السنتر</h5>
                     <div class="section-divider"></div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                                         <th class="text-center"><i class="fa fa-money"></i>دفع المرتب</th>
                                         <th class="text-center"><i class="fa fa-credit-card"></i>المرتب</th>
                                         <th class="text-center"><i class="fa fa-book"></i>تاريخ العمل</th>
-                                        <th class="text-center"><i class="fa fa-book"></i>مواد</th>
+                                        <th class="text-center"><i class="fa fa-book"></i>المادة</th>
                                         {{--<th class="text-center"><i class="fa fa-id-card"></i>العنوان</th>--}}
                                         <th class="text-center"><i class="fa fa-phone"></i>الموبيل</th>
                                         <th class="text-center"><i class="fa fa-user"></i>الأسم</th>
@@ -37,10 +37,10 @@
                                         @foreach($teachers  as $index => $teacher)
                                             <tr>
                                                 <td class="action-link text-center">
-                                                    <a class="delete DeleteIncuTeacher" href="#" title="حذف"
+                                                    <a class="delete DeleteCenterTeacher" href="#" title="حذف"
                                                        data-toggle="modal" data-id="{{$teacher->id}}"
                                                        data-target="#deleteDetailModal"><i class="fa fa-remove"></i></a>
-                                                    <a class="edit EditIncuTeacherUpdate" href="#" title="تعديل"
+                                                    <a class="edit EditTeacherUpdate" href="#" title="تعديل"
                                                        data-toggle="modal" data-id="{{$teacher->id}}"
                                                        data-target="#editDetailModal">
                                                         <i class="fa fa-edit"></i>
@@ -56,11 +56,7 @@
                                                 </td>
                                                 <td class="text-center"> {{ $teacher->salary }} </td>
                                                 <td class="text-center">{{ $teacher->work_date }}</td>
-                                                <td class="text-center">
-                                                    @foreach($teacher->Incusubjects as $incusubject)
-                                                        {{$incusubject->name}}
-                                                    @endforeach
-                                                </td>
+                                                <td class="text-center">{{$teacher->subject}}</td>
                                                 {{--<td class="text-center"> {{ $teacher->address }} </td>--}}
                                                 <td class="text-center">{{ $teacher->phone }}</td>
                                                 <td class="text-center" style="font-weight: bold">{{ $teacher->name }}</td>
@@ -95,7 +91,7 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="status">
-                                        <p class="text-look"><i class="fa fa-clock-o"></i>عدد مدرسين الحضانة</p>
+                                        <p class="text-look"><i class="fa fa-clock-o"></i>عدد مدرسين السنتر</p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -156,7 +152,7 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="status">
-                                        <p class="text-ex"><i class="fa fa-money"></i>مجموع المرتبات الكليه لمدرسين الحضانة </p>
+                                        <p class="text-ex"><i class="fa fa-money"></i>مجموع المرتبات الكليه لمدرسين السنتر </p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -196,7 +192,7 @@
         <!-- **********************************************************Edit details modal ********************************************************-->
         <div id="editDetailModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
-                {{ Form::open(array('url' => "teacher/$teacher->id" , 'method' => 'PUT', 'class'=> "updateIncuTeacherForm"))}}
+                {{ Form::open(array('url' => "teacher/$teacher->id" , 'method' => 'PUT', 'class'=> "updateCenterTeacherForm"))}}
                 <input type="hidden" value="{{ csrf_token() }}" id="token">
             <!-- Modal content-->
                 <div class="modal-content">
@@ -241,21 +237,10 @@
                             <label><i class="fa fa-address-book"></i>العنوان #</label>
                             {!! Form::text('address','',['placeholder'=>'','class'=>'T_address', 'tabindex'=>'6']) !!}
                         </div>
-                        @if(isset($incusubjects))
-                            <div class="col-sm-3 multi_select">
-                                <label><i class="fa fa-flag"></i>المواد التى يدرسها</label>
-                                <select name="incusubjects[]" tabindex="5" multiple class="form-control framework T_incusubjects_id" required>
-                                    @foreach($incusubjects as $incusubject)
-                                        <option value="{{$incusubject->id}}">{{$incusubject->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endif
-                        <div class="clearfix"></div>
-                            <div class="col-sm-6 text-center" style="margin-left: 180px;">
-                                <label><i class="fa fa-address-book"></i>أسماء المواد التى يدرسها</label>
-                                {!! Form::text('','',['placeholder'=>'','class'=>'T_incusubjects_name','disabled']) !!}
-                            </div>
+                        <div class="col-sm-3">
+                            <label class=""><i class="fa fa-user"></i>المادة</label>
+                            {!!Form::text('subject','',['placeholder' => '','class' => 'T_subject', 'required', 'maxlength'=>'100','tabindex'=>'5'])!!}
+                        </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="modal-footer">
@@ -277,13 +262,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <input type="hidden" value="{{ csrf_token() }}" id="token">
-                        {!!Form::hidden('id','',['placeholder' => '','id' => 'DeleteIncuTeacher_Id'])!!}
+                        {!!Form::hidden('id','',['placeholder' => '','id' => 'DeleteCenterTeacher_Id'])!!}
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title"><i class="fa fa-trash"></i>حذف المدرس</h4>
                     </div>
                     <div class="modal-body">
                         <div class="table-action-box">
-                            <a href="#" class="save Delete_Teacher_confirmed"><i class="fa fa-check"></i>حذف</a>
+                            <a href="#" class="save Delete_CenterTeacher_confirmed"><i class="fa fa-check"></i>حذف</a>
                             <a href="#" class="cancel Cancel_Delete_Form" data-dismiss="modal"><i class="fa fa-ban"></i>الغاء</a>
                         </div>
                         <div class="clearfix"></div>
@@ -303,7 +288,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="table-action-box">
-                            <a href="#" class="save make_all_salary_get_0_confirmed"><i class="fa fa-check"></i>حسنا</a>
+                            <a href="#" class="save make_all_centerTeacher_salary_get_0_confirmed"><i class="fa fa-check"></i>حسنا</a>
                             <a href="#" class="cancel Cancel_Form" data-dismiss="modal"><i class="fa fa-ban"></i>الغاء</a>
                         </div>
                         <div class="clearfix"></div>
@@ -321,7 +306,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="table-action-box">
-                            <a href="#" class="save make_all_salary_get_1_confirmed"><i class="fa fa-check"></i>حسنا</a>
+                            <a href="#" class="save make_all_centerTeacher_salary_get_1_confirmed"><i class="fa fa-check"></i>حسنا</a>
                             <a href="#" class="cancel Cancel_Form" data-dismiss="modal"><i class="fa fa-ban"></i>الغاء</a>
                         </div>
                         <div class="clearfix"></div>

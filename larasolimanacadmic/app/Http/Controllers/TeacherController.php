@@ -20,6 +20,10 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    /*   ************************* Incu Functions on Teachers *****************************   */
+
     public function index()
     {
         $teachers = Teacher::all()->where('type_id', 1);
@@ -192,4 +196,116 @@ class TeacherController extends Controller
         }
         return Response($request);
     }
+
+    /*   ************************* Center Functions on Teachers *****************************   */
+    public function indexOfCenterTeachers()
+    {
+        $teachers = Teacher::all()->where('type_id', 2);
+
+        $TotalIncuTeachers = Teacher::all()->where('type_id', 2)->count();
+        $TotalSalaries = Teacher::all()->where('type_id', 2)->sum('salary');
+        $TotalSalaries_done = Teacher::all()->where('type_id', 2)->where('salary_get', 1)->sum('salary');
+        $TotalSalaries_not_done = Teacher::all()->where('type_id', 2)->where('salary_get', 0)->sum('salary');
+
+        return view('center.teacher.index', compact('teachers', 'TotalSalaries', 'TotalSalaries_done', 'TotalSalaries_not_done', 'TotalIncuTeachers'));
+    }
+    public function createTeacher()
+    {
+        return view('center.teacher.create');
+    }
+    public function storeTeacherOfCenter(Request $request)
+    {
+        $this->validate($request, [
+            //required Student Information
+            'name' => 'required | max:100 | string',
+            'address' => 'max:100 | string',
+            'phone' => 'required | digits:11',
+            'sex' => 'required | integer',
+            'salary' => 'required',
+            'salary_get' => 'required | integer',
+            'subject' => 'string',
+        ]);
+        $teacher = new Teacher();
+        if ($request->ajax()) {
+            $teacher->name = $request->name;
+            if ($request->address != null) {
+                $teacher->address = $request->address;
+            }
+            $teacher->phone = $request->phone;
+            $teacher->sex = $request->sex;
+            $teacher->salary = $request->salary;
+            $teacher->salary_get = $request->salary_get;
+            $teacher->work_date = $request->work_date;
+            $teacher->subject = $request->subject;
+            $teacher->type_id = 2;
+            $teacher->save();
+        }
+        return response($teacher);
+
+    }
+    // Send information to Edit Form of (Center teacher) by ajax and make values of the inputs as the CenterTeacher Information
+    //in ajax File style.js
+    public function getUpdateCenterTeacher(Request $request)
+    {
+        if ($request->ajax()) {
+            $Update_Teacher = Teacher::find($request->id);
+            /*$T_incusubjects = $incusubjects->map(function ($incusubject) {
+                return $incusubject->only(['id'])->value();
+            });*/
+            $data = compact('Update_Teacher');
+            return Response($data);
+        }
+    }
+
+    public
+    function newUpdateCenterTeacher(Request $request)
+    {
+        if ($request->ajax()) {
+            $nTeacher = Teacher::find($request->id);
+            $nTeacher->name = $request->name;
+            $nTeacher->phone = $request->phone;
+            $nTeacher->salary = $request->salary;
+            $nTeacher->salary_get = $request->salary_get;
+            $nTeacher->address = $request->address;
+            $nTeacher->sex = $request->sex;
+            $nTeacher->work_date = $request->work_date;
+            $nTeacher->subject = $request->subject;
+            $nTeacher->save();
+            return Response($nTeacher);
+        }
+    }
+    public
+    function destroyCenterTeacher(Request $request)
+    {
+        if ($request->ajax()) {
+            $teacher = Teacher::find($request->id);
+            Teacher::destroy($request->id);
+            return Response($teacher);
+        }
+    }
+
+    /* Actions in details of Center teachers */
+    public function changecentersalarygetto0(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->action == 0) {
+                Teacher::where('type_id', '=', 2)->update(['salary_get' => 0]);
+            }
+        }
+        return Response($request);
+    }
+    public function changecentersalarygetto1(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->action == 1) {
+                Teacher::where('type_id', '=', 2)->update(['salary_get' => 1]);
+            }
+        }
+        return Response($request);
+    }
+
+
+
+
+
 }

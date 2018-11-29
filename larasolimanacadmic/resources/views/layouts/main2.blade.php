@@ -204,10 +204,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="../teacher/create"><i class="fa fa-caret-right"></i>اضافة مدرس</a>
+                                <a href="../createTeacher"><i class="fa fa-caret-right"></i>اضافة مدرس</a>
                             </li>
                             <li>
-                                <a href="../teacher"><i class="fa fa-caret-right"></i>كل المدرسين</a>
+                                <a href="../indexOfCenterTeachers"><i class="fa fa-caret-right"></i>كل المدرسين</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
@@ -237,34 +237,16 @@
                         </ul>
                         <div class="clearfix"></div>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-book menu-icon"></i> المواد <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="../incusubject"><i class="fa fa-caret-right"></i>مواد حضانة</a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </li>
+
                     <li>
                         <a href="../budget"><i class="fa fa-money menu-icon"></i> الميزاينه والمصاريف</a>
                     </li>
                     @endif
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-address-card menu-icon"></i> تقرير <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="teacher-attendence-report.html"><i class="fa fa-caret-right"></i>الغيابات</a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
+                    <li>
+                        <a href="../downloadCenterStudents" class=""><i class="fa fa-download menu-icon"></i> تحميل الغياب</a>
                     </li>
                     <li>
-                        <a href="../downloadIncuStudents" class=""><i class="fa fa-download menu-icon"></i> تحميل الغياب</a>
+                        <a href="../incubation"><i class="fa fa-home menu-icon"></i> الحضانة</a>
                     </li>
                 </ul>
             </div>

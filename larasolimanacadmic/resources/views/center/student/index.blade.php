@@ -170,7 +170,7 @@
                             <div class="col-md 12" style="overflow: hidden">
                                 <div class="col-md-4">
                                     <button class="btn btn-danger btn_in_details make_all_salary_get_0"
-                                            data-toggle="modal" data-target="#changepaymentsgetto0incustudent">جعل كل
+                                            data-toggle="modal" data-target="#changepaymentsgetto0centerstudent">جعل كل
                                         الرواتب غير مدفوعه
                                     </button>
                                 </div>
@@ -181,7 +181,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <button class="btn btn-success btn_in_details make_all_salary_get_1"
-                                            data-toggle="modal" data-target="#changepaymentsgetto1incustudent">جعل كل
+                                            data-toggle="modal" data-target="#changepaymentsgetto1centerstudent">جعل كل
                                         الرواتب مدفوعه
                                     </button>
                                 </div>
@@ -297,7 +297,7 @@
         </div>
 
 
-        <div id="changepaymentsgetto0incustudent" class="modal fade" role="dialog">
+        <div id="changepaymentsgetto0centerstudent" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -307,7 +307,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="table-action-box">
-                            <a href="#" class="save make_allIncustudent_payments_get_0_confirmed"><i
+                            <a href="#" class="save make_allCenterstudent_payments_get_0_confirmed"><i
                                     class="fa fa-check"></i>حسنا</a>
                             <a href="#" class="cancel Cancel_Form" data-dismiss="modal"><i
                                     class="fa fa-ban"></i>الغاء</a>
@@ -317,7 +317,7 @@
                 </div>
             </div>
         </div>
-        <div id="changepaymentsgetto1incustudent" class="modal fade" role="dialog">
+        <div id="changepaymentsgetto1centerstudent" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -327,7 +327,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="table-action-box">
-                            <a href="#" class="save make_allIncustudent_payments_get_1_confirmed"><i
+                            <a href="#" class="save make_allCenterstudent_payments_get_1_confirmed"><i
                                     class="fa fa-check"></i>حسنا</a>
                             <a href="#" class="cancel Cancel_Form" data-dismiss="modal"><i
                                     class="fa fa-ban"></i>الغاء</a>

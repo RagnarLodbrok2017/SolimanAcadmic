@@ -63,7 +63,7 @@ Route::resource('stuff', 'StuffController');
 Route::get('/getUpdateStuff','StuffController@getUpdateStuff')->name('getUpdateStuff');
 Route::post('/newUpdateStuff','StuffController@newUpdateStuff')->name('newUpdateStuff');
 Route::post('/newUpdateStuff','StuffController@newUpdateStuff')->name('newUpdateStuff');
-//actions in IncuTeachers Details
+//actions in IncStuff Details
 Route::get('/changesalarygetto0stuff','StuffController@changesalarygetto0stuff');
 Route::get('/changesalarygetto1stuff','StuffController@changesalarygetto1stuff');
 
@@ -79,7 +79,18 @@ Route::get('/createStudent','StudentController@createStudent')->name('createStud
 Route::post('storeStudentCenter','StudentController@storeStudentCenter')->name('storeStudentCenter');
 Route::get('/getUpdateStudentCenter','StudentController@getUpdateStudentCenter')->name('getUpdateStudentCenter');
 Route::post('/newUpdateStudentCenter','StudentController@newUpdateStudentCenter')->name('newUpdateStudentCenter');
+Route::get('/downloadCenterStudents','StudentController@downloadCenterStudents');
+Route::get('/changepaymentsgetto0centerstudent','StudentController@changepaymentsgetto0centerstudent');
+Route::get('/changepaymentsgetto1centerstudent','StudentController@changepaymentsgetto1centerstudent');
 
-/* subject routes in center  */
-Route::resource('subject', 'subjectController');
-Route::post('/newUpdateSubject','subjectController@newUpdateSubject')->name('newUpdateSubject');
+
+/*           Teacher In center routes       */
+Route::get('/indexOfCenterTeachers','TeacherController@indexOfCenterTeachers')->name('indexOfCenterTeachers');
+Route::get('/createTeacher','TeacherController@createTeacher')->name('createTeacher');
+Route::post('storeTeacherOfCenter','TeacherController@storeTeacherOfCenter')->name('storeTeacherOfCenter');
+Route::get('/getUpdateCenterTeacher','TeacherController@getUpdateCenterTeacher')->name('getUpdateCenterTeacher');
+Route::post('/newUpdateCenterTeacher','TeacherController@newUpdateCenterTeacher')->name('newUpdateCenterTeacher');
+Route::post('/destroyCenterTeacher','TeacherController@destroyCenterTeacher')->name('destroyCenterTeacher');
+//actions in Teachers Details
+Route::get('/changecentersalarygetto0','TeacherController@changecentersalarygetto0');
+Route::get('/changecentersalarygetto1','TeacherController@changecentersalarygetto1');

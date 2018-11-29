@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classroom;
+use App\Exports\CenterStudentExport;
 use App\Exports\IncuStudentExport;
 use App\Level;
 use App\Parents;
@@ -42,34 +43,34 @@ class StudentController extends Controller
         $shifts = Shift::all();
         //total payment
         $Total_Payment = 0;
-        foreach ($students as $student){
+        foreach ($students as $student) {
             $payment = $student->payment->price;
             $Total_Payment = $Total_Payment + $payment;
         }
         //number of student that price = 0
         $Total_Students_Payment_Zero = 0;
-        foreach ($students as $student){
-            if($student->payment->price == 0){
-                $Total_Students_Payment_Zero ++;
+        foreach ($students as $student) {
+            if ($student->payment->price == 0) {
+                $Total_Students_Payment_Zero++;
             }
         }
         //number of student that price > 0
         $Total_Students_Payment_Not_Zero = 0;
-        foreach ($students as $student){
-            if($student->payment->price !== 0){
-                $Total_Students_Payment_Not_Zero ++;
+        foreach ($students as $student) {
+            if ($student->payment->price !== 0) {
+                $Total_Students_Payment_Not_Zero++;
             }
         }
         //number of student that the father or mother is dead > 0
         $Total_Students_Parents_Dead = 0;
-        foreach ($students as $student){
-            if($student->status_id !== 1){
-                $Total_Students_Parents_Dead ++;
+        foreach ($students as $student) {
+            if ($student->status_id !== 1) {
+                $Total_Students_Parents_Dead++;
             }
         }
 
         return view('incu.incustudent.index', compact('students', 'statuss', 'classes', 'levels', 'shifts',
-            'Total_Payment','Total_Students_Payment_Zero','Total_Students_Payment_Not_Zero','Total_Students_Parents_Dead'));
+            'Total_Payment', 'Total_Students_Payment_Zero', 'Total_Students_Payment_Not_Zero', 'Total_Students_Parents_Dead'));
     }
 
 
@@ -242,14 +243,12 @@ class StudentController extends Controller
             $Student = Student::find($id);
             Student::destroy($id);
             //remove incustudent parents
-            if($Student->parents_id !== 0 || $Student->parents_id != null)
-            {
+            if ($Student->parents_id !== 0 || $Student->parents_id != null) {
                 Parents::destroy($Student->parents_id);
             }
             //remove incustudent payments
             $payment = Payment::where('student_id', $Student->id)->first();
-            if($payment->id != null)
-            {
+            if ($payment->id != null) {
                 Payment::destroy($payment->id);
             }
             return Response($Student);
@@ -257,8 +256,9 @@ class StudentController extends Controller
     }
 
 
-    public function downloadIncuStudents(){
-        return Excel::download(new IncuStudentExport , 'غياب حضانة.xlsx');
+    public function downloadIncuStudents()
+    {
+        return Excel::download(new IncuStudentExport, 'غياب حضانة.xlsx');
     }
 
     /* Actions in details of Incu Students */
@@ -269,19 +269,20 @@ class StudentController extends Controller
 //                Payment::all()->student()->where('type_id', '=', 1)->update(['price' => 0]);
 //                Student::where('type_id', '=', 1)->payment()->update(['price' => 0]);
                 $students = Student::all()->where('type_id', '=', 1);
-                $allStudents =$students->map(function ($student){
+                $allStudents = $students->map(function ($student) {
                     return $student->payment->update(['price' => 0]);
                 });
             }
         }
         return Response($request);
     }
+
     public function changepaymentsgetto1incustudent(Request $request)
     {
         if ($request->ajax()) {
             if ($request->action == 1) {
                 $students = Student::all()->where('type_id', '=', 1);
-                $allStudents =$students->map(function ($student){
+                $allStudents = $students->map(function ($student) {
                     return $student->payment->update(['price' => 300]);
                 });
             }
@@ -290,9 +291,9 @@ class StudentController extends Controller
     }
 
 
-
     /* **************************************** Center Functions ************************************* */
-    public function centerIndex(){
+    public function centerIndex()
+    {
         $students = Student::all()->where('type_id', 2);
         //$statuss = Status::all();
         $classes = Classroom::all();
@@ -301,33 +302,33 @@ class StudentController extends Controller
         $shifts = Shift::all();
         //total payment
         $Total_Payment = 0;
-        foreach ($students as $student){
+        foreach ($students as $student) {
             $payment = $student->payment->price;
             $Total_Payment = $Total_Payment + $payment;
         }
         //number of student that price = 0
         $Total_Students_Payment_Zero = 0;
-        foreach ($students as $student){
-            if($student->payment->price == 0){
-                $Total_Students_Payment_Zero ++;
+        foreach ($students as $student) {
+            if ($student->payment->price == 0) {
+                $Total_Students_Payment_Zero++;
             }
         }
         //number of student that price > 0
         $Total_Students_Payment_Not_Zero = 0;
-        foreach ($students as $student){
-            if($student->payment->price !== 0){
-                $Total_Students_Payment_Not_Zero ++;
+        foreach ($students as $student) {
+            if ($student->payment->price !== 0) {
+                $Total_Students_Payment_Not_Zero++;
             }
         }
         //number of student that the father or mother is dead > 0
         $Total_Students_Parents_Dead = 0;
-        foreach ($students as $student){
-            if($student->status_id !== 1){
-                $Total_Students_Parents_Dead ++;
+        foreach ($students as $student) {
+            if ($student->status_id !== 1) {
+                $Total_Students_Parents_Dead++;
             }
         }
         return view('center.student.index', compact('students', 'classes', 'stages', 'shifts',
-            'Total_Payment','Total_Students_Payment_Zero','Total_Students_Payment_Not_Zero','Total_Students_Parents_Dead'));
+            'Total_Payment', 'Total_Students_Payment_Zero', 'Total_Students_Payment_Not_Zero', 'Total_Students_Parents_Dead'));
     }
 
     public function createStudent()
@@ -355,12 +356,10 @@ class StudentController extends Controller
         $student->sex = $request->sex;
         $student->classroom_id = 1;
 //        $student->phone = $request->phone;
-        if(strlen($request->phone) != 0 && $request->phone != null )
-        {
+        if (strlen($request->phone) != 0 && $request->phone != null) {
             $student->phone = $request->phone;
         }
-        if(strlen($request->addess) != 0 && $request->address != null)
-        {
+        if (strlen($request->addess) != 0 && $request->address != null) {
             $student->address = $request->address;
         }
         $student->dob = Carbon::now();
@@ -422,12 +421,10 @@ class StudentController extends Controller
             $student->last_name = $request->last_name;
             $student->stage_id = $request->stage_id;
             $student->sex = $request->sex;
-            if(strlen($request->phone) != 0 && $request->phone != null )
-            {
+            if (strlen($request->phone) != 0 && $request->phone != null) {
                 $student->phone = $request->phone;
             }
-            if(strlen($request->addess) != 0 && $request->address != null)
-            {
+            if (strlen($request->addess) != 0 && $request->address != null) {
                 $student->address = $request->address;
             }
 
@@ -441,4 +438,40 @@ class StudentController extends Controller
         }
     }
 
+    public function downloadCenterStudents()
+    {
+        return Excel::download(new CenterStudentExport(), 'غياب السنتر.xlsx');
+    }
+
+    /* Actions in details of Center Students */
+    public function changepaymentsgetto0centerstudent(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->action == 0) {
+//                Payment::all()->student()->where('type_id', '=', 1)->update(['price' => 0]);
+//                Student::where('type_id', '=', 1)->payment()->update(['price' => 0]);
+                $students = Student::all()->where('type_id', '=', 2);
+                $allStudents = $students->map(function ($student) {
+                    return $student->payment->update(['price' => 0]);
+                });
+            }
+        }
+        return Response($request);
+    }
+
+    public function changepaymentsgetto1centerstudent(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->action == 1) {
+                $students = Student::all()->where('type_id', '=', 2);
+                $allStudents = $students->map(function ($student) {
+                    return $student->payment->update(['price' => 300]);
+                });
+            }
+        }
+        return Response($request);
+    }
+
+
 }
+
