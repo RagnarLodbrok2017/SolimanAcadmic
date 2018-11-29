@@ -24,7 +24,7 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="status">
-                                        <p class="text-success"><i class="fa fa-money"></i>اجمالى سعر الفواتير المصروفة بالحضانه بالجنيه</p>
+                                        <p class="text-success"><i class="fa fa-money"></i>اجمالى سعر الفواتير المصروفة بالسنتر بالجنيه</p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -67,7 +67,7 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="status">
-                                        <p class="text-danger"><i class="fa fa-exclamation-triangle"></i>عدد مدرسين الحضانة</p>
+                                        <p class="text-danger"><i class="fa fa-exclamation-triangle"></i>عدد مدرسين السنتر</p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -89,7 +89,7 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="status">
-                                        <p class="text-ex"><i class="fa fa-pencil-square-o"></i>عدد طلاب الحضانة</p>
+                                        <p class="text-ex"><i class="fa fa-pencil-square-o"></i>عدد طلاب السنتر</p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
