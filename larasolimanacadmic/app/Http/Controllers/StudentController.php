@@ -21,7 +21,7 @@ class StudentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('superAdmin')->except(['downloadIncuStudents']);
+        $this->middleware('superAdmin')->except(['downloadIncuStudents','downloadCenterStudents']);
     }
 
     public function debug_to_console($data)

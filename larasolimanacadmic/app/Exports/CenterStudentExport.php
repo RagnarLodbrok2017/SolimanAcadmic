@@ -14,7 +14,7 @@ class CenterStudentExport implements FromQuery, WithMapping, WithHeadings
 
     public function query()
     {
-        return Student::where('stage_id', null)->where('type_id', 2)->orderBy('stage_id', 'asc');
+        return Student::where('type_id', 2)->orderBy('classroom_id', 'asc');
     }
 
     /**
@@ -28,8 +28,8 @@ class CenterStudentExport implements FromQuery, WithMapping, WithHeadings
             $this->index = $this->index + 1,
             $student->first_name.' '. $student->middle_name.' '.$student->last_name,
             $student->phone,
-            $student->level->name,
             $student->classroom->name,
+            $student->stage->name,
         ];
     }
 
@@ -42,8 +42,8 @@ class CenterStudentExport implements FromQuery, WithMapping, WithHeadings
             'الرقم',
             'الأسم',
             'التليفون',
-            'المستوى',
             'الفصل',
+            'المرحلة',
             'السبت',
             'الأحد',
             'الأتنين',

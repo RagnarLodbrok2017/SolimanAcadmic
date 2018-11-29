@@ -266,6 +266,9 @@
                     <li>
                         <a href="../downloadIncuStudents" class=""><i class="fa fa-download menu-icon"></i> تحميل الغياب</a>
                     </li>
+                    <li>
+                        <a href="../center"><i class="fa fa-home menu-icon"></i> السنتر</a>
+                    </li>
                 </ul>
             </div>
             @yield('content')
