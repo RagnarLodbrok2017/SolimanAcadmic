@@ -203,6 +203,7 @@
         <!-- **********************************************************Edit details modal ********************************************************-->
         <div id="editDetailModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
+                @if(isset($student))
                 {{ Form::open(array('url' => "student/$student->id" , 'method' => 'PUT', 'class'=> "updateStudentForm"))}}
                 <input type="hidden" value="{{ csrf_token() }}" id="token">
             {{--<input type="hidden" value="{{ $student->id }}" id="id" name="id">--}}
@@ -264,6 +265,7 @@
                     <div class="modal-footer">
                         <div class="table-action-box">
                             {{Form::submit('حفظ',['id'=>"$student->id",'class'=>'updateIncustudent button_submit','tabindex'=>'9'])}}
+                            @endif
                             {{--<a href="#" class="save" id="updateIncustudent"><i class="fa fa-check"></i>حفظ</a>--}}
                             <a href="#" class="cancel" id="CancelUpdateForm" data-dismiss="modal" tabindex="10"><i
                                     class="fa fa-ban"></i>أغلاق</a>
